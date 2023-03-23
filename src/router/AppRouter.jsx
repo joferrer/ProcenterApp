@@ -1,34 +1,31 @@
-
-import { Navigate, Route, Routes } from 'react-router-dom';
-import { AuthRouter } from '../auth/routes/AuthRouter';
+import { Navigate, Route, Routes } from "react-router-dom";
+import { AuthRouter } from "../auth/routes/AuthRouter";
 
 //import { useCheckAuth } from '../hooks';
-import {ProcenterAppRouter  } from '../procenterapp';
+import { ProcenterAppRouter } from "../procenterapp";
 
 //import { CheckingAuth } from '../ui';
-
+import { LoginPage } from "./../auth/pages/LoginPage";
 
 export const AppRouter = () => {
+  //const {status} = useCheckAuth();
 
-  
-  //const {status} = useCheckAuth();  
-
- // if(status === 'checking'){
-   // return <CheckingAuth />
+  // if(status === 'checking'){
+  // return <CheckingAuth />
   //}
 
-  const status = 'authenticated'
+  /*
+  {status === "authenticated" ? (
+        <Route path="/*" element={<ProcenterAppRouter />} />
+      ) : (
+        <Route path="/auth/*" element={<AuthRouter />} />
+      )}
+      <Route path="/*" element={<Navigate to="/auth/login" />} />
+  */
+  const status = "authenticated";
   return (
     <Routes>
-
-        {
-          status === 'authenticated' ? 
-          <Route path="/*" element={<ProcenterAppRouter/>} />
-          :<Route path="/auth/*" element={<AuthRouter/>} />
-        }
-
-        <Route path="/*" element={<Navigate to ='/auth/login'/>} />
-        
+      <Route path="/auth/login" element={<LoginPage />}></Route>
     </Routes>
-  )
-}
+  );
+};

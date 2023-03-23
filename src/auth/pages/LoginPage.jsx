@@ -1,7 +1,6 @@
-import React from 'react'
+import React from "react";
+import { AuthLayout } from "../layout/AuthLayout";
 
 export const LoginPage = () => {
-  return (
-    <div>LoginPage</div>
-  )
-}
+  return <AuthLayout title="Login"></AuthLayout>;
+};
