@@ -1,7 +1,6 @@
-import React from 'react'
+import React from "react";
+import MiniDrawer from "../../ui/components/Sidebar";
 
 export const ProcenterAppLayout = () => {
-  return (
-    <div>ProcenterAppLayout</div>
-  )
-}
+  return <MiniDrawer></MiniDrawer>;
+};

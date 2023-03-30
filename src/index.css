@@ -1,0 +1,48 @@
+img {
+  width: 40%;
+}
+
+.texto {
+  color: gray;
+  font-family: "Segoe UI";
+  font-weight: lighter;
+  font-size: 30pt;
+  padding-left: 15px;
+}
+.textoCenter {
+  color: gray;
+  font-family: "Segoe UI";
+  font-weight: lighter;
+  font-size: 20pt;
+  text-align: center;
+}
+
+#im2 {
+  width: 20%;
+}
+#img3 {
+  width: 80%;
+}
+#img4 {
+  width: 50%;
+}
+
+#img5 {
+  width: 30%;
+}
+
+.color {
+  background-color: black;
+}
+
+.fondo {
+  background-color: black;
+  color: rgb(255, 255, 255);
+}
+
+.tex {
+  color: white;
+  font-family: "Segoe UI";
+  font-weight: lighter;
+  font-size: 7pt;
+}

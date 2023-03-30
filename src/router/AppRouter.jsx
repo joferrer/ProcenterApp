@@ -22,10 +22,11 @@ export const AppRouter = () => {
       )}
       <Route path="/*" element={<Navigate to="/auth/login" />} />
   */
-  const status = "authenticated";
+  //const status = "authenticated";
   return (
     <Routes>
       <Route path="/auth/login" element={<LoginPage />}></Route>
+      <Route path="/auth/*" element={<ProcenterAppRouter />}></Route>
     </Routes>
   );
 };
