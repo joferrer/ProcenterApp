@@ -46,3 +46,7 @@ img {
   font-weight: lighter;
   font-size: 7pt;
 }
+
+p {
+  width: inherit;
+}
