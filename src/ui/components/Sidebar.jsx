@@ -36,7 +36,6 @@ export default function MiniDrawer() {
     left: false,
   });
 
-  //const [titulo, setTitulo] = useState("PROCENTER");
   const toggleDrawer = (anchor, open) => (event) => {
     if (
       event.type === "keydown" &&
