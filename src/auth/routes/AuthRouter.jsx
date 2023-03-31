@@ -1,7 +1,10 @@
-import React from 'react'
+import React from "react";
+import { LoginPage } from "../pages/LoginPage";
 
 export const AuthRouter = () => {
   return (
-    <div>AuthRouter</div>
-  )
-}
+    <Routes>
+      <Route path="/auth/login" element={<LoginPage />} />
+    </Routes>
+  );
+};

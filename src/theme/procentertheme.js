@@ -1,23 +1,19 @@
-
-
-import { createTheme } from '@mui/material';
-import {red} from '@mui/material/colors';
-
+import { createTheme } from "@mui/material";
+import { red } from "@mui/material/colors";
 
 export const procentertheme = createTheme({
-    palette:{
-        
-        primary:{
-            main: '#d73925'
-        },
-        secondary:{
-            main: '#777'
-        },
-        error:{
-            main: red.A400
-        }
-
-
-    }
-
+  palette: {
+    primary: {
+      main: "#757575",
+    },
+    secondary: {
+      main: "#000000",
+    },
+    error: {
+      main: red.A400,
+    },
+    butto: {
+      main: "#FFFFFF",
+    },
+  },
 });
