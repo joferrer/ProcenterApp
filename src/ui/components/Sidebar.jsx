@@ -27,7 +27,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import { Catalogo } from "./../../procenterapp/pages/Catalogo";
 
 const wid = 230;
-const parrafo = "PROCENTERAPP";
+const parrafoprincipal = "PROCENTERAPP";
 
 export default function MiniDrawer() {
   const isSmallScreen = useMediaQuery("(min-width:800px)");
@@ -236,7 +236,7 @@ export default function MiniDrawer() {
             >
               {list("left")}
             </Drawer>
-            <p color="whire">{parrafo}</p>
+            <p color="whire">{parrafoprincipal}</p>
           </Box>
         </Box>
       </Hidden>
