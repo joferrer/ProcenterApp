@@ -21,11 +21,13 @@ import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
-import { AttachEmail } from "@mui/icons-material";
+import { AttachEmail, Title } from "@mui/icons-material";
 import { Grid, Typography, Hidden } from "@mui/material";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import { Catalogo } from "./../../procenterapp/pages/Catalogo";
 
 const wid = 230;
+const parrafo = "PROCENTERAPP";
 
 export default function MiniDrawer() {
   const isSmallScreen = useMediaQuery("(min-width:800px)");
@@ -34,6 +36,7 @@ export default function MiniDrawer() {
     left: false,
   });
 
+  //const [titulo, setTitulo] = useState("PROCENTER");
   const toggleDrawer = (anchor, open) => (event) => {
     if (
       event.type === "keydown" &&
@@ -105,7 +108,7 @@ export default function MiniDrawer() {
             </ListItemIcon>
             <ListItemText
               sx={{ opacity: open ? 1 : 0 }}
-              primary="informes"
+              primary="Informes"
               fontSize="11pt"
             />
           </ListItemButton>
@@ -211,153 +214,31 @@ export default function MiniDrawer() {
     <Box sx={{ display: "flex" }}>
       <Hidden smUp>
         <Box
-          sx={{ width: 60, height: "100vh", position: "fixed" }}
+          sx={{ width: "100vw", height: 10, position: "fixed" }}
           className="fondo "
         >
-          <List className="fondo">
-            <ListItem disablePadding sx={{ display: "block" }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? "initial" : "center",
-                  px: 2.5,
-                }}
-                onClick={toggleDrawer("left", true)}
-              >
-                <ListItemIcon>
-                  <MenuIcon sx={{ color: "white" }} />
-                </ListItemIcon>
-              </ListItemButton>
-              <Drawer
-                open={state["left"]}
-                onClose={toggleDrawer("left", false)}
-                sx={{ height: "100wh" }}
-              >
-                {list("left")}
-              </Drawer>
-            </ListItem>
+          <Box className="fondo" sx={{ display: "flex" }}>
+            <Button
+              sx={{
+                minHeight: 48,
+                justifyContent: open ? "initial" : "center",
+                px: 2.5,
+                mr: 2,
+              }}
+              onClick={toggleDrawer("left", true)}
+            >
+              <MenuIcon sx={{ color: "white" }} />
+            </Button>
 
-            <ListItem disablePadding sx={{ display: "block" }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? "initial" : "center",
-                  px: 2.5,
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : "auto",
-                    justifyContent: "center",
-                  }}
-                >
-                  <AutoStoriesIcon sx={{ color: "white", width: 20 }} />
-                </ListItemIcon>
-                <ListItemText sx={{ opacity: open ? 1 : 0 }} />
-              </ListItemButton>
-            </ListItem>
-            <ListItem disablePadding sx={{ display: "block" }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? "initial" : "center",
-                  px: 2.5,
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : "auto",
-                    justifyContent: "center",
-                  }}
-                >
-                  <TimelineIcon sx={{ color: "white", width: 20 }} />
-                </ListItemIcon>
-                <ListItemText sx={{ opacity: open ? 1 : 0 }} />
-              </ListItemButton>
-            </ListItem>
-            <ListItem disablePadding sx={{ display: "block" }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? "initial" : "center",
-                  px: 2.5,
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : "auto",
-                    justifyContent: "center",
-                  }}
-                >
-                  <AttachMoneyIcon sx={{ color: "white", width: 20 }} />
-                </ListItemIcon>
-                <ListItemText sx={{ opacity: open ? 1 : 0 }} />
-              </ListItemButton>
-            </ListItem>
-            <ListItem disablePadding sx={{ display: "block" }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? "initial" : "center",
-                  px: 2.5,
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : "auto",
-                    justifyContent: "center",
-                  }}
-                >
-                  <WorkHistoryIcon sx={{ color: "white", width: 20 }} />
-                </ListItemIcon>
-                <ListItemText sx={{ opacity: open ? 1 : 0 }} />
-              </ListItemButton>
-            </ListItem>
-            <ListItem disablePadding sx={{ display: "block" }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? "initial" : "center",
-                  px: 2.5,
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : "auto",
-                    justifyContent: "center",
-                  }}
-                >
-                  <PermIdentityIcon sx={{ color: "white", width: 20 }} />
-                </ListItemIcon>
-                <ListItemText sx={{ opacity: open ? 1 : 0 }} />
-              </ListItemButton>
-            </ListItem>
-            <ListItem disablePadding sx={{ display: "block" }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? "initial" : "center",
-                  px: 2.5,
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : "auto",
-                    justifyContent: "center",
-                  }}
-                >
-                  <AdminPanelSettingsIcon sx={{ color: "white", width: 20 }} />
-                </ListItemIcon>
-                <ListItemText sx={{ opacity: open ? 1 : 0 }} />
-              </ListItemButton>
-            </ListItem>
-          </List>
+            <Drawer
+              open={state["left"]}
+              onClose={toggleDrawer("left", false)}
+              sx={{ height: "100wh" }}
+            >
+              {list("left")}
+            </Drawer>
+            <p color="whire">{parrafo}</p>
+          </Box>
         </Box>
       </Hidden>
       <Hidden smDown>
@@ -626,7 +507,7 @@ export default function MiniDrawer() {
             </Typography>
           </Box>
         ) : (
-          <Box component="main" sx={{ flexGrow: 1, p: 3, ml: 6 }}>
+          <Box component="main" sx={{ flexGrow: 1, p: 3, mt: 6 }}>
             <Typography paragraph>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua.
