@@ -21,13 +21,15 @@ import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
-import { AttachEmail } from "@mui/icons-material";
+import { AttachEmail, Title } from "@mui/icons-material";
 import { Grid, Typography, Hidden } from "@mui/material";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import { Catalogo } from "./../../procenterapp/pages/Catalogo";
 
 const wid = 230;
+const parrafoprincipal = "PROCENTERAPP";
 
-export default function MiniDrawer() {
+export default function MiniDrawer({ children }) {
   const isSmallScreen = useMediaQuery("(min-width:800px)");
   const isPequeño = useMediaQuery("(min-width:599px)");
   const [state, setState] = React.useState({
@@ -105,7 +107,7 @@ export default function MiniDrawer() {
             </ListItemIcon>
             <ListItemText
               sx={{ opacity: open ? 1 : 0 }}
-              primary="informes"
+              primary="Informes"
               fontSize="11pt"
             />
           </ListItemButton>
@@ -211,153 +213,36 @@ export default function MiniDrawer() {
     <Box sx={{ display: "flex" }}>
       <Hidden smUp>
         <Box
-          sx={{ width: 60, height: "100vh", position: "fixed" }}
+          sx={{
+            width: "100%",
+            height: 10,
+            position: "fixed",
+            maxwidth: "100%",
+          }}
           className="fondo "
         >
-          <List className="fondo">
-            <ListItem disablePadding sx={{ display: "block" }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? "initial" : "center",
-                  px: 2.5,
-                }}
-                onClick={toggleDrawer("left", true)}
-              >
-                <ListItemIcon>
-                  <MenuIcon sx={{ color: "white" }} />
-                </ListItemIcon>
-              </ListItemButton>
-              <Drawer
-                open={state["left"]}
-                onClose={toggleDrawer("left", false)}
-                sx={{ height: "100wh" }}
-              >
-                {list("left")}
-              </Drawer>
-            </ListItem>
+          <Box className="fondo" sx={{ display: "flex" }}>
+            <Button
+              sx={{
+                minHeight: 48,
+                justifyContent: open ? "initial" : "center",
+                px: 2.5,
+                mr: 2,
+              }}
+              onClick={toggleDrawer("left", true)}
+            >
+              <MenuIcon sx={{ color: "white" }} />
+            </Button>
 
-            <ListItem disablePadding sx={{ display: "block" }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? "initial" : "center",
-                  px: 2.5,
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : "auto",
-                    justifyContent: "center",
-                  }}
-                >
-                  <AutoStoriesIcon sx={{ color: "white", width: 20 }} />
-                </ListItemIcon>
-                <ListItemText sx={{ opacity: open ? 1 : 0 }} />
-              </ListItemButton>
-            </ListItem>
-            <ListItem disablePadding sx={{ display: "block" }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? "initial" : "center",
-                  px: 2.5,
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : "auto",
-                    justifyContent: "center",
-                  }}
-                >
-                  <TimelineIcon sx={{ color: "white", width: 20 }} />
-                </ListItemIcon>
-                <ListItemText sx={{ opacity: open ? 1 : 0 }} />
-              </ListItemButton>
-            </ListItem>
-            <ListItem disablePadding sx={{ display: "block" }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? "initial" : "center",
-                  px: 2.5,
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : "auto",
-                    justifyContent: "center",
-                  }}
-                >
-                  <AttachMoneyIcon sx={{ color: "white", width: 20 }} />
-                </ListItemIcon>
-                <ListItemText sx={{ opacity: open ? 1 : 0 }} />
-              </ListItemButton>
-            </ListItem>
-            <ListItem disablePadding sx={{ display: "block" }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? "initial" : "center",
-                  px: 2.5,
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : "auto",
-                    justifyContent: "center",
-                  }}
-                >
-                  <WorkHistoryIcon sx={{ color: "white", width: 20 }} />
-                </ListItemIcon>
-                <ListItemText sx={{ opacity: open ? 1 : 0 }} />
-              </ListItemButton>
-            </ListItem>
-            <ListItem disablePadding sx={{ display: "block" }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? "initial" : "center",
-                  px: 2.5,
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : "auto",
-                    justifyContent: "center",
-                  }}
-                >
-                  <PermIdentityIcon sx={{ color: "white", width: 20 }} />
-                </ListItemIcon>
-                <ListItemText sx={{ opacity: open ? 1 : 0 }} />
-              </ListItemButton>
-            </ListItem>
-            <ListItem disablePadding sx={{ display: "block" }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? "initial" : "center",
-                  px: 2.5,
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : "auto",
-                    justifyContent: "center",
-                  }}
-                >
-                  <AdminPanelSettingsIcon sx={{ color: "white", width: 20 }} />
-                </ListItemIcon>
-                <ListItemText sx={{ opacity: open ? 1 : 0 }} />
-              </ListItemButton>
-            </ListItem>
-          </List>
+            <Drawer
+              open={state["left"]}
+              onClose={toggleDrawer("left", false)}
+              sx={{ height: "100wh" }}
+            >
+              {list("left")}
+            </Drawer>
+            <p color="whire">{parrafoprincipal}</p>
+          </Box>
         </Box>
       </Hidden>
       <Hidden smDown>
@@ -533,190 +418,15 @@ export default function MiniDrawer() {
       </Hidden>
       <Box>
         {isPequeño ? (
-          <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-            <Typography paragraph>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              Rhoncus dolor purus non enim praesent elementum facilisis leo vel.
-              Risus at ultrices mi tempus imperdiet. Semper risus in hendrerit
-              gravida rutrum quisque non tellus. Convallis convallis tellus id
-              interdum velit laoreet id donec ultrices. Odio morbi quis commodo
-              odio aenean sed adipiscing. Amet nisl suscipit adipiscing bibendum
-              est ultricies integer quis. Cursus euismod quis viverra nibh cras.
-              Metus vulputate eu scelerisque felis imperdiet proin fermentum
-              leo. Mauris commodo quis imperdiet massa tincidunt. Cras tincidunt
-              lobortis feugiat vivamus at augue. At augue eget arcu dictum
-              varius duis at consectetur lorem. Velit sed ullamcorper morbi
-              tincidunt. Lorem donec massa sapien faucibus et molestie ac.
-            </Typography>
-            <Typography paragraph>
-              Consequat mauris nunc congue nisi vitae suscipit. Fringilla est
-              ullamcorper eget nulla facilisi etiam dignissim diam. Pulvinar
-              elementum integer enim neque volutpat ac tincidunt. Ornare
-              suspendisse sed nisi lacus sed viverra tellus. Purus sit amet
-              volutpat consequat mauris. Elementum eu facilisis sed odio morbi.
-              Euismod lacinia at quis risus sed vulputate odio. Morbi tincidunt
-              ornare massa eget egestas purus viverra accumsan in. In hendrerit
-              gravida rutrum quisque non tellus orci ac. Pellentesque nec nam
-              aliquam sem et tortor. Habitant morbi tristique senectus et.
-              Adipiscing elit duis tristique sollicitudin nibh sit. Ornare
-              aenean euismod elementum nisi quis eleifend. Commodo viverra
-              maecenas accumsan lacus vel facilisis. Nulla posuere sollicitudin
-              aliquam ultrices sagittis orci a.
-            </Typography>
-            <Typography paragraph>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              Rhoncus dolor purus non enim praesent elementum facilisis leo vel.
-              Risus at ultrices mi tempus imperdiet. Semper risus in hendrerit
-              gravida rutrum quisque non tellus. Convallis convallis tellus id
-              interdum velit laoreet id donec ultrices. Odio morbi quis commodo
-              odio aenean sed adipiscing. Amet nisl suscipit adipiscing bibendum
-              est ultricies integer quis. Cursus euismod quis viverra nibh cras.
-              Metus vulputate eu scelerisque felis imperdiet proin fermentum
-              leo. Mauris commodo quis imperdiet massa tincidunt. Cras tincidunt
-              lobortis feugiat vivamus at augue. At augue eget arcu dictum
-              varius duis at consectetur lorem. Velit sed ullamcorper morbi
-              tincidunt. Lorem donec massa sapien faucibus et molestie ac.
-            </Typography>
-            <Typography paragraph>
-              Consequat mauris nunc congue nisi vitae suscipit. Fringilla est
-              ullamcorper eget nulla facilisi etiam dignissim diam. Pulvinar
-              elementum integer enim neque volutpat ac tincidunt. Ornare
-              suspendisse sed nisi lacus sed viverra tellus. Purus sit amet
-              volutpat consequat mauris. Elementum eu facilisis sed odio morbi.
-              Euismod lacinia at quis risus sed vulputate odio. Morbi tincidunt
-              ornare massa eget egestas purus viverra accumsan in. In hendrerit
-              gravida rutrum quisque non tellus orci ac. Pellentesque nec nam
-              aliquam sem et tortor. Habitant morbi tristique senectus et.
-              Adipiscing elit duis tristique sollicitudin nibh sit. Ornare
-              aenean euismod elementum nisi quis eleifend. Commodo viverra
-              maecenas accumsan lacus vel facilisis. Nulla posuere sollicitudin
-              aliquam ultrices sagittis orci a.
-            </Typography>
-            <Typography paragraph>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              Rhoncus dolor purus non enim praesent elementum facilisis leo vel.
-              Risus at ultrices mi tempus imperdiet. Semper risus in hendrerit
-              gravida rutrum quisque non tellus. Convallis convallis tellus id
-              interdum velit laoreet id donec ultrices. Odio morbi quis commodo
-              odio aenean sed adipiscing. Amet nisl suscipit adipiscing bibendum
-              est ultricies integer quis. Cursus euismod quis viverra nibh cras.
-              Metus vulputate eu scelerisque felis imperdiet proin fermentum
-              leo. Mauris commodo quis imperdiet massa tincidunt. Cras tincidunt
-              lobortis feugiat vivamus at augue. At augue eget arcu dictum
-              varius duis at consectetur lorem. Velit sed ullamcorper morbi
-              tincidunt. Lorem donec massa sapien faucibus et molestie ac.
-            </Typography>
-            <Typography paragraph>
-              Consequat mauris nunc congue nisi vitae suscipit. Fringilla est
-              ullamcorper eget nulla facilisi etiam dignissim diam. Pulvinar
-              elementum integer enim neque volutpat ac tincidunt. Ornare
-              suspendisse sed nisi lacus sed viverra tellus. Purus sit amet
-              volutpat consequat mauris. Elementum eu facilisis sed odio morbi.
-              Euismod lacinia at quis risus sed vulputate odio. Morbi tincidunt
-              ornare massa eget egestas purus viverra accumsan in. In hendrerit
-              gravida rutrum quisque non tellus orci ac. Pellentesque nec nam
-              aliquam sem et tortor. Habitant morbi tristique senectus et.
-              Adipiscing elit duis tristique sollicitudin nibh sit. Ornare
-              aenean euismod elementum nisi quis eleifend. Commodo viverra
-              maecenas accumsan lacus vel facilisis. Nulla posuere sollicitudin
-              aliquam ultrices sagittis orci a.
-            </Typography>
+          <Box component="main" sx={{ flexGrow: 1, p: 2, maxWidth: "100vw" }}>
+            {children}
           </Box>
         ) : (
-          <Box component="main" sx={{ flexGrow: 1, p: 3, ml: 6 }}>
-            <Typography paragraph>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              Rhoncus dolor purus non enim praesent elementum facilisis leo vel.
-              Risus at ultrices mi tempus imperdiet. Semper risus in hendrerit
-              gravida rutrum quisque non tellus. Convallis convallis tellus id
-              interdum velit laoreet id donec ultrices. Odio morbi quis commodo
-              odio aenean sed adipiscing. Amet nisl suscipit adipiscing bibendum
-              est ultricies integer quis. Cursus euismod quis viverra nibh cras.
-              Metus vulputate eu scelerisque felis imperdiet proin fermentum
-              leo. Mauris commodo quis imperdiet massa tincidunt. Cras tincidunt
-              lobortis feugiat vivamus at augue. At augue eget arcu dictum
-              varius duis at consectetur lorem. Velit sed ullamcorper morbi
-              tincidunt. Lorem donec massa sapien faucibus et molestie ac.
-            </Typography>
-            <Typography paragraph>
-              Consequat mauris nunc congue nisi vitae suscipit. Fringilla est
-              ullamcorper eget nulla facilisi etiam dignissim diam. Pulvinar
-              elementum integer enim neque volutpat ac tincidunt. Ornare
-              suspendisse sed nisi lacus sed viverra tellus. Purus sit amet
-              volutpat consequat mauris. Elementum eu facilisis sed odio morbi.
-              Euismod lacinia at quis risus sed vulputate odio. Morbi tincidunt
-              ornare massa eget egestas purus viverra accumsan in. In hendrerit
-              gravida rutrum quisque non tellus orci ac. Pellentesque nec nam
-              aliquam sem et tortor. Habitant morbi tristique senectus et.
-              Adipiscing elit duis tristique sollicitudin nibh sit. Ornare
-              aenean euismod elementum nisi quis eleifend. Commodo viverra
-              maecenas accumsan lacus vel facilisis. Nulla posuere sollicitudin
-              aliquam ultrices sagittis orci a.
-            </Typography>
-            <Typography paragraph>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              Rhoncus dolor purus non enim praesent elementum facilisis leo vel.
-              Risus at ultrices mi tempus imperdiet. Semper risus in hendrerit
-              gravida rutrum quisque non tellus. Convallis convallis tellus id
-              interdum velit laoreet id donec ultrices. Odio morbi quis commodo
-              odio aenean sed adipiscing. Amet nisl suscipit adipiscing bibendum
-              est ultricies integer quis. Cursus euismod quis viverra nibh cras.
-              Metus vulputate eu scelerisque felis imperdiet proin fermentum
-              leo. Mauris commodo quis imperdiet massa tincidunt. Cras tincidunt
-              lobortis feugiat vivamus at augue. At augue eget arcu dictum
-              varius duis at consectetur lorem. Velit sed ullamcorper morbi
-              tincidunt. Lorem donec massa sapien faucibus et molestie ac.
-            </Typography>
-            <Typography paragraph>
-              Consequat mauris nunc congue nisi vitae suscipit. Fringilla est
-              ullamcorper eget nulla facilisi etiam dignissim diam. Pulvinar
-              elementum integer enim neque volutpat ac tincidunt. Ornare
-              suspendisse sed nisi lacus sed viverra tellus. Purus sit amet
-              volutpat consequat mauris. Elementum eu facilisis sed odio morbi.
-              Euismod lacinia at quis risus sed vulputate odio. Morbi tincidunt
-              ornare massa eget egestas purus viverra accumsan in. In hendrerit
-              gravida rutrum quisque non tellus orci ac. Pellentesque nec nam
-              aliquam sem et tortor. Habitant morbi tristique senectus et.
-              Adipiscing elit duis tristique sollicitudin nibh sit. Ornare
-              aenean euismod elementum nisi quis eleifend. Commodo viverra
-              maecenas accumsan lacus vel facilisis. Nulla posuere sollicitudin
-              aliquam ultrices sagittis orci a.
-            </Typography>
-            <Typography paragraph>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              Rhoncus dolor purus non enim praesent elementum facilisis leo vel.
-              Risus at ultrices mi tempus imperdiet. Semper risus in hendrerit
-              gravida rutrum quisque non tellus. Convallis convallis tellus id
-              interdum velit laoreet id donec ultrices. Odio morbi quis commodo
-              odio aenean sed adipiscing. Amet nisl suscipit adipiscing bibendum
-              est ultricies integer quis. Cursus euismod quis viverra nibh cras.
-              Metus vulputate eu scelerisque felis imperdiet proin fermentum
-              leo. Mauris commodo quis imperdiet massa tincidunt. Cras tincidunt
-              lobortis feugiat vivamus at augue. At augue eget arcu dictum
-              varius duis at consectetur lorem. Velit sed ullamcorper morbi
-              tincidunt. Lorem donec massa sapien faucibus et molestie ac.
-            </Typography>
-            <Typography paragraph>
-              Consequat mauris nunc congue nisi vitae suscipit. Fringilla est
-              ullamcorper eget nulla facilisi etiam dignissim diam. Pulvinar
-              elementum integer enim neque volutpat ac tincidunt. Ornare
-              suspendisse sed nisi lacus sed viverra tellus. Purus sit amet
-              volutpat consequat mauris. Elementum eu facilisis sed odio morbi.
-              Euismod lacinia at quis risus sed vulputate odio. Morbi tincidunt
-              ornare massa eget egestas purus viverra accumsan in. In hendrerit
-              gravida rutrum quisque non tellus orci ac. Pellentesque nec nam
-              aliquam sem et tortor. Habitant morbi tristique senectus et.
-              Adipiscing elit duis tristique sollicitudin nibh sit. Ornare
-              aenean euismod elementum nisi quis eleifend. Commodo viverra
-              maecenas accumsan lacus vel facilisis. Nulla posuere sollicitudin
-              aliquam ultrices sagittis orci a.
-            </Typography>
+          <Box
+            component="main"
+            sx={{ flexGrow: 1, p: 2, mt: 6, maxWidth: "100vw" }}
+          >
+            {children}
           </Box>
         )}
       </Box>
