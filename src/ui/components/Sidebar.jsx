@@ -3,6 +3,7 @@ import { Button, Drawer, Box, Hidden, useMediaQuery } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import ListasdeDrawer from "./DrawerDesplegable/ListadeDrawer";
 import DrawerEstaticoVista from "./DraweFijo/DrawerEstaticoVista";
+import ToolarSesion from "./Sesion/ToolbarSesion";
 
 export default function MiniDrawer({ children }) {
   const isSmallScreen = useMediaQuery("(min-width:800px)");
@@ -90,20 +91,31 @@ export default function MiniDrawer({ children }) {
           )}
         </Box>
       </Hidden>
-      <Box>
-        {isPequeño ? (
-          <Box component="main" sx={{ flexGrow: 1, p: 2, maxWidth: "100vw" }}>
-            {children}
-          </Box>
-        ) : (
+      {isPequeño ? (
+        <Box>
+          {isSmallScreen ? (
+            <ToolarSesion text={"Pepa pig"} size={"78vw"} />
+          ) : (
+            <ToolarSesion text={"Pepa pig"} size={"70vw"} />
+          )}
+
           <Box
             component="main"
             sx={{ flexGrow: 1, p: 2, mt: 6, maxWidth: "100vw" }}
           >
             {children}
           </Box>
-        )}
-      </Box>
+        </Box>
+      ) : (
+        <Box>
+          <Box
+            component="main"
+            sx={{ flexGrow: 1, p: 2, mt: 6, maxWidth: "100vw" }}
+          >
+            {children}
+          </Box>
+        </Box>
+      )}
     </Box>
   );
 }

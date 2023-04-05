@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Drawer, Box, Toolbar } from "@mui/material";
+import { Drawer, Box, Toolbar, AppBar } from "@mui/material";
 import ListasEstatica from "./ListasEstatica";
 
 export default function DrawerEstaticoVista({ tamaño }) {
@@ -16,16 +16,19 @@ export default function DrawerEstaticoVista({ tamaño }) {
       variant="permanent"
       anchor="left"
     >
-      <Toolbar className="fondo" display="flex">
-        <Box
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          sx={{ mt: 4, mb: 4 }}
-        >
-          <img id="img4" src="../../../public/Images/LUCKY5.png" />
-        </Box>
-      </Toolbar>
+      <Box className="fondo">
+        <Toolbar className="fondo" display="flex" sx={{ mt: 4 }}>
+          <Box
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            sx={{ mt: 4, mb: 4 }}
+          >
+            <img id="img4" src="../../../public/Images/LUCKY5.png" />
+          </Box>
+        </Toolbar>
+      </Box>
+
       <ListasEstatica />
     </Drawer>
   );

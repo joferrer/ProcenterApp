@@ -1,12 +1,14 @@
-import { Home } from "../pages/Home";
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import { Catalogo } from "../pages/Catalogo";
-import { Simulador } from "./../pages/Simulador";
-import { Historial } from "./../pages/Historial";
-import { Asesores } from "./../pages/Asesores";
-import { Administrador } from "./../pages/Administrador";
-
+import {
+  Home,
+  Catalogo,
+  Simulador,
+  Historial,
+  Asesores,
+  Administrador,
+} from "./../pages";
+/**! CAMBIAR POR JX PARA ESO*/
 export const ProcenterAppRouter = () => {
   return (
     <Routes>
