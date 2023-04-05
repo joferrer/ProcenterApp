@@ -47,6 +47,12 @@ img {
   font-size: 7pt;
 }
 
+#textcard {
+  color: gray;
+  font-family: "Segoe UI";
+  font-weight: lighter;
+}
+
 p {
   width: inherit;
 }
