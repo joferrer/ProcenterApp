@@ -56,3 +56,55 @@ img {
 p {
   width: inherit;
 }
+
+#contenedor {
+  position: relative;
+  width: 600px;
+  height: 400px;
+}
+
+#mision,
+#vision,
+#quienessomos {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #d9d9d9;
+  color: #000000;
+  resize: none;
+  font-size: 25px;
+  font-family: Inter;
+}
+
+#botonNegro1,
+#botonNegro2,
+#botonNegro3 {
+  position: absolute;
+  top: 326px;
+  right: -100px;
+  bottom: 0;
+  width: 70px;
+  height: 70px;
+  background-color: #000;
+}
+
+#botonVerde1,
+#botonVerde2,
+#botonVerde3 {
+  position: absolute;
+  top: 230px;
+  right: -100px;
+  width: 70px;
+  height: 70px;
+  background-color: #0f0;
+}
+
+.accion {
+  visibility: visible;
+}
+
+.ocultar {
+  visibility: hidden;
+}
