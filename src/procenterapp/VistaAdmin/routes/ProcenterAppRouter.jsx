@@ -7,7 +7,7 @@ import {
   Historial,
   Asesores,
   Administrador,
-} from "./../pages";
+} from "../pages/";
 /**! CAMBIAR POR JX PARA ESO*/
 export const ProcenterAppRouter = () => {
   return (
