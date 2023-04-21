@@ -1,13 +1,8 @@
 import { Navigate, Route, Routes } from "react-router-dom";
-import { AuthRouter } from "../auth/routes/AuthRouter";
+import { AsesoresEmpleado } from "../pages/AsesoresEmpledo";
 
-//import { useCheckAuth } from '../hooks';
 
-//import { CheckingAuth } from '../ui';
-import { LoginPage } from "./../auth/pages/LoginPage";
-import { AppRouterUser } from "../procenterapp/router/AppRouterUser";
-
-export const AppRouter = () => {
+export const EmpleadoRouter = () => {
   //const {status} = useCheckAuth();
 
   // if(status === 'checking'){
@@ -25,8 +20,7 @@ export const AppRouter = () => {
   //const status = "authenticated";
   return (
     <Routes>
-      <Route path="/auth/login" element={<LoginPage />}></Route>
-      <Route path="/*" element={<AppRouterUser />}></Route>
+      <Route path="/asesores" element={<AsesoresEmpleado/>}></Route>
     </Routes>
   );
 };

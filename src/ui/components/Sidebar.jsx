@@ -5,7 +5,7 @@ import ListasdeDrawer from "./DrawerDesplegable/ListadeDrawer";
 import DrawerEstaticoVista from "./DraweFijo/DrawerEstaticoVista";
 import ToolarSesion from "./Sesion/ToolbarSesion";
 
-export default function MiniDrawer({ children }) {
+export default function MiniDrawer({ children, Admin }) {
   const isSmallScreen = useMediaQuery("(min-width:800px)");
   const isPequeño = useMediaQuery("(min-width:599px)");
   const [state, setState] = React.useState({
@@ -43,7 +43,7 @@ export default function MiniDrawer({ children }) {
       >
         <img id="img4" src="../../../public/Images/LUCKY5.png" />
       </Box>
-      <ListasdeDrawer />
+      <ListasdeDrawer admin={Admin}/>
     </Box>
   );
   return (
@@ -85,9 +85,9 @@ export default function MiniDrawer({ children }) {
       <Hidden smDown>
         <Box sx={{ display: "flex" }}>
           {isSmallScreen ? (
-            <DrawerEstaticoVista tamaño={"22vw"} />
+            <DrawerEstaticoVista tamaño={"22vw"} admin={Admin}/>
           ) : (
-            <DrawerEstaticoVista tamaño={"30vw"} />
+            <DrawerEstaticoVista tamaño={"30vw"} admin={Admin}/>
           )}
         </Box>
       </Hidden>

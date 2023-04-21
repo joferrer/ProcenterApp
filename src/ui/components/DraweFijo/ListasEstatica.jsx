@@ -8,8 +8,9 @@ import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import ListaItemEstatica from "./ListaItemEstatica";
 
-export default function ListasEstatica() {
-  return (
+export default function ListasEstatica({admin}) {
+
+  return (admin ? (
     <List className="fondo" sx={{ height: "100vh" }}>
       <ListaItemEstatica
         texto={"Catalogo"}
@@ -36,5 +37,24 @@ export default function ListasEstatica() {
         icono={<AdminPanelSettingsIcon sx={{ color: "white", ml: 2 }} />}
       />
     </List>
-  );
+  ) : (
+    <List className="fondo" sx={{ height: "100vh" }}>
+      <ListaItemEstatica
+        texto={"Catalogo"}
+        icono={<AutoStoriesIcon sx={{ color: "white", ml: 2 }} />}
+      />
+      <ListaItemEstatica
+        texto={"Informes"}
+        icono={<TimelineIcon sx={{ color: "white", ml: 2 }} />}
+      />
+      <ListaItemEstatica
+        texto={"Simulador de Credito"}
+        icono={<AttachMoneyIcon sx={{ color: "white", ml: 2 }} />}
+      />
+      <ListaItemEstatica
+        texto={"Historial de Ventas"}
+        icono={<WorkHistoryIcon sx={{ color: "white", ml: 2 }} />}
+      />
+    </List>
+  ));
 }
