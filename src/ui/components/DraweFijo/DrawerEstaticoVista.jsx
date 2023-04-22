@@ -2,8 +2,9 @@ import * as React from "react";
 import { Drawer, Box, Toolbar, AppBar } from "@mui/material";
 import ListasEstatica from "./ListasEstatica";
 
-export default function DrawerEstaticoVista({ tamaño }) {
+export default function DrawerEstaticoVista({ tamaño , admin}) {
   return (
+    
     <Drawer
       sx={{
         width: tamaño,
@@ -29,7 +30,7 @@ export default function DrawerEstaticoVista({ tamaño }) {
         </Toolbar>
       </Box>
 
-      <ListasEstatica />
+      <ListasEstatica admin={admin} />
     </Drawer>
   );
 }

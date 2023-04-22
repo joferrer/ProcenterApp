@@ -8,8 +8,8 @@ import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import ListaItemDrawer from "./ListaItemDrawer";
 
-export default function ListasdeDrawer() {
-  return (
+export default function ListasdeDrawer({admin}) {
+  return admin ? (
     <List className="fondo">
       <ListaItemDrawer
         texto={"Catalogo"}
@@ -34,6 +34,25 @@ export default function ListasdeDrawer() {
       <ListaItemDrawer
         texto={"Administrar"}
         icono={<AdminPanelSettingsIcon sx={{ color: "white", width: 20 }} />}
+      />
+    </List>
+  ) : (
+    <List className="fondo">
+      <ListaItemDrawer
+        texto={"Catalogo"}
+        icono={<AutoStoriesIcon sx={{ color: "white", width: 20 }} />}
+      />
+      <ListaItemDrawer
+        texto={"Informes"}
+        icono={<TimelineIcon sx={{ color: "white", width: 20 }} />}
+      />
+      <ListaItemDrawer
+        texto={"Simulador de Credito"}
+        icono={<AttachMoneyIcon sx={{ color: "white", width: 20 }} />}
+      />
+      <ListaItemDrawer
+        texto={"Historial de Ventas"}
+        icono={<WorkHistoryIcon sx={{ color: "white", width: 20 }} />}
       />
     </List>
   );
