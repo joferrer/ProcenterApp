@@ -1,5 +1,6 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import { AsesoresEmpleado } from "../pages/AsesoresEmpledo";
+import { RegistrarVenta } from "../pages/RegistrarVenta";
 
 
 export const EmpleadoRouter = () => {
@@ -21,6 +22,7 @@ export const EmpleadoRouter = () => {
   return (
     <Routes>
       <Route path="/asesores" element={<AsesoresEmpleado/>}></Route>
+      <Route path="/registrar-venta" element={<RegistrarVenta/>}></Route>
     </Routes>
   );
 };
