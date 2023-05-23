@@ -16,4 +16,7 @@ export const procentertheme = createTheme({
       main: "#FFFFFF",
     },
   },
+  typography:{
+    fontFamily: `"Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif`
+  }
 });
