@@ -1,10 +1,11 @@
 import { Grid, TextField, Typography } from "@mui/material"
 
-export const TextInput =({label, value, onInputChange,error, multilinea = false})=>{
+export const TextInput =({label, value, onInputChange,error, type ="text",multilinea = false})=>{
  
     return <Grid sx={{mt: "10px"}} >
         <Typography>{label}</Typography>
         <TextField
+            type={type}
             value={value} 
             onChange={ onInputChange}
             variant="filled"

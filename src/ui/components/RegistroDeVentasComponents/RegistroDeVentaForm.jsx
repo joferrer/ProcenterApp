@@ -1,11 +1,15 @@
 import { Button, Grid } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import { TextInput } from "./TextInput";
+import { PhoneMui } from "./PhoneMui";
+import { useDispatch, useSelector } from "react-redux";
+import { VehiculosDispatch } from "../../../store/vehiculos/VehiculosDispatch";
 
 export const RegistroDeVentaForm = ()=>{
 
     const {control,handleSubmit} = useForm();
-
+    const { vehiculos,isLoading, error } = VehiculosDispatch()
+    console.log(vehiculos)
     const onSubmit = (data)=>{
         alert(JSON.stringify(data))
     }
@@ -32,27 +36,27 @@ export const RegistroDeVentaForm = ()=>{
             <Controller        
                  name={"cedula"}
                  control={control}
-                 rules={{required: true}}
+                 rules={{required: true, min: 0}}
                  defaultValue=""
                  render={({field,fieldState,formState})=>
                      <TextInput 
                          value={field.value} 
                          label={"CC"} 
+                         type={"number"}
                          onInputChange={field.onChange}
                          error={formState.errors.cedula}
                          />}
              />
+             
              <Controller        
                  name={"telefono"}
                  control={control}
                  rules={{required: true}}
                  defaultValue=""
                  render={({field,fieldState,formState})=>
-                     <TextInput 
-                         value={field.value} 
-                         label={"TELEFONO"} 
-                         onInputChange={field.onChange}
-                         error={formState.errors.telefono}
+                     <PhoneMui 
+                         phoneNumber={field.value} 
+                         cambio={field.onChange}
                          />}
              />    
 
@@ -89,12 +93,13 @@ export const RegistroDeVentaForm = ()=>{
              <Controller        
                  name={"edad"}
                  control={control}
-                 rules={{required: true}}
+                 rules={{required: true, min: 0}}
                  defaultValue=""
                  render={({field,fieldState,formState})=>
                      <TextInput 
                          value={field.value} 
                          label={"EDAD"} 
+                         type={"number"}
                          onInputChange={field.onChange}
                          error={formState.errors.edad}
                          />}
@@ -102,11 +107,12 @@ export const RegistroDeVentaForm = ()=>{
              <Controller        
                  name={"precio"}
                  control={control}
-                 rules={{required: true}}
+                 rules={{required: true, min: 0}}
                  defaultValue=""
                  render={({field,fieldState,formState})=>
                      <TextInput 
                          value={field.value} 
+                         type={"number"}
                          label={"PRECIO"} 
                          onInputChange={field.onChange}
                          error={formState.errors.precio}
