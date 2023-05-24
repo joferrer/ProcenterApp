@@ -4,12 +4,14 @@ import { TextInput } from "./TextInput";
 import { PhoneMui } from "./PhoneMui";
 import { useDispatch, useSelector } from "react-redux";
 import { VehiculosDispatch } from "../../../store/vehiculos/VehiculosDispatch";
+import { UsuariosDispatch } from "../../../store/usuario/UsuariosDispatch";
 
 export const RegistroDeVentaForm = ()=>{
 
     const {control,handleSubmit} = useForm();
     const { vehiculos,isLoading, error } = VehiculosDispatch()
-    console.log(vehiculos)
+    const {usuarios} = UsuariosDispatch()
+    console.log(usuarios)
     const onSubmit = (data)=>{
         alert(JSON.stringify(data))
     }
