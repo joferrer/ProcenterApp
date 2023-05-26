@@ -1,6 +1,7 @@
 import React from "react";
 import MiniDrawer from "../../../ui/components/Sidebar";
 
-export const ProcenterAppLayout = ({ children }) => {
-  return <MiniDrawer Admin={true}>{children}</MiniDrawer>;
+export const ProcenterAppLayout = ({ children, Admin }) => {
+  console.log(Admin);
+  return <MiniDrawer Admin={Admin}>{children}</MiniDrawer>;
 };
