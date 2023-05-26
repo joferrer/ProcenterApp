@@ -11,9 +11,6 @@ import { ListadoPublicista } from "../ListadoForDrawer/listadoPublicista";
 import { ListadoAdmin } from "../ListadoForDrawer/listadoAdmin";
 import { List } from "@mui/material";
 export const ListasEstatica = ({ admin }) => {
-  console.log("Hola");
-  console.log(admin);
-
   return admin === "admin" ? (
     <ListadoAdmin />
   ) : admin === "asesor" ? (

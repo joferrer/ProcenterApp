@@ -3,7 +3,7 @@ import { Drawer, Box, Toolbar, AppBar } from "@mui/material";
 import { ListasEstatica } from "./ListasEstatica";
 
 export default function DrawerEstaticoVista({ tamaño, admin }) {
-  console.log(admin);
+
   return (
     <Drawer
       className="fondo"
