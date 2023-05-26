@@ -8,7 +8,6 @@ export const VehiculosDispatch = () => {
 
     const dispatch = useDispatch()
     const {vehiculos, isLoading, error} = useSelector(state => state.vehiculos)
-    console.log(JSON.stringify(vehiculos))
 
     const cargarVehiculos = async()=>{
         await dispatch(startCargarVehiculos())

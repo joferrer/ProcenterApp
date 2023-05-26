@@ -5,13 +5,14 @@ import { PhoneMui } from "./PhoneMui";
 import { useDispatch, useSelector } from "react-redux";
 import { VehiculosDispatch } from "../../../store/vehiculos/VehiculosDispatch";
 import { UsuariosDispatch } from "../../../store/usuario/UsuariosDispatch";
+import { AutocompleteInput } from "./AutocompleteInput";
 
 export const RegistroDeVentaForm = ()=>{
 
-    const {control,handleSubmit} = useForm();
-    const { vehiculos,isLoading, error } = VehiculosDispatch()
-    const {usuarios} = UsuariosDispatch()
-    console.log(usuarios)
+    const {control,handleSubmit, setValue} = useForm();
+    const {vehiculos,isLoading, error } = VehiculosDispatch()
+    const {usuarios, clientes, isLoadingUsuarios, errorUsuarios} = UsuariosDispatch()
+    
     const onSubmit = (data)=>{
         alert(JSON.stringify(data))
     }
@@ -41,13 +42,15 @@ export const RegistroDeVentaForm = ()=>{
                  rules={{required: true, min: 0}}
                  defaultValue=""
                  render={({field,fieldState,formState})=>
-                     <TextInput 
-                         value={field.value} 
-                         label={"CC"} 
-                         type={"number"}
-                         onInputChange={field.onChange}
-                         error={formState.errors.cedula}
-                         />}
+                    <AutocompleteInput 
+                        valor={field.value}
+                        label={"CC"}
+                        type={"number"}
+                        cambio= {field.onChange}
+                        error={formState.errors.cedula}
+                        opciones = { clientes.map(u => ({"valor": `${u.cedula}`, "texto": `${u.cedula}-${u?.nombre}`}) ) }
+                    />
+                }
              />
              
              <Controller        

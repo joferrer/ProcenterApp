@@ -2,13 +2,14 @@ import { useDispatch, useSelector } from "react-redux"
 import { startCargarUsuarios } from "./UsuarioThunks"
 import { useEffect } from "react"
 
+const filtrarUsuariosClientes = (usuarios= [])=>{
+    return usuarios.filter(u => u.rol == "CLIENTE")
+}
 
 export const UsuariosDispatch = () => {
-    
     const dispatch = useDispatch()
     const {usuarios, isLoading, error} = useSelector(state => state.usuarios)
-    console.log(JSON.stringify(usuarios))
-
+    
     const cargarUsuarios = async()=>{
         await dispatch(startCargarUsuarios())
     }
@@ -20,6 +21,7 @@ export const UsuariosDispatch = () => {
     }, [usuarios])
     return {
         usuarios,
+        clientes: filtrarUsuariosClientes(usuarios),
         isLoadingUsuarios: isLoading,
         errorUsuarios: error 
   }
