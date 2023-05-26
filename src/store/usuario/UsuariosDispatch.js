@@ -5,7 +5,9 @@ import { useEffect } from "react"
 const filtrarUsuariosClientes = (usuarios= [])=>{
     return usuarios.filter(u => u.rol == "CLIENTE")
 }
-
+const getUsuarioPorCedula = (usuarios=[], pCedula = 0)=>{
+    return usuarios.find(u => u.cedula == pCedula)
+}
 export const UsuariosDispatch = () => {
     const dispatch = useDispatch()
     const {usuarios, isLoading, error} = useSelector(state => state.usuarios)
@@ -23,6 +25,7 @@ export const UsuariosDispatch = () => {
         usuarios,
         clientes: filtrarUsuariosClientes(usuarios),
         isLoadingUsuarios: isLoading,
-        errorUsuarios: error 
+        errorUsuarios: error,
+        getUsuarioPorCedula
   }
 }

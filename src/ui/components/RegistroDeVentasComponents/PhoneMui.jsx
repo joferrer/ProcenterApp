@@ -1,12 +1,12 @@
 
 import { Grid, Typography } from "@mui/material";
-import React from "react";
+import React, { useMemo } from "react";
 import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 
 export const PhoneMui = ({ label= "TELEFONO" ,cambio , phoneNumber = "+57 "}) => {
   const [phone, setPhone] = React.useState(phoneNumber);
-
+  useMemo(() => setPhone(String(phoneNumber)), [phoneNumber])
   const handleChange = (newPhone) => {
     setPhone(newPhone);
   };

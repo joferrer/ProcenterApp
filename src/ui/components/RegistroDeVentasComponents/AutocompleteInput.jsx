@@ -47,7 +47,7 @@ export const AutocompleteInput = ({
                 onChange={(event)=>{
                     cambio(Number(event.target.value))
                 }}
-
+                helperText={!!error ? "El valor ingresado es invalido" : ""}
             />
             
             }

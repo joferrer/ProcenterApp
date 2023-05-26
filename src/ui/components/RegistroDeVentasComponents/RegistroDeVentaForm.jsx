@@ -6,13 +6,21 @@ import { useDispatch, useSelector } from "react-redux";
 import { VehiculosDispatch } from "../../../store/vehiculos/VehiculosDispatch";
 import { UsuariosDispatch } from "../../../store/usuario/UsuariosDispatch";
 import { AutocompleteInput } from "./AutocompleteInput";
+import { useMemo } from "react";
 
 export const RegistroDeVentaForm = ()=>{
 
-    const {control,handleSubmit, setValue} = useForm();
+    const {control,handleSubmit, reset ,watch,getValues} = useForm();
     const {vehiculos,isLoading, error } = VehiculosDispatch()
-    const {usuarios, clientes, isLoadingUsuarios, errorUsuarios} = UsuariosDispatch()
-    
+    const {usuarios, clientes, isLoadingUsuarios, errorUsuarios, getUsuarioPorCedula} = UsuariosDispatch()
+   
+    //console.log(getUsuarioPorCedula(clientes,watch().cedula))
+    useMemo(() => 
+        typeof getUsuarioPorCedula(clientes,watch().cedula) != "undefined" ? 
+            reset({...watch(), ...getUsuarioPorCedula(clientes,watch().cedula)})
+            :
+            ()=>{}
+    , [watch()?.cedula])
     const onSubmit = (data)=>{
         alert(JSON.stringify(data))
     }
