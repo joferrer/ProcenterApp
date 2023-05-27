@@ -1,14 +1,15 @@
 import { consultarApi } from "../api/conexion"
 import { loadVehiculos, registrarError, setVehiculos } from "./VehiculosSlice"
 
-const VEHICULOS = "rvehiculos"
+const VEHICULOS = "vehiculos"
 
 export const startCargarVehiculos = ()=>{
     return async (dispatch) =>{
         try{
             dispatch(loadVehiculos())
             const vehiculos = await consultarApi(VEHICULOS)
-            dispatch(setVehiculos({vehiculos}))
+            if(!vehiculos.estado) return dispatch(registrarError(vehiculos.texto))
+            dispatch(setVehiculos({vehiculos:vehiculos.data}))
             
             return {
                 ok: true

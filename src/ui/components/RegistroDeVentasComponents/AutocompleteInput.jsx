@@ -16,7 +16,7 @@ const filterOptions = createFilterOptions({
 export const AutocompleteInput = ({
     opciones,
     cambio,
-    valor=0,
+    valor,
     label,
     type,
     error,
@@ -34,7 +34,9 @@ export const AutocompleteInput = ({
             options={opciones}
             getOptionLabel={(opcion) => opcion.texto}
             filterOptions={filterOptions}
-            sx={{ width: 300, }}
+            sx={{ width: "100%", "@media (max-width:500px)": {
+                width:"80vw",
+            }, }}
             renderInput={(params)=>
                 <TextField 
                 {...params}

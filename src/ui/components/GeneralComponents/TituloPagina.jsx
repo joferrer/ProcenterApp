@@ -2,7 +2,11 @@ import { Grid, Typography } from "@mui/material"
 
 export const Titulo = ({titulo})=>{
 
-    return <Grid sx={{ml:"30px"}}>
+    return <Grid sx={{ml:"30px",
+    "@media (max-width:600px)": {
+        ml:"10px",
+    },
+    }}>
         <Typography 
         fontSize={"28px"}
         fontWeight={"300"}
