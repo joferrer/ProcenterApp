@@ -40,8 +40,15 @@ function CardForm() {
   };
 
   return (
-    <div>
-      <Button variant="contained" onClick={handleOpen}>
+    <div
+      style={{
+        width: "100%",
+        "align-items": "center",
+        "text-align": "center",
+        "margin-top": "1em",
+      }}
+    >
+      <Button variant="contained" onClick={handleOpen} sx={{float: "right"}}>
         Agregar asesor
       </Button>
       <Modal
