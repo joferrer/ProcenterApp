@@ -11,6 +11,9 @@ const style = {
     bgcolor: 'background.paper',
     boxShadow: 24,
     p: 4,
+    maxWidth: "80vw",
+    width: "80vw",
+    maxHeight: "80vh"
   };
   
 
@@ -26,7 +29,7 @@ export const SeleccionarVehiculo = ({label,textoBoton,vehiculos = [], onFormChan
         handleClose()
     }
   return (
-    <Grid>
+    <Grid sx={{mt: "10px"}}>
         <Typography>{label}</Typography>
         <Button onClick={handleOpen} >{textoBoton}</Button>
         <Modal
@@ -35,13 +38,15 @@ export const SeleccionarVehiculo = ({label,textoBoton,vehiculos = [], onFormChan
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
         >
-            <Grid sx={{...style, display:"flex", flexDirection: "column"}} >
+            <Grid container sx={{...style, } } >
                 <Typography id="modal-modal-title" variant="h6" component="h2">Seleccione el vehiculo</Typography>
-                <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-                    {
-                        vehiculos.map(v => <Card key={v.id}  sx={{ maxWidth: 300 }} onClick={()=>handleClick(v.id)}>
+                <Grid container  sx={{ overflowY: "scroll",width: "100%",height: "70vh"}} spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+                    {   
+                    
+                        vehiculos.map(v => <Grid item key={JSON.stringify(v)}>
+                            <Card key={v.id}  sx={{ maxWidth: 250 }} onClick={()=>handleClick(v.id)}>
                              <CardActionArea>
-                            <CardMedia image={v.imagenes.url1} title={v.nombre}   sx={{ height: 140 , width: 300}} />
+                            <CardMedia image={v.imagenes.url1} title={v.nombre}   sx={{ height: 140 , width: 250}} />
                             <CardContent >
                                 <Typography gutterBottom variant="h5" component="div">{v?.nombre}</Typography>
                                 <Typography variant="body2" color="text.secondary">{v?.modelo}</Typography>
@@ -49,8 +54,12 @@ export const SeleccionarVehiculo = ({label,textoBoton,vehiculos = [], onFormChan
                                 <Typography variant="body2" color="text.secondary" sx={{}}>Placa: {v?.placa}</Typography>
                             </CardContent>
                             </CardActionArea>
-                        </Card>)
+                        </Card>
+                        </Grid>
+                        )
                     }
+                    
+
                 </Grid>
             </Grid>
 
