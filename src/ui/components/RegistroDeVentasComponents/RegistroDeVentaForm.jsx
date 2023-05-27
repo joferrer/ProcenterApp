@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { VehiculosDispatch } from "../../../store/vehiculos/VehiculosDispatch";
 import { UsuariosDispatch } from "../../../store/usuario/UsuariosDispatch";
 import { AutocompleteInput } from "./AutocompleteInput";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 
 export const RegistroDeVentaForm = ()=>{
 
@@ -15,12 +15,16 @@ export const RegistroDeVentaForm = ()=>{
     const {usuarios, clientes, isLoadingUsuarios, errorUsuarios, getUsuarioPorCedula} = UsuariosDispatch()
    
     //console.log(getUsuarioPorCedula(clientes,watch().cedula))
-    useMemo(() => 
-        typeof getUsuarioPorCedula(clientes,watch().cedula) != "undefined" ? 
-            reset({...watch(), ...getUsuarioPorCedula(clientes,watch().cedula)})
-            :
-            ()=>{}
-    , [watch()?.cedula])
+    const cedula = watch()?.cedula;
+
+  useEffect(() => {
+    if (cedula) {
+      const usuarioPorCedula = getUsuarioPorCedula(clientes, cedula);
+      if (usuarioPorCedula) {
+        reset({ ...watch(), ...usuarioPorCedula });
+      }
+    }
+  }, [cedula]);
     const onSubmit = (data)=>{
         alert(JSON.stringify(data))
     }
@@ -28,22 +32,14 @@ export const RegistroDeVentaForm = ()=>{
     <Grid 
         container 
         display={"flex"} flexDirection={"row"} wrap="wrap" 
-        sx={{mt:"50px", ml:"40px", width:"100%",justifyContent:"space-between"}}>
+        sx={{mt:"50px", ml:"40px", 
+            width:"100%",   
+            "@media (max-width:600px)": {
+                ml:"10px",
+            },
+            justifyContent:"space-between"}}>
         
-        <Grid>    
-            <Controller
-                name={"nombre"}
-                control={control}
-                rules={{required: true}}
-                defaultValue=""
-                render={({field,fieldState,formState})=>
-                    <TextInput 
-                        value={field.value} 
-                        label={"NOMBRE"} 
-                        onInputChange={field.onChange}
-                        error={formState.errors.nombre}
-                        />}
-            />
+        <Grid>
             <Controller        
                  name={"cedula"}
                  control={control}
@@ -59,8 +55,21 @@ export const RegistroDeVentaForm = ()=>{
                         opciones = { clientes.map(u => ({"valor": `${u.cedula}`, "texto": `${u.cedula}-${u?.nombre}`}) ) }
                     />
                 }
-             />
-             
+             />    
+            <Controller
+                name={"nombre"}
+                control={control}
+                rules={{required: true}}
+                defaultValue=""
+                render={({field,fieldState,formState})=>
+                    <TextInput 
+                        value={field.value} 
+                        label={"NOMBRE"} 
+                        onInputChange={field.onChange}
+                        error={formState.errors.nombre}
+                        />}
+            />
+            
              <Controller        
                  name={"telefono"}
                  control={control}
