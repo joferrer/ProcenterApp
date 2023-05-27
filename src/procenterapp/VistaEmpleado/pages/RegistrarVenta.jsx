@@ -4,7 +4,7 @@ import { RegistroDeVentaForm } from "../../../ui/components/RegistroDeVentasComp
 
 export const RegistrarVenta = () => {
         
-    return <EmpleadosLayout Admin={false}>
+    return <EmpleadosLayout Admin={"asesor"}>
 
         <Titulo titulo={"Registro de venta"} />
         <RegistroDeVentaForm />
