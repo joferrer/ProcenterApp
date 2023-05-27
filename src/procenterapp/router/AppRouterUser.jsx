@@ -5,6 +5,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 //import { CheckingAuth } from '../ui';
 import { AdminRouter } from './../VistaAdmin/routes/AdminRouter';
 import { EmpleadoRouter } from "../VistaEmpleado/routes/EmpleadoRouter";
+import { PublicistaRouter } from "../VistaPublicista";
 
 export const AppRouterUser = () => {
   //const {status} = useCheckAuth();
@@ -25,7 +26,8 @@ export const AppRouterUser = () => {
   return (
     <Routes>
       <Route path="/proapp/*" element={<AdminRouter />}></Route>
-      <Route path="/user/*" element={<EmpleadoRouter />}></Route>
+      <Route path="/asesor/*" element={<EmpleadoRouter />}></Route>
+      <Route path="/publicista/*" element={<PublicistaRouter />}></Route>
     </Routes>
   );
 };
