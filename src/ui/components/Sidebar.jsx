@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Button, Drawer, Box, Hidden, useMediaQuery } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import ListasdeDrawer from "./DrawerDesplegable/ListadeDrawer";
+import { ListasdeDrawer } from "./DrawerDesplegable/ListadeDrawer";
 import DrawerEstaticoVista from "./DraweFijo/DrawerEstaticoVista";
 import ToolarSesion from "./Sesion/ToolbarSesion";
 
@@ -11,7 +11,6 @@ export default function MiniDrawer({ children, Admin }) {
   const [state, setState] = React.useState({
     left: false,
   });
-
   const toggleDrawer = (anchor, open) => (event) => {
     if (
       event.type === "keydown" &&
@@ -43,7 +42,7 @@ export default function MiniDrawer({ children, Admin }) {
       >
         <img id="img4" src="../../../public/Images/LUCKY5.png" />
       </Box>
-      <ListasdeDrawer admin={Admin}/>
+      <ListasdeDrawer admin={Admin} />
     </Box>
   );
   return (
@@ -78,16 +77,16 @@ export default function MiniDrawer({ children, Admin }) {
             >
               {list("left")}
             </Drawer>
-            <p color="whire">PROCENTERAPP</p>
+            <p color="white">PROCENTERAPP</p>
           </Box>
         </Box>
       </Hidden>
       <Hidden smDown>
         <Box sx={{ display: "flex" }}>
           {isSmallScreen ? (
-            <DrawerEstaticoVista tamaño={"22vw"} admin={Admin}/>
+            <DrawerEstaticoVista tamaño={"22vw"} admin={Admin} />
           ) : (
-            <DrawerEstaticoVista tamaño={"30vw"} admin={Admin}/>
+            <DrawerEstaticoVista tamaño={"30vw"} admin={Admin} />
           )}
         </Box>
       </Hidden>
@@ -98,24 +97,18 @@ export default function MiniDrawer({ children, Admin }) {
           ) : (
             <ToolarSesion text={"Pepa pig"} size={"70vw"} />
           )}
-
-          <Box
-            component="main"
-            sx={{ flexGrow: 1, p: 2, mt: 6, maxWidth: "100vw" }}
-          >
-            {children}
-          </Box>
         </Box>
       ) : (
-        <Box>
-          <Box
-            component="main"
-            sx={{ flexGrow: 1, p: 2, mt: 6, maxWidth: "100vw" }}
-          >
-            {children}
-          </Box>
-        </Box>
+        <></>
       )}
+      <Box>
+        <Box
+          component="main"
+          sx={{ flexGrow: 1, p: 2, mt: 6, maxWidth: "100vw" }}
+        >
+          {children}
+        </Box>
+      </Box>
     </Box>
   );
 }

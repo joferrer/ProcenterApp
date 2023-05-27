@@ -24,7 +24,7 @@ export const AppRouterUser = () => {
   //const status = "authenticated";
   return (
     <Routes>
-      <Route path="/proapp/*" element={<AdminRouter/>}></Route>
+      <Route path="/proapp/*" element={<AdminRouter />}></Route>
       <Route path="/user/*" element={<EmpleadoRouter />}></Route>
     </Routes>
   );

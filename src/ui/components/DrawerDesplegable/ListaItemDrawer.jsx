@@ -1,4 +1,5 @@
 import * as React from "react";
+import { AutoStoriesIcon } from "@mui/icons-material/AutoStories";
 import {
   ListItemButton,
   ListItem,
@@ -6,7 +7,7 @@ import {
   ListItemText,
 } from "@mui/material";
 
-export default function ListaItemDrawer(props) {
+export const ListaItemDrawer = (props)=> {
   return (
     <ListItem disablePadding sx={{ display: "block" }}>
       <ListItemButton
