@@ -7,6 +7,7 @@ import { VehiculosDispatch } from "../../../store/vehiculos/VehiculosDispatch";
 import { UsuariosDispatch } from "../../../store/usuario/UsuariosDispatch";
 import { AutocompleteInput } from "./AutocompleteInput";
 import { useEffect, useMemo } from "react";
+import { SeleccionarVehiculo } from "./SeleccionarVehiculo";
 
 export const RegistroDeVentaForm = ()=>{
 
@@ -105,12 +106,12 @@ export const RegistroDeVentaForm = ()=>{
                  rules={{required: true}}
                  defaultValue=""
                  render={({field,fieldState,formState})=>
-                     <TextInput 
-                         value={field.value} 
-                         label={"VEHICULO"} 
-                         onInputChange={field.onChange}
-                         error={formState.errors.cedula}
-                         />}
+                    <SeleccionarVehiculo 
+                        label={"VEHICULO"}
+                        vehiculos={vehiculos}
+                        textoBoton={field.value != "" ? field.value : "Seleccione un vehiculo..." }
+                        onFormChange={field.onChange}
+                    />}
              />
              <Controller        
                  name={"edad"}
