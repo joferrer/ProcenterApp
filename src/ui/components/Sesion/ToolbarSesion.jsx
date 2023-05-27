@@ -6,16 +6,17 @@ export default function ToolarSesion({ text, size }) {
   return (
     <Box
       position="fixed"
-      backgroundColor="white"
       sx={{
         width: size,
         height: "54px",
+        backgroundColor: "white",
       }}
     >
       <Toolbar
         sx={{
           width: "100%",
           justifyContent: "end",
+          backgroundColor: "white",
         }}
       >
         <CardUser text={text} />

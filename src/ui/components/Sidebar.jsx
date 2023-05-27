@@ -97,24 +97,18 @@ export default function MiniDrawer({ children, Admin }) {
           ) : (
             <ToolarSesion text={"Pepa pig"} size={"70vw"} />
           )}
-
-          <Box
-            component="main"
-            sx={{ flexGrow: 1, p: 2, mt: 6, maxWidth: "100vw" }}
-          >
-            {children}
-          </Box>
         </Box>
       ) : (
-        <Box>
-          <Box
-            component="main"
-            sx={{ flexGrow: 1, p: 2, mt: 6, maxWidth: "100vw" }}
-          >
-            {children}
-          </Box>
-        </Box>
+        <></>
       )}
+      <Box>
+        <Box
+          component="main"
+          sx={{ flexGrow: 1, p: 2, mt: 6, maxWidth: "100vw" }}
+        >
+          {children}
+        </Box>
+      </Box>
     </Box>
   );
 }
