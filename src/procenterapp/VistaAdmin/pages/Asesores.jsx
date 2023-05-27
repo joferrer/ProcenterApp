@@ -9,7 +9,7 @@ export const Asesores = () => {
   return (
     <ProcenterAppLayout>
       <Box sx={{ width: "75vw" }}>
-        <Typography variant="h4">Asesores Comerciales</Typography>
+        <Typography variant="h4">Asesores Comerciales </Typography>
         <CardContextProvider>
           <CardForm />
           <CardList />
