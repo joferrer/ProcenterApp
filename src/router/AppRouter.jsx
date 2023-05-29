@@ -12,7 +12,7 @@ const NO_AUTHENTICATED = "no-authenticated"
 export const AppRouter = () => {
   
   const {status,rol} = authDispatch();
-
+  console.log(rol,status)
   if(status === CHECKING){
    return <CheckingAuth />
   }
@@ -22,9 +22,9 @@ export const AppRouter = () => {
       {status === AUTHENTICATED ? (
           <Route path="/*" element={<AppRouterUser rol={rol} />}></Route>
         ) : (
-          <Route path="/auth/*" element={<AuthRouter />} />
+          <Route path="/*" element={<AuthRouter status={status}/>} />
       )}
-      <Route path="/auth/*" element={<Navigate to="/auth/login" />} />
+      
     </Routes>
   );
 };

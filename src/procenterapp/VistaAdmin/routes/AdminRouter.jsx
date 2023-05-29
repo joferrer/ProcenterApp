@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import {
   Home,
   Catalogo,
@@ -10,6 +10,7 @@ import {
 } from "../pages/";
 /**! CAMBIAR POR JX PARA ESO*/
 export const AdminRouter= () => {
+  console.log("wat")
   return (
     <Routes>
       <Route path="/home" element={<Home />}></Route>
@@ -18,6 +19,7 @@ export const AdminRouter= () => {
       <Route path="/historial" element={<Historial />}></Route>
       <Route path="/asesores" element={<Asesores />}></Route>
       <Route path="/administrar" element={<Administrador />}></Route>
+      <Route path="/*" element={<Navigate to="/home" />} />
     </Routes>
   );
 };

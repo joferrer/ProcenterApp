@@ -4,7 +4,7 @@ import { Typography } from "@mui/material";
 
 export const Home = () => {
   return (
-    <ProcenterAppLayout>
+    <ProcenterAppLayout Admin={"admin"}>
       <Typography paragraph>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Rhoncus dolor purus
