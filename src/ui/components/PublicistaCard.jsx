@@ -7,9 +7,9 @@ import Button from "@mui/material/Button";
 import { CardContext } from "../context/CardContext";
 import { useContext } from "react";
 
-function ProfileCard({ card }) {
+function PublicistaCard({ card }) {
 
-  const { deleteCard } = useContext(CardContext);
+  const { deletePublicista} = useContext(CardContext);
 
 
   return (
@@ -25,13 +25,12 @@ function ProfileCard({ card }) {
         <p>Correo: {card.correo}</p>
         <p>Teléfono: {card.telefono}</p>
         <p>Fecha de contratación: {card.fecha}</p>
-        <p>Vehículos vendidos: 0</p>
       </CardContent>
       <CardActions>
         <Button
           variant="outlined"
           size="small"
-          onClick={() => deleteCard(card.cedula)}
+          onClick={() => deletePublicista(card.cedula)}
         >
           Eliminar
         </Button>
@@ -39,4 +38,4 @@ function ProfileCard({ card }) {
     </Card>
   );
 }
-export default ProfileCard;
+export default PublicistaCard;
