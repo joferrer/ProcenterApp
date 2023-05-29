@@ -1,31 +1,43 @@
 
+import { signOut } from "firebase/auth";
 import { loginWithEmailPassword, logoutFireBase, registerUserWithEmailPassword, singInWithGoogle } from "../../firebase/provider";
-import { consultarApi } from "../api/ufpsformsApi";
+import { consultarApi } from "../api/conexion";
 import { checkingCredentials, logout, login } from "./"
 
+const USUARIOS_URL= "usuarios"
 
-export const checkingAuthentication = ( email, password) =>{
+export const checkingAuthentication = () =>{
     return async ( dispatch )=>{
         await dispatch( checkingCredentials() );
     }
 }
-export const startGoogleSingIn = ( email, password) =>{
+
+//TODO: Verificar que el usario exista y esté activo. 
+//TODO: Verificar el ROL. 
+export const startGoogleSingIn = () =>{
     return async ( dispatch )=>{
         dispatch( checkingCredentials() );
 
         const result = await singInWithGoogle();
-
         if(!result.ok) return dispatch( logout(result.errorMessage) );
-        const {poblacion, id_encuestado} = await verificarPoblacion(email);
+        const usuarios = await consultarApi(USUARIOS_URL);
+        if(!usuarios.estado){ 
+            //TODO: Logout google
+            await signOut()
+            return dispatch(logout({errorMessage: usuarios.mensaje}))
+        }
+        const existe = usuarios.data.find(u => u.correo == result.email && u.estado && u.rol != "CLIENTE")
+        if(!existe){
+            await signOut()
+            return dispatch(logout({errorMessage: 
+                `El usuario con el email ${result.email} no se encuentra registrado o ya no está viculado con la empresa.` }))
+        }
         const datos = {
             ...result,
-            poblacion: poblacion,
+            rol: existe.rol,
             id_encuestado
         }
-        console.log("POBLACION PERDIDA 1" + poblacion);
         return dispatch( login( datos ) );
-
-        
     }
 }
 
@@ -46,17 +58,16 @@ export const startLoginWithEmailPassword = ({email, password})=>{
  
     return async(dispatch) =>{
         dispatch(checkingAuthentication());
-        const {poblacion, id_encuestado} = await verificarPoblacion(email);
-        if(poblacion != `El correo ${email} no se encuetra registrado`){
-            console.log("POBLACION PERDIDA 2.1");
+
+       
             const {ok,uid,displayName, photoURL, errorMessage} = await loginWithEmailPassword({email, password});
             if(!ok) return dispatch(logout({errorMessage}));
-            dispatch(login({uid, displayName,email,photoURL,poblacion,id_encuestado}));
-        }
-        else{
+            return dispatch(login({uid, displayName,email,photoURL,poblacion,id_encuestado}));
+        
+        
             console.log("POBLACION PERDIDA 2");
-            return dispatch(logout({errorMessage: 'Este correo no se encuentra registrado'}));
-        }
+            //return dispatch(logout({errorMessage: 'Este correo no se encuentra registrado'}));
+        
         
         
     }

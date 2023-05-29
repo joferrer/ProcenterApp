@@ -8,7 +8,7 @@ export const startCargarVehiculos = ()=>{
         try{
             dispatch(loadVehiculos())
             const vehiculos = await consultarApi(VEHICULOS)
-            if(!vehiculos.estado) return dispatch(registrarError(vehiculos.texto))
+            if(!vehiculos.estado) return dispatch(registrarError({error: vehiculos.texto}))
             dispatch(setVehiculos({vehiculos:vehiculos.data}))
             
             return {
