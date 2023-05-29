@@ -120,6 +120,7 @@ export const LoginPage = () => {
               variant="contained"
               color="butto"
               fullWidth
+              onClick={onGoogleSingIn}
               sx={{ mt: 2, pl: 2, pr: 2 }}
             >
               <Google />

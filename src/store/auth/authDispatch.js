@@ -5,7 +5,7 @@ import { login, logout } from "./authSlice";
 import { FireBaseAuth } from "../../firebase/config";
 
 export const authDispatch = () => {
-    const {status} = useSelector(state => state.auth);
+    const {status,rol,email,id,displayName,photoURL} = useSelector(state => state.auth);
     const dispatch = useDispatch();
   
     useEffect(() => {
@@ -18,6 +18,6 @@ export const authDispatch = () => {
     
     }, [])
   
-    return {status}
+    return {status,rol,correo: email, id, nombre: displayName, photoURL}
   
 }

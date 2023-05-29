@@ -35,7 +35,7 @@ export const startGoogleSingIn = () =>{
         const datos = {
             ...result,
             rol: existe.rol,
-            id_encuestado
+            id: existe.id
         }
         return dispatch( login( datos ) );
     }
@@ -58,17 +58,25 @@ export const startLoginWithEmailPassword = ({email, password})=>{
  
     return async(dispatch) =>{
         dispatch(checkingAuthentication());
-
+        const usuarios = await consultarApi(USUARIOS_URL);
+        if(!usuarios.estado){ 
+            return dispatch(logout({errorMessage: usuarios.mensaje}))
+        }
+        const existe = usuarios.data.find(u => u.correo == email && u.estado && u.rol != "CLIENTE")
+        if(!existe){
+            return dispatch(logout({errorMessage: 
+                `El usuario con el email ${result.email} no se encuentra registrado o ya no está viculado con la empresa.` }))
+        }
        
-            const {ok,uid,displayName, photoURL, errorMessage} = await loginWithEmailPassword({email, password});
-            if(!ok) return dispatch(logout({errorMessage}));
-            return dispatch(login({uid, displayName,email,photoURL,poblacion,id_encuestado}));
+        const {ok,uid,displayName, photoURL, errorMessage} = await loginWithEmailPassword({email, password});
+        if(!ok) return dispatch(logout({errorMessage}));
+
+        return dispatch(login({uid, displayName,email,photoURL,
+            rol:existe.rol,
+            id: existe.id
+        }));
         
-        
-            console.log("POBLACION PERDIDA 2");
             //return dispatch(logout({errorMessage: 'Este correo no se encuentra registrado'}));
-        
-        
         
     }
 }
