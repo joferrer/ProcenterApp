@@ -4,14 +4,19 @@ import { CardContextProvider } from "../../../ui/context/CardContext";
 import CardForm from "../../../ui/components/CardForm";
 import Box from "@mui/material/Box";
 import { Typography } from "@mui/material";
+import { Titulo } from "../../../ui/components/GeneralComponents/TituloPagina";
+import ListaPublicistas from "../../../ui/components/ListaPublicistas";
 
 export const Asesores = () => {
   return (
     <ProcenterAppLayout>
       <Box sx={{ width: "75vw" }}>
-        <Typography variant="h4">Asesores Comerciales </Typography>
+        <Titulo></Titulo>
         <CardContextProvider>
           <CardForm />
+          <Typography variant="h4">Publicistas</Typography>
+          <ListaPublicistas></ListaPublicistas>
+          <Typography variant="h4">Asesores</Typography>
           <CardList />
         </CardContextProvider>
       </Box>
