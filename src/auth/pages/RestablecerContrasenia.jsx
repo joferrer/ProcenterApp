@@ -27,7 +27,7 @@ export const RestablecerContrasenia = () => {
             enviado ? (
                 <Grid>
                     <Typography>Se ha enviado el enlace de restablecimiento a su correo.</Typography>
-                    <Link to="/auth/login" style={{textDecoration:"none"}}>Regresar al login</Link>
+                    <Link to="/login" style={{textDecoration:"none"}}>Regresar al login</Link>
                 </Grid>
                 
             ):(<Formulario control={control}/>)
@@ -90,7 +90,7 @@ const Formulario = ({control})=>{
                 </Button>
         </Grid>
         </Grid>
-            <Link to="/auth/login" style={{textDecoration:"none"}}>Regresar al login</Link>
+            <Link to="/login" style={{textDecoration:"none"}}>Regresar al login</Link>
         </Grid>
     )
 }

@@ -85,7 +85,7 @@ export const LoginPage = () => {
               />}
             />
 
-           <Link to="/auth/restablecer-password" style={{textDecoration: "none"}}>¿Has olvidado tu contraseña?</Link>
+           <Link to="/restablecer-password" style={{textDecoration: "none"}}>¿Has olvidado tu contraseña?</Link>
           
         </Grid>
 
