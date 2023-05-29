@@ -1,4 +1,4 @@
-import { Link as RouterLink } from "react-router-dom";
+import { Link, Link as RouterLink } from "react-router-dom";
 import React, { useMemo } from "react";
 import { Google, Apple } from "@mui/icons-material";
 import { AuthLayout } from "../layout/AuthLayout";
@@ -8,7 +8,6 @@ import {
   TextField,
   Button,
   Hidden,
-  Link,
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { startGoogleSingIn, startLoginWithEmailPassword } from "../../store/auth/thunks";
@@ -44,22 +43,22 @@ export const LoginPage = () => {
                 rules={{required: true}}
                 defaultValue=""
                 render={({field,fieldState,formState})=>
-                <TextField
-                id="outlined-basic"
-                variant="outlined"
-                label="Correo"
-                type="email"
-                placeholder="correo@google.com"
-                fullWidth
-                value={field.value}
-                onChange={field.onChange}
-                error={!!formState.errors.email}
-                helperText={!!formState.errors.email ?  "Ingrese un correo valido" : ""}
-                sx={{
-                  input: {
-                    background: "#D9D9D9",
-                  },
-                }}
+                  <TextField
+                  id="outlined-basic"
+                  variant="outlined"
+                  label="Correo"
+                  type="email"
+                  placeholder="correo@google.com"
+                  fullWidth
+                  value={field.value}
+                  onChange={field.onChange}
+                  error={!!formState.errors.email}
+                  helperText={!!formState.errors.email ?  "Ingrese un correo valido" : ""}
+                  sx={{
+                    input: {
+                      background: "#D9D9D9",
+                    },
+                  }}
               />}
             />
           
@@ -85,6 +84,8 @@ export const LoginPage = () => {
                 }}
               />}
             />
+
+           <Link to="/auth/restablecer-password" style={{textDecoration: "none"}}>¿Has olvidado tu contraseña?</Link>
           
         </Grid>
 

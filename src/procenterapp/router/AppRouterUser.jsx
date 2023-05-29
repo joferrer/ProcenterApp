@@ -7,17 +7,11 @@ import { authDispatch } from "../../store/auth/authDispatch";
 const ROL_ASESOR        = "ASESOR"
 const ROL_CLIENTE       = "CLIENTE"
 const ROL_PUBLICISTA    = "PUBLICISTA"
-const ROL_ADMINISTRADOR = "ADMINISTRADOR"
+const ROL_ADMINISTRADOR = "ADMIN"
 
 
-export const AppRouterUser = () => {
-  const {rol} = authDispatch();
-
-  if(rol === ROL_ADMINISTRADOR){
-    return <Routes>
-     
-    </Routes>
-  }
+export const AppRouterUser = ({rol}) => {
+  console.log("rol",rol)
   return (
     <Routes>
       {
@@ -30,11 +24,8 @@ export const AppRouterUser = () => {
         rol === ROL_ADMINISTRADOR ? 
         <Route path="/proapp/*" element={<AdminRouter />}></Route>
         :
-        <Route path="/*" element={<Navigate to="/auth/login" />} />
-      }
-      
-      
-      
+        <Route path="/*" element={<Navigate to="/proapp/home" />} />
+      }      
     </Routes>
   );
 };
