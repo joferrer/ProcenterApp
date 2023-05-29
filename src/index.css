@@ -116,3 +116,33 @@ p {
   border: 1px solid rgb(193, 193, 193);
   border-radius: 5px;
 }
+
+.small-image {
+  width: 60px;
+  height: 60px;
+}
+.image-preview-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.image-preview {
+  flex: 0 0 calc(10% - 10px);
+  position: relative;
+}
+
+.image-container {
+  width: 76px;
+  height: 60px;
+}
+
+.delete-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-color: transparent;
+  color: red;
+}
+
+
