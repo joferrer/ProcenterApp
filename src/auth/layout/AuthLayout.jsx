@@ -30,7 +30,7 @@ export const AuthLayout = ({ children, title = "" }) => {
             minHeight="100vh"
             xs={8}
             sx={{
-              width: "55vw",
+              width: "55%",
               height: "100vh",
             }}
           >
@@ -44,7 +44,7 @@ export const AuthLayout = ({ children, title = "" }) => {
             minHeight="100vh"
             xs={8}
             sx={{
-              width: "45vw",
+              width: "45%",
               height: "100vh",
               backgroundColor: "black",
             }}
