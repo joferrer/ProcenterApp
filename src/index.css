@@ -23,6 +23,10 @@ img {
 #img3 {
   width: 80%;
 }
+#im{
+  width: 100%;
+  height: 100%;
+}
 #img4 {
   width: 50%;
 }
@@ -33,6 +37,7 @@ img {
 #img6 {
   width: 10%;
 }
+
 
 .color {
   background-color: black;

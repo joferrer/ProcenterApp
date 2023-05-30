@@ -12,8 +12,18 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
-
-const pages = ["Products", "Pricing", "Blog"];
+import { Grid } from "@mui/material";
+import TextoImagenEcomerfooter from "./../../ui/components/GeneralComponents/TextoImagenEcomerfooter";
+import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
+import DiamondIcon from "@mui/icons-material/Diamond";
+import MinorCrashIcon from "@mui/icons-material/MinorCrash";
+const pages = ["Vehiculos", "Financiancion", "Sobre Nosotros"];
+import FacebookIcon from "@mui/icons-material/Facebook";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import WhatsAppIcon from "@mui/icons-material/WhatsApp";
+import SearchIcon from "@mui/icons-material/Search";
+import PersonIcon from "@mui/icons-material/Person";
+import { Link } from "react-router-dom";
 
 function ProcenterCommerceLayout({ children }) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -26,26 +36,18 @@ function ProcenterCommerceLayout({ children }) {
     setAnchorElNav(null);
   };
 
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
   return (
-    <Box sx={{ mb: 6 }}>
+    <Box sx={{ width: "100%" }}>
       <Box sx={{ width: "100%", height: "100%", mb: 10 }}>
         <AppBar sx={{ backgroundColor: "black", width: "100%" }}>
-          <Container sx={{ width: "100%" }}>
-            <Toolbar sx={{ width: "100%", display: "flex" }}>
-              <Box
-                sx={{
-                  mr: 2,
-                  display: { xs: "none", md: "flex" },
-                  fontFamily: "monospace",
-                  fontWeight: 700,
-                  letterSpacing: ".3rem",
-                  color: "inherit",
-                  textDecoration: "none",
-                }}
-              >
-                <img src="../../../public/Images/LUCKY5.png" id="img6" />
-              </Box>
-
+          <Box sx={{ display: "flex", width: "100%" }}>
+            <Toolbar sx={{ display: "flex", width: { xs: "100%", md: "80%" } }}>
               <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
                 <IconButton
                   size="large"
@@ -81,23 +83,41 @@ function ProcenterCommerceLayout({ children }) {
                     </MenuItem>
                   ))}
                 </Menu>
+                <Box
+                  sx={{
+                    "@media (min-width:899px)": {
+                      display: "none",
+                    },
+                    "@media (max-width:899px)": {
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      width: "100%",
+                    },
+                  }}
+                >
+                  <Box sx={{ width: "60px", height: "60px" }}>
+                    <img src="../../../public/Images/LUCKY5.png" id="im" />
+                  </Box>
+                </Box>
               </Box>
-
               <Box
                 sx={{
-                  mr: 2,
-                  display: { xs: "flex", md: "none" },
-                  flexGrow: 1,
-                  fontFamily: "monospace",
-                  fontWeight: 700,
-                  letterSpacing: ".3rem",
-                  color: "inherit",
-                  textDecoration: "none",
-                  justifyContent: "center",
+                  "@media (min-width:899px)": {
+                    display: "flex",
+                    justifyContent: "center",
+                    width: "60px",
+                    height: "60px",
+                    mr: 3,
+                  },
+                  "@media (max-width:899px)": {
+                    display: "none",
+                  },
                 }}
               >
-                <img src="../../../public/Images/LUCKY5.png" id="img6" />
+                <img src="../../../public/Images/LUCKY5.png" id="im" />
               </Box>
+
               <Box
                 sx={{
                   display: "flex",
@@ -107,24 +127,186 @@ function ProcenterCommerceLayout({ children }) {
                 }}
               >
                 {pages.map((page) => (
-                  <MenuItem key={page} onClick={handleCloseNavMenu}>
+                  <MenuItem
+                    key={page}
+                    sx={{ height: "65px", width: "140px" }}
+                    onClick={handleCloseNavMenu}
+                  >
                     <Typography textAlign="center">{page}</Typography>
                   </MenuItem>
                 ))}
               </Box>
             </Toolbar>
-          </Container>
+            <Toolbar
+              sx={{
+                "@media (max-width:899px)": {
+                  display: "none",
+                },
+                "@media (min-width:899px)": {
+                  display: "flex",
+                  justifyContent: "center",
+                  width: "20%",
+                },
+              }}
+            >
+              <Box
+                sx={{
+                  "@media (min-width:899px)": {
+                    display: "flex",
+                    justifyContent: "center",
+                    width: "100%",
+                  },
+                  "@media (max-width:899px)": {
+                    display: "none",
+                  },
+                }}
+              >
+                <MenuItem
+                  sx={{ height: "65px", width: "100px" }}
+                  onClick={handleCloseNavMenu}
+                >
+                  <Grid
+                    container
+                    justifyContent={"center"}
+                    alignItems={"center"}
+                  >
+                    <SearchIcon />
+                    <Typography sx={{ fontSize: "10pt", textAlign: "center" }}>
+                      buscador
+                    </Typography>
+                  </Grid>
+                </MenuItem>
+                <MenuItem
+                  sx={{ height: "65px", width: "100px" }}
+                  onClick={handleCloseNavMenu}
+                >
+                  <Grid
+                    container
+                    justifyContent={"center"}
+                    alignItems={"center"}
+                  >
+                    <PersonIcon />
+                    <Typography sx={{ fontSize: "10pt" }}>
+                      contactanos
+                    </Typography>
+                  </Grid>
+                </MenuItem>
+              </Box>
+            </Toolbar>
+          </Box>
         </AppBar>
       </Box>
-      <Box sx={{ m: 3, height: "100%" }}>{children}</Box>
-      <Box>
-        <Box></Box>
+      <Box sx={{ mt: 3, mb: 3, height: "100%" }}>{children}</Box>
+
+      <Box sx={{ width: "100%", pt: "20px" }}>
+        <Button
+          fullWidth
+          onClick={scrollToTop}
+          sx={{
+            width: "100%",
+            border: "1px solid black",
+            pt: 1,
+            pb: 3,
+            textAlign: "center",
+          }}
+        >
+          Volver al Inicio ⇑
+        </Button>
+        <Box sx={{ width: "100%", height: "auto", backgroundColor: "black" }}>
+          <Grid container spacing={2} sx={{ mb: 2 }}>
+            <Grid item sm={4} xs={12} sx={{ mb: 2 }}>
+              <TextoImagenEcomerfooter
+                icon={
+                  <MinorCrashIcon
+                    sx={{
+                      width: 70,
+                      height: 70,
+                      color: "white",
+                    }}
+                  />
+                }
+                texto={"CERTIFICADOS POR AUTOMAs"}
+              />
+            </Grid>
+            <Grid item sm={4} xs={12} sx={{ mb: 2 }}>
+              <TextoImagenEcomerfooter
+                icon={
+                  <EmojiEventsIcon
+                    sx={{
+                      width: 70,
+                      height: 70,
+                      color: "white",
+                    }}
+                  />
+                }
+                texto={"CERTIFICADOS POR COLCERAUTOS"}
+              />
+            </Grid>
+            <Grid item sm={4} xs={12} sx={{ mb: 2 }}>
+              <TextoImagenEcomerfooter
+                icon={
+                  <DiamondIcon
+                    sx={{
+                      color: "white",
+                      width: 70,
+                      height: 70,
+                    }}
+                  />
+                }
+                texto={"VEHICULOS DE ALTA CALIDAD"}
+              />
+            </Grid>
+          </Grid>
+        </Box>
         <Box
-          sx={{ width: "100%", height: "30px", backgroundColor: "black" }}
-        ></Box>
-        <Box
-          sx={{ width: "100%", height: "40px", backgroundColor: "grey" }}
-        ></Box>
+          sx={{
+            width: "100%",
+            height: "auto",
+            backgroundColor: "#F2F2F2",
+          }}
+        >
+          <Grid
+            container
+            sx={{
+              display: "flex",
+              textAlign: "center",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+            spacing={2}
+          >
+            <Grid item sm={4} xs={12} sx={{ mb: 2 }}>
+              <Box sx={{ width: "100%", pt: 2 }}>
+                <img id="im2<<" src="../../../public/Images/black.png" />
+              </Box>
+            </Grid>
+            <Grid item sm={4} xs={12}>
+              <Typography sx={{ mb: 2, fontWeight: "bold" }}>
+                Sobre Nosotros:
+              </Typography>
+              <p>
+                blablblablablblalbalblablbl blablblablablblalbalblablblab
+                blablablblalbalblblblblblalbl
+              </p>
+              <Link
+                to="/login"
+                style={{ textDecoration: "none", color: "black" }}
+              >
+                <Typography sx={{ mb: 2, fontWeight: "bold" }}>
+                  ¿Eres Empleado?
+                </Typography>
+              </Link>
+            </Grid>
+            <Grid item sm={4} xs={12}>
+              <Typography sx={{ mb: 2, fontWeight: "bold" }}>
+                Visitanos en:
+              </Typography>
+              <FacebookIcon sx={{ color: "blue", width: 40, height: 40 }} />
+              <InstagramIcon sx={{ color: "#FF0097", width: 40, height: 40 }} />
+              <WhatsAppIcon sx={{ color: "green", width: 40, height: 40 }} />
+            </Grid>
+          </Grid>
+        </Box>
       </Box>
     </Box>
   );
