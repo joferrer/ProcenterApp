@@ -6,10 +6,15 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
+import { Link } from "react-router-dom";
 
-export const ListaItemDrawer = (props)=> {
+export const ListaItemDrawer = (props) => {
   return (
     <ListItem disablePadding sx={{ display: "block" }}>
+      <Link
+        style={{ textDecoration: "none" , color:"white" }}
+        to={props.link}
+      >
       <ListItemButton
         sx={{
           minHeight: 48,
@@ -28,6 +33,7 @@ export const ListaItemDrawer = (props)=> {
         </ListItemIcon>
         <ListItemText sx={{ opacity: open ? 1 : 0 }} primary={props.texto} />
       </ListItemButton>
+      </Link >
     </ListItem>
   );
-}
+};

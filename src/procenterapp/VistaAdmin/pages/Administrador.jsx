@@ -31,7 +31,7 @@ const Contenedor = ({ nombre, id, id2 }) => {
 
 export const Administrador = () => {
   return (
-    <ProcenterAppLayout>
+    <ProcenterAppLayout Admin={"admin"}>
       <h2>Administrador</h2>
       <h3>PROCENTER AUTOS</h3>
 

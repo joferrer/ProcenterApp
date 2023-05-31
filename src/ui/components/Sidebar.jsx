@@ -4,10 +4,19 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { ListasdeDrawer } from "./DrawerDesplegable/ListadeDrawer";
 import DrawerEstaticoVista from "./DraweFijo/DrawerEstaticoVista";
 import ToolarSesion from "./Sesion/ToolbarSesion";
+import { useDispatch, useSelector } from "react-redux";
+import LogoutIcon from "@mui/icons-material/Logout";
+import { startLogout } from "../../store/auth";
 
 export default function MiniDrawer({ children, Admin }) {
   const isSmallScreen = useMediaQuery("(min-width:800px)");
   const isPequeño = useMediaQuery("(min-width:599px)");
+  const dispatch = useDispatch();
+  const { displayName, email, photoURL } = useSelector((state) => state.auth);
+
+  const onLogout = () => {
+    dispatch(startLogout());
+  };
   const [state, setState] = React.useState({
     left: false,
   });
@@ -69,7 +78,6 @@ export default function MiniDrawer({ children, Admin }) {
             >
               <MenuIcon sx={{ color: "white" }} />
             </Button>
-
             <Drawer
               open={state["left"]}
               onClose={toggleDrawer("left", false)}
@@ -77,7 +85,28 @@ export default function MiniDrawer({ children, Admin }) {
             >
               {list("left")}
             </Drawer>
-            <p color="white">PROCENTERAPP</p>
+            <Box sx={{ width: "80%" }}>
+              <p color="white">PROCENTERAPP</p>
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                width: "20%",
+                height: "55px",
+              }}
+              onClick={onLogout}
+            >
+              <LogoutIcon
+                sx={{
+                  justifyContent: "center",
+                  alignItems: "center",
+                  width: 30,
+                  height: 30,
+                }}
+              />
+            </Box>
           </Box>
         </Box>
       </Hidden>
@@ -93,9 +122,9 @@ export default function MiniDrawer({ children, Admin }) {
       {isPequeño ? (
         <Box>
           {isSmallScreen ? (
-            <ToolarSesion text={"Pepa pig"} size={"78vw"} />
+            <ToolarSesion text={displayName} url={photoURL} size={"78vw"} />
           ) : (
-            <ToolarSesion text={"Pepa pig"} size={"70vw"} />
+            <ToolarSesion text={displayName} url={photoURL} size={"70vw"} />
           )}
         </Box>
       ) : (
