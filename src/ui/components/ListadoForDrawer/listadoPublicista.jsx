@@ -5,7 +5,15 @@ import { ListaItemDrawer } from "../DrawerDesplegable/ListaItemDrawer";
 
 export const ListadoPublicista = () => {
   return (
-    <List className="fondo" sx={{ height: "100vh" }}>
+    <List
+      className="fondo"
+      sx={{
+        height: "auto",
+        "@media (min-width:599px)": {
+          height: "100%",
+        },
+      }}
+    >
       <ListaItemDrawer
         texto={"Adquisiciones"}
         link={"/adquisiciones"}

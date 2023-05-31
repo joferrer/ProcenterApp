@@ -9,7 +9,15 @@ import { AutoStoriesIcon } from '@mui/icons-material/AutoStories';
 
 export const ListadoAsesor = () => {
   return (
-    <List className="fondo" sx={{ height: "100vh" }}>
+    <List
+      className="fondo"
+      sx={{
+        height: "auto",
+        "@media (min-width:599px)": {
+          height: "100%",
+        },
+      }}
+    >
       <ListaItemDrawer
         texto={"Catalogo"}
         link={"/catalogo"}

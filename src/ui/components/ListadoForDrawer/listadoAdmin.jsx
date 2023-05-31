@@ -11,7 +11,15 @@ import AddCommentIcon from "@mui/icons-material/AddComment";
 import SettingsIcon from "@mui/icons-material/Settings";
 export const ListadoAdmin = () => {
   return (
-    <List className="fondo" sx={{ height: "100vh" }}>
+    <List
+      className="fondo"
+      sx={{
+        height: "auto",
+        "@media (min-width:599px)": {
+         height: "100%",
+        },
+      }}
+    >
       <ListaItemDrawer
         texto={"Catalogo"}
         link={"/catalogo"}

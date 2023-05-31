@@ -5,7 +5,7 @@ import { ListasdeDrawer } from "./DrawerDesplegable/ListadeDrawer";
 import DrawerEstaticoVista from "./DraweFijo/DrawerEstaticoVista";
 import ToolarSesion from "./Sesion/ToolbarSesion";
 import { useDispatch, useSelector } from "react-redux";
-
+import LogoutIcon from "@mui/icons-material/Logout";
 export default function MiniDrawer({ children, Admin }) {
   const isSmallScreen = useMediaQuery("(min-width:800px)");
   const isPequeño = useMediaQuery("(min-width:599px)");
@@ -72,7 +72,6 @@ export default function MiniDrawer({ children, Admin }) {
             >
               <MenuIcon sx={{ color: "white" }} />
             </Button>
-
             <Drawer
               open={state["left"]}
               onClose={toggleDrawer("left", false)}
@@ -80,7 +79,12 @@ export default function MiniDrawer({ children, Admin }) {
             >
               {list("left")}
             </Drawer>
-            <p color="white">PROCENTERAPP</p>
+            <Box sx={{width:"80%"}}>
+              <p color="white">PROCENTERAPP</p>
+            </Box>
+            <Box sx={{ float: "right", mt:2 }}>
+              <LogoutIcon />
+            </Box>
           </Box>
         </Box>
       </Hidden>
@@ -96,7 +100,7 @@ export default function MiniDrawer({ children, Admin }) {
       {isPequeño ? (
         <Box>
           {isSmallScreen ? (
-            <ToolarSesion text={displayName} url={photoURL}  size={"78vw"} />
+            <ToolarSesion text={displayName} url={photoURL} size={"78vw"} />
           ) : (
             <ToolarSesion text={displayName} url={photoURL} size={"70vw"} />
           )}

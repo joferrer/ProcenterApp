@@ -11,8 +11,7 @@ import { ListadoPublicista } from "../ListadoForDrawer/listadoPublicista";
 import { ListadoAdmin } from "../ListadoForDrawer/listadoAdmin";
 
 export const ListasdeDrawer = ({ admin }) => {
-  console.log("Hola");
-  console.log(admin);
+
 
   return admin === "admin" ? (
     <ListadoAdmin />
