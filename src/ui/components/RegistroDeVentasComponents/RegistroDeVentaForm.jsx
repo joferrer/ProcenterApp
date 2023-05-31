@@ -8,11 +8,15 @@ import { UsuariosDispatch } from "../../../store/usuario/UsuariosDispatch";
 import { AutocompleteInput } from "./AutocompleteInput";
 import { useEffect, useMemo } from "react";
 import { SeleccionarVehiculo } from "./SeleccionarVehiculo";
+import { CatalogoDispatch } from "../../../store/catalogo/CatalogoDispatch";
+import { authDispatch } from "../../../store/auth/authDispatch";
 
 export const RegistroDeVentaForm = ()=>{
 
     const {control,handleSubmit, reset ,watch,getValues} = useForm();
-    const {vehiculos,isLoading, error } = VehiculosDispatch()
+    const {catalogo,isLoading, error } = CatalogoDispatch()
+    const {id}= authDispatch()
+    const vehiculos = catalogo
     const {usuarios, clientes, isLoadingUsuarios, errorUsuarios, getUsuarioPorCedula} = UsuariosDispatch()
    
     //console.log(getUsuarioPorCedula(clientes,watch().cedula))
@@ -27,6 +31,7 @@ export const RegistroDeVentaForm = ()=>{
     }
   }, [cedula]);
     const onSubmit = (data)=>{
+        data = {...data,id}
         alert(JSON.stringify(data))
     }
     return <form  onSubmit={handleSubmit(onSubmit)}>
@@ -82,7 +87,20 @@ export const RegistroDeVentaForm = ()=>{
                          cambio={field.onChange}
                          />}
              />    
-
+             <Controller        
+                 name={"correo"}
+                 control={control}
+                 rules={{required: true}}
+                 defaultValue=""
+                 render={({field,fieldState,formState})=>
+                     <TextInput 
+                        type="email"
+                         value={field.value} 
+                         label={"CORREO"} 
+                         onInputChange={field.onChange}
+                         error={formState.errors.correo}
+                         />}
+             />
             <Controller        
                  name={"detalles"}
                  control={control}
@@ -111,6 +129,7 @@ export const RegistroDeVentaForm = ()=>{
                         vehiculos={vehiculos}
                         textoBoton={field.value != "" ? field.value : "Seleccione un vehiculo..." }
                         onFormChange={field.onChange}
+                        error={formState.errors.vehiculo}
                     />}
              />
              <Controller        

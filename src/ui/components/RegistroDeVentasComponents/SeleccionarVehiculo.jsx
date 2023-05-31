@@ -17,7 +17,7 @@ const style = {
   };
   
 
-export const SeleccionarVehiculo = ({label,textoBoton,vehiculos = [], onFormChange}) => {
+export const SeleccionarVehiculo = ({label,textoBoton,vehiculos = [], onFormChange, error}) => {
 
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
@@ -31,7 +31,7 @@ export const SeleccionarVehiculo = ({label,textoBoton,vehiculos = [], onFormChan
   return (
     <Grid sx={{mt: "10px"}}>
         <Typography>{label}</Typography>
-        <Button onClick={handleOpen} >{textoBoton}</Button>
+        <Button onClick={handleOpen} variant='outlined' color={!!error ?"error":"secondary" }>{textoBoton}</Button>
         <Modal
             open={open}
             onClose={handleClose}
@@ -47,7 +47,7 @@ export const SeleccionarVehiculo = ({label,textoBoton,vehiculos = [], onFormChan
                              <CardActionArea>
                             <CardMedia image={v.imagenes[0]} title={v.nombre}   sx={{ height: 140 , width: 250}} />
                             <CardContent >
-                                <Typography gutterBottom variant="h5" component="div">{v?.nombre}</Typography>
+                                <Typography gutterBottom variant="h5" component="div" sx={{fontSize:"18px", }}>{v?.nombre}</Typography>
                                 <Typography variant="body2" color="text.secondary">{v?.modelo}</Typography>
                                 <Typography variant="body2" color="text.secondary">{v?.anio}</Typography>
                                 <Typography variant="body2" color="text.secondary" sx={{}}>Placa: {v?.placa}</Typography>
