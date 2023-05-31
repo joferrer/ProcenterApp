@@ -9,7 +9,7 @@ import ListaPublicistas from "../../../ui/components/ListaPublicistas";
 
 export const Asesores = () => {
   return (
-    <ProcenterAppLayout>
+    <ProcenterAppLayout Admin={"admin"}>
       <Box sx={{ width: "75vw" }}>
         <Titulo></Titulo>
         <CardContextProvider>

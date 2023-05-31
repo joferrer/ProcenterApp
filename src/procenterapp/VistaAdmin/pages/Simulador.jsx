@@ -1,9 +1,7 @@
 import { ProcenterAppLayout } from "./../layout/ProcenterAppLayout";
 import { Typography } from "@mui/material";
 import Box from "@mui/material/Box";
-import React, { useState } from 'react';
-
-
+import React, { useState } from "react";
 
 /*let capital = 0;
 let interes = 0;
@@ -20,19 +18,18 @@ function calcularInteres() {
   calculo = capital * interes * tiempo;
 }*/
 
-export const Simulador = () => {
-
+export const Simulador = ({admin}) => {
   const [capital, setCapital] = useState("");
   const [interes, setInteres] = useState("");
   const [tiempo, setTiempo] = useState("");
   let calculo = 0;
 
-  function calcularInteres(){
-    calculo = capital * interes* tiempo;
+  function calcularInteres() {
+    calculo = capital * interes * tiempo;
   }
 
   return (
-    <ProcenterAppLayout>
+    <ProcenterAppLayout Admin={admin}>
       <Typography variant="h4">Simulador de Crédito</Typography>
       <Box
         sx={{

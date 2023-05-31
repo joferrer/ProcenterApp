@@ -7,7 +7,8 @@ export const ListadoPublicista = () => {
   return (
     <List className="fondo" sx={{ height: "100vh" }}>
       <ListaItemDrawer
-        texto={"Publicacion"}
+        texto={"Adquisiciones"}
+        link={"/adquisiciones"}
         icono={<DirectionsCarIcon sx={{ color: "white", width: 20 }} />}
       />
     </List>

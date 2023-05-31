@@ -4,10 +4,13 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { ListasdeDrawer } from "./DrawerDesplegable/ListadeDrawer";
 import DrawerEstaticoVista from "./DraweFijo/DrawerEstaticoVista";
 import ToolarSesion from "./Sesion/ToolbarSesion";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function MiniDrawer({ children, Admin }) {
   const isSmallScreen = useMediaQuery("(min-width:800px)");
   const isPequeño = useMediaQuery("(min-width:599px)");
+  const dispatch = useDispatch();
+  const { displayName, email, photoURL } = useSelector((state) => state.auth);
   const [state, setState] = React.useState({
     left: false,
   });
@@ -93,9 +96,9 @@ export default function MiniDrawer({ children, Admin }) {
       {isPequeño ? (
         <Box>
           {isSmallScreen ? (
-            <ToolarSesion text={"Pepa pig"} size={"78vw"} />
+            <ToolarSesion text={displayName} url={photoURL}  size={"78vw"} />
           ) : (
-            <ToolarSesion text={"Pepa pig"} size={"70vw"} />
+            <ToolarSesion text={displayName} url={photoURL} size={"70vw"} />
           )}
         </Box>
       ) : (
