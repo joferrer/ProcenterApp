@@ -19,7 +19,7 @@ export const authDispatch = () => {
         const usuarios = await consultarApi(USUARIOS_URL);
         if(!usuarios.estado){ 
             //TODO: Logout google
-            await signOut()
+            await signOut(FireBaseAuth) 
             return dispatch(logout({errorMessage: usuarios.mensaje}))
         }
         const existe = usuarios.data.find(u => u.correo == email && u.estado && u.rol != "CLIENTE")
