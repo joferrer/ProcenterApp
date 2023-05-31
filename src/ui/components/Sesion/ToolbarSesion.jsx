@@ -2,7 +2,7 @@ import { Toolbar, Box } from "@mui/material";
 import * as React from "react";
 import CardUser from "./CardUser";
 
-export default function ToolarSesion({ text, size }) {
+export default function ToolarSesion({ text, size,url }) {
   return (
     <Box
       position="fixed"
@@ -19,7 +19,7 @@ export default function ToolarSesion({ text, size }) {
           backgroundColor: "white",
         }}
       >
-        <CardUser text={text} />
+        <CardUser url={url} text={text} />
       </Toolbar>
     </Box>
   );

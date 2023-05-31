@@ -17,7 +17,7 @@ import TextoImagenEcomerfooter from "./../../ui/components/GeneralComponents/Tex
 import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 import DiamondIcon from "@mui/icons-material/Diamond";
 import MinorCrashIcon from "@mui/icons-material/MinorCrash";
-const pages = ["Vehiculos", "Financiancion", "Sobre Nosotros"];
+const pages = ["Vehiculos", "Sobre Nosotros"];
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
