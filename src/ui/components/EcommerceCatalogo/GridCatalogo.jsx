@@ -18,14 +18,14 @@ export const GridCatalogo = () => {
                     {   
             
                         catalogo.map(v => <Grid item key={JSON.stringify(v)}>
-                            <Card key={v.id}  sx={{ maxWidth: 250, backgroundColor:"#F2F2F2" }} onClick={()=>handleClick(v.id)}>
+                            <Card key={v.id}  sx={{ maxWidth: 250, maxHeight:280, backgroundColor:"#F2F2F2" }} onClick={()=>handleClick(v.id)}>
                              <CardActionArea>
                             <CardMedia image={v.imagenes.url1} title={v.nombre}   sx={{ height: 150 , width: 250}} />
                             <CardContent >
                                 <Typography gutterBottom variant="h5" component="div">{v?.nombre}</Typography>
                                 <Typography variant="body2" color="text.secondary">{v?.modelo}</Typography>
                                 <Typography variant="body2" color="text.secondary">{v?.anio} CON {v?.kilometraje} KMS</Typography>
-                                <Typography variant="body2" color="text.secondary" sx={{fontWeight:"bold"}}>COP: {v?.precio}$</Typography>
+                                <Typography variant="body2" color="text.secondary" sx={{fontWeight:"bold"}}>COP {v?.precio}$</Typography>
                             </CardContent>
                             </CardActionArea>
                         </Card>

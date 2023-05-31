@@ -3,21 +3,37 @@ import { AuthLayout } from "../layout/AuthLayout";
 import { Button, Grid, Hidden, TextField, Typography } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { startRecuperarContrasenia } from "../../store/auth";
+import { SnackbarComponent } from "../../ui/components/FeedbackComponents/Snackbar";
 
 export const RestablecerContrasenia = () => {
+  
   const { control, handleSubmit } = useForm();
   const [enviado, setenviado] = useState(false);
-  const onSubmit = (data) => {
-    alert(JSON.stringify(data));
+  const [error, seterror] = useState("");
+  
+  const dispatch = useDispatch()
+
+  const onSubmit = async(data) => {
+   
+    const resp = await dispatch(startRecuperarContrasenia(data.email))
+    if(!resp.ok) {
+      console.log(JSON.stringify(resp))
+      seterror(resp.error)
+      return;
+    } 
     setenviado(true);
   };
 
   return (
     <AuthLayout>
+      
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="animate__animated animate__fadeIn animate__faster"
       >
+       <SnackbarComponent mensaje={error} mostrar={error != ""} cerrar={seterror}/>
         <Hidden smDown>
           <p className="texto">Restablecer contraseña</p>
         </Hidden>
@@ -35,11 +51,13 @@ export const RestablecerContrasenia = () => {
           </Grid>
         ) : (
           <Formulario control={control} />
+          
         )}
       </form>
     </AuthLayout>
   );
 };
+
 
 const Formulario = ({ control }) => {
   return (

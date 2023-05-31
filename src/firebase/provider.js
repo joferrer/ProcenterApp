@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup, updateProfile } from 'firebase/auth';
+import { createUserWithEmailAndPassword, GoogleAuthProvider, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, updateProfile } from 'firebase/auth';
 
 import { FireBaseAuth } from './config';
 
@@ -92,4 +92,24 @@ export const loginWithEmailPassword = async({email, password})=>{
 export const logoutFireBase = async()=>{
 
     return await FireBaseAuth.signOut();
+}
+
+export const recuperarContrasenia = async (email)=>{
+
+    try {
+        console.log(email)
+        await sendPasswordResetEmail(FireBaseAuth,email)
+        
+        return {
+            ok:true,
+        }
+
+    } catch (error) {
+        console.log(JSON.stringify(error))
+        const errorMessage = error
+        return {
+            ok:false,
+            errorMessage
+        }
+    }   
 }

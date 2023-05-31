@@ -1,6 +1,6 @@
 
 import { signOut } from "firebase/auth";
-import { loginWithEmailPassword, logoutFireBase, registerUserWithEmailPassword, singInWithGoogle } from "../../firebase/provider";
+import { loginWithEmailPassword, logoutFireBase, recuperarContrasenia, registerUserWithEmailPassword, singInWithGoogle } from "../../firebase/provider";
 import { consultarApi } from "../api/conexion";
 import { checkingCredentials, logout, login } from "./"
 
@@ -88,43 +88,22 @@ export const startLogout = ()=>{
     }
 }
 
-/**
- * 1. Consultar si es admnistrador, SI NO
- * 2. Consultar si es estudiante, SI NO
- * 3. Consultar si es profesor, SI NO
- * 4. Consultar si es graduado, SI NO
- * 5. Negar inicio de sección. 
- */
-export const verificarPoblacion = async(correo = '')=>{
 
-    
-    try {
-        const URL = `/admin/registrados/${correo}`;
-        const consultaAdmin = await consultarApi(URL);
-        if(consultaAdmin.length != 0) return {
-            poblacion: 0,
-            id_encuestado: consultaAdmin.id_encuestado
-        }
-        
-        const encuestadosURL = `/encuestado/mostrar`;
-        const consultaEncuestados = await consultarApi(encuestadosURL);
-        if(consultaEncuestados.length > 0){
-            console.log("a ver");
-            const {id_poblacion, id_encuestado} = consultaEncuestados.find(encuestado => encuestado.correo == correo);
-            return {
-                poblacion: id_poblacion,
-                id_encuestado
-            };
-        }
+export const startRecuperarContrasenia = (email)=>{
+    return async(dispatch)=>{
+        try {
+            const resp = await recuperarContrasenia(email)
+            if(!resp.ok ) return{
+                ok:false,
+                error: "No se pudo restablecer la contraseña, verifique el correo o intentelo de nuevo más tarde"
+            }
+            return resp
             
-
-
-    } catch (error) {
-        console.log("POBLACION PERDIDA 3");
-        return `El correo ${correo} no se encuetra registrado`
+        } catch (error) {
+            return {
+                ok:false,
+                error
+            }
+        }
     }
-   
-        
-     
-
 }
