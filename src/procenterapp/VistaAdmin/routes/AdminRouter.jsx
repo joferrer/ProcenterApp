@@ -16,7 +16,7 @@ export const AdminRouter = () => {
   return (
     <Routes>
       <Route path="/home" element={<Home />}></Route>
-      <Route path="/catalogo" element={<Catalogo />}></Route>
+      <Route path="/catalogo" element={<Catalogo admin={"admin"} />}></Route>
       <Route path="/simulador" element={<Simulador admin={"admin"} />}></Route>
       <Route path="/historial" element={<Historial admin={"admin"} />}></Route>
       <Route path="/asesores" element={<Asesores />}></Route>
@@ -25,7 +25,10 @@ export const AdminRouter = () => {
         path="/registrar-venta"
         element={<RegistrarVenta admin={"admin"} />}
       ></Route>
-      <Route path="/adquisiciones" element={<Adquisiciones admin={"admin"}/>}></Route>
+      <Route
+        path="/adquisiciones"
+        element={<Adquisiciones admin={"admin"} />}
+      ></Route>
       <Route path="/*" element={<Navigate to="/home" />} />
     </Routes>
   );

@@ -1,11 +1,11 @@
 import React from "react";
+import { List } from "@mui/material";
+import { ListaItemDrawer } from "../DrawerDesplegable/ListaItemDrawer";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import UpdateIcon from "@mui/icons-material/Update";
 import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
-import { List } from "@mui/material";
-import { ListaItemDrawer } from "../DrawerDesplegable/ListaItemDrawer";
-import { AutoStoriesIcon } from '@mui/icons-material/AutoStories';
+import AutoStoriesIcon from "@mui/icons-material/AutoStories";
 
 export const ListadoAsesor = () => {
   return (
@@ -25,6 +25,7 @@ export const ListadoAsesor = () => {
       />
       <ListaItemDrawer
         texto={"Registrar Ventas"}
+        link={"/registrar-venta"}
         icono={<AttachMoneyIcon sx={{ color: "white", width: 20 }} />}
       />
       <ListaItemDrawer
