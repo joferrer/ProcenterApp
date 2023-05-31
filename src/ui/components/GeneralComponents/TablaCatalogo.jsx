@@ -25,6 +25,7 @@ function Row(props) {
   const [Edit, setEdit] = React.useState(false);
   const [placa, setPlaca] = React.useState(row.placa);
   const [imagenes, setImagenes] = React.useState(row.imagenes);
+  const [imagEnvio, setImagEnvio] = React.useState(null);
   //console.log(imagenes);
   const handleEdit = () => {
     Edit ? setEdit(false) : setEdit(true);
@@ -33,11 +34,11 @@ function Row(props) {
   const handleUpload = () => {
     const formData = new FormData();
 
-    imagenes.forEach((file, index) => {
-      formData.append(`image${index}`, file);
-    });
+    for (let i = 0; i < imagenes.length; i++) {
+      formData.append("image", imagenes[i]);
+    }
 
-    fetch("/upload", {
+    fetch("https://procenterapi-production.up.railway.app/subir-imagen", {
       method: "POST",
       body: formData,
     })
@@ -274,29 +275,39 @@ export default function TablaCatologo() {
   };
 
   return (
-    <TableContainer component={Paper} sx={{ width: "100%" }}>
-      <Table aria-label="collapsible table">
-        <TableHead>
-          <TableRow>
-            <TableCell />
-            <TableCell>Nombre</TableCell>
-            <TableCell align="right">Placa</TableCell>
-            <TableCell align="right">Año</TableCell>
-            <TableCell align="right">Precio</TableCell>
-            <TableCell align="right"></TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <Row
-              key={row.id}
-              row={row}
-              isOpen={openRowId === row.id}
-              onToggleOpen={handleToggleOpen}
-            />
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <>
+      {rows.estado === false ? (
+        <Paper sx={{ width: "100%", height:"30px" }}>
+          <Typography sx={{ display: "flex", justifyContent: "center" }}>
+            {rows.mensaje}
+          </Typography>
+        </Paper>
+      ) : (
+        <TableContainer component={Paper} sx={{ width: "100%" }}>
+          <Table aria-label="collapsible table">
+            <TableHead>
+              <TableRow>
+                <TableCell />
+                <TableCell>Nombre</TableCell>
+                <TableCell align="right">Placa</TableCell>
+                <TableCell align="right">Año</TableCell>
+                <TableCell align="right">Precio</TableCell>
+                <TableCell align="right"></TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {rows.map((row) => (
+                <Row
+                  key={row.id}
+                  row={row}
+                  isOpen={openRowId === row.id}
+                  onToggleOpen={handleToggleOpen}
+                />
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      )}
+    </>
   );
 }

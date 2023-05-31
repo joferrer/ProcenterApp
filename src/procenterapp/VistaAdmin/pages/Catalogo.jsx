@@ -4,10 +4,9 @@ import TablaCatologo from "../../../ui/components/GeneralComponents/TablaCatalog
 import { Titulo } from "./../../../ui/components/GeneralComponents/TituloPagina";
 import { Box } from "@mui/material";
 
-
-export const Catalogo = () => {
+export const Catalogo = ({ admin }) => {
   return (
-    <ProcenterAppLayout Admin={"admin"}>
+    <ProcenterAppLayout Admin={admin}>
       <Titulo titulo={"Catalogo"} />
       <Box
         sx={{
