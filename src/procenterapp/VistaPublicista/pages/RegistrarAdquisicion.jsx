@@ -2,10 +2,10 @@ import { Titulo } from "../../../ui/components/GeneralComponents/TituloPagina"
 import { RegistrarAdquisicionForm } from "../../../ui/components/RegistarAdquisicionComponents/RegistrarAdquisicionForm"
 import { ProcenterAppLayout } from "../../VistaAdmin/layout/ProcenterAppLayout"
 
-export const RegistrarAdquisicion = () => {
+export const RegistrarAdquisicion = ({admin}) => {
     
   return (
-    <ProcenterAppLayout Admin={"publicista"}>
+    <ProcenterAppLayout Admin={admin}>
         <Titulo titulo={"Registra vehiculo"}/>
 
         <RegistrarAdquisicionForm />

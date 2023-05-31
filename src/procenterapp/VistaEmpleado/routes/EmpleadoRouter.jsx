@@ -1,7 +1,10 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import { AsesoresEmpleado } from "../pages/AsesoresEmpledo";
 import { RegistrarVenta } from "../pages/RegistrarVenta";
-
+import { Catalogo } from "./../../VistaAdmin/pages/Catalogo";
+import { RegistrarAdquisicion } from "./../../VistaPublicista/pages/RegistrarAdquisicion";
+import HistorialAsesor from "./../pages/HistorialAsesor";
+import { Simulador } from "./../../VistaAdmin/pages/Simulador";
 
 export const EmpleadoRouter = () => {
   //const {status} = useCheckAuth();
@@ -21,8 +24,21 @@ export const EmpleadoRouter = () => {
   //const status = "authenticated";
   return (
     <Routes>
-      <Route path="/asesores" element={<AsesoresEmpleado/>}></Route>
-      <Route path="/registrar-venta" element={<RegistrarVenta/>}></Route>
+      <Route path="/catalogo" element={<Catalogo admin={"asesor"} />}></Route>
+      <Route
+        path="/registrar-venta"
+        element={<RegistrarVenta admin={"asesor"} />}
+      ></Route>
+      <Route path="/simulador" element={<Simulador admin={"asesor"} />}></Route>
+      <Route
+        path="/adquisiciones"
+        element={<RegistrarAdquisicion admin={"asesor"} />}
+      ></Route>
+
+      <Route
+        path="/historialAsesor"
+        element={<HistorialAsesor admin={"asesor"} />}
+      ></Route>
     </Routes>
   );
 };

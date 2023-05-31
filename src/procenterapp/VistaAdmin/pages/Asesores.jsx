@@ -7,9 +7,9 @@ import { Typography } from "@mui/material";
 import { Titulo } from "../../../ui/components/GeneralComponents/TituloPagina";
 import ListaPublicistas from "../../../ui/components/ListaPublicistas";
 
-export const Asesores = () => {
+export const Asesores = ({ admin }) => {
   return (
-    <ProcenterAppLayout>
+    <ProcenterAppLayout Admin={admin}>
       <Box sx={{ width: "75vw" }}>
         <Titulo></Titulo>
         <CardContextProvider>
