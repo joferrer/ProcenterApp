@@ -14,7 +14,7 @@ export const GridCatalogo = () => {
     <Grid sx={{mt:"100px", ml:"10px"}}>
       <Grid container >
                
-                <Grid container  sx={{ width: "100%",height: "70vh"}} spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+                <Grid container  sx={{ width: "100%"}} spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
                     {   
             
                         catalogo.map(v => <Grid item key={JSON.stringify(v)}>

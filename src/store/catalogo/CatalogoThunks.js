@@ -11,7 +11,7 @@ export const startCargarCatalogo = () => {
       dispatch(setCatalogo({ catalogo: catalogo }));
 
       return {
-        ok: true,
+        ok: true, 
       };
     } catch (error) {
       dispatch(registrarError({ error }));

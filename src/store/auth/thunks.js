@@ -23,12 +23,10 @@ export const startGoogleSingIn = () =>{
         const usuarios = await consultarApi(USUARIOS_URL);
         if(!usuarios.estado){ 
             //TODO: Logout google
-            await signOut()
             return dispatch(logout({errorMessage: usuarios.mensaje}))
         }
         const existe = usuarios.data.find(u => u.correo == result.email && u.estado && u.rol != "CLIENTE")
         if(!existe){
-            await signOut()
             return dispatch(logout({errorMessage: 
                 `El usuario con el email ${result.email} no se encuentra registrado o ya no está viculado con la empresa.` }))
         }
@@ -54,7 +52,7 @@ export const startCreatingUserWithEmailPassword = ({email, password, displayName
 
 }
 
-export const startLoginWithEmailPassword = ({email, password})=>{
+export const startLoginWithEmailPassword = (email, password)=>{
  
     return async(dispatch) =>{
         dispatch(checkingAuthentication());
@@ -62,13 +60,17 @@ export const startLoginWithEmailPassword = ({email, password})=>{
         if(!usuarios.estado){ 
             return dispatch(logout({errorMessage: usuarios.mensaje}))
         }
+        console.log(JSON.stringify(usuarios))
         const existe = usuarios.data.find(u => u.correo == email && u.estado && u.rol != "CLIENTE")
+        console.log(JSON.stringify(existe))
         if(!existe){
+            console.log("WAT")
             return dispatch(logout({errorMessage: 
                 `El usuario con el email ${result.email} no se encuentra registrado o ya no está viculado con la empresa.` }))
         }
        
         const {ok,uid,displayName, photoURL, errorMessage} = await loginWithEmailPassword({email, password});
+        console.log(displayName,errorMessage)
         if(!ok) return dispatch(logout({errorMessage}));
 
         return dispatch(login({uid, displayName,email,photoURL,

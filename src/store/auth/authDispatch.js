@@ -24,7 +24,7 @@ export const authDispatch = () => {
         }
         const existe = usuarios.data.find(u => u.correo == email && u.estado && u.rol != "CLIENTE")
         if(!existe){
-            await signOut()
+            await signOut(FireBaseAuth)
             return dispatch(logout({errorMessage: 
                 `El usuario con el email ${result.email} no se encuentra registrado o ya no está viculado con la empresa.` }))
         }

@@ -12,6 +12,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { startGoogleSingIn, startLoginWithEmailPassword } from "../../store/auth/thunks";
 import { Controller, useForm } from "react-hook-form";
+import { SnackbarComponent } from "../../ui/components/FeedbackComponents/Snackbar";
 
 export const LoginPage = () => {
 
@@ -21,8 +22,8 @@ export const LoginPage = () => {
   const isAuthenticating = useMemo( () => status === 'checking', [status]);
 //<Link component={RouterLink} color="inherit" to="/auth/proapp/home">
   const onSubmit = (data)=>{
-    alert(JSON.stringify(data))
-    //dispatch(startLoginWithEmailPassword(email,password))
+    //alert(JSON.stringify(data))
+    dispatch(startLoginWithEmailPassword(data.email,data.password))
   }
   const onGoogleSingIn = ()=>{
     dispatch(startGoogleSingIn())
@@ -30,6 +31,7 @@ export const LoginPage = () => {
   return (
     <AuthLayout title="Login">
       <form onSubmit={handleSubmit(onSubmit)} className="animate__animated animate__fadeIn animate__faster">
+      <SnackbarComponent mensaje={errorMessage} mostrar={!errorMessage ||errorMessage != "" || errorMessage != null} />
         <Hidden smDown>
           <p className="texto">Inicio de Sesión</p>
         </Hidden>
