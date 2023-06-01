@@ -6,8 +6,7 @@ export const PublicistaRouter = () => {
 
     return (
       <Routes>
-        <Route path="/registrar-adquisicion" element={<RegistrarAdquisicion/>}></Route>
-        <Route path="/adquisiciones" element={<Adquisiciones/>}></Route>
+        <Route path="/adquisiciones" element={<Adquisiciones admin={"publi"}/>}></Route>
       </Routes>
     );
   };
