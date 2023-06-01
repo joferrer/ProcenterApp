@@ -43,6 +43,7 @@ export const EmpleadoRouter = () => {
         path="/historialAsesor"
         element={<HistorialAsesor admin={"asesor"} />}
       ></Route>
+      <Route path="/*" element={<Navigate to="/catalogo" />} />
     </Routes>
   );
 };
