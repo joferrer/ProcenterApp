@@ -26,10 +26,10 @@ dayjs.extend(timezone);
 dayjs.extend(localizedFormat);
 dayjs.extend(updateLocale);
 
-const timezoneLocation = "America/Colombia";
+const timezoneLocation = "America/Bogota";
 dayjs.tz.setDefault(timezoneLocation);
 
-
+const fechaact = dayjs().tz(timezoneLocation).format("MM-DD-YYYY");
 
 function CardForm() {
   const [open, setOpen] = React.useState(false);
@@ -70,11 +70,11 @@ function CardForm() {
       fecha,
     });
     setRol("");
-    setCedula("");
+    setCedula(0);
     setNombre("");
     setCorreo("");
     setTelefono("");
-    setFecha("");
+    setFecha(fechaact);
   };
 
   return (
@@ -182,7 +182,7 @@ function CardForm() {
                       display: "flex",
                       justifyContent: "center",
                     }}
-                    type="text"
+                    type="number"
                     id="filled-basic"
                     variant="filled"
                     placeholder="Ingresar cédula"

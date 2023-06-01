@@ -189,51 +189,55 @@ function Row(props) {
                       value={row.otros}
                     />
                   </Box>
-                  <Box sx={{ ml: 2, width: "50%", display: "flex", mt: 7 }}>
-                    <Grid container spacing={1}>
-                      <Grid item xs={12}>
-                        <IconButton
-                          disabled={!Edit}
-                          onClick={envioDatos}
-                          sx={{
-                            width: "40px",
-                            height: "40px",
-                            borderRadius: "4px",
-                            backgroundColor: "blue",
-                            "&:hover": {
-                              backgroundColor: "darkblue",
-                            },
-                          }}
-                        >
-                          <SaveIcon
+                  {props.admin === "asesor" ? (
+                    <></>
+                  ) : (
+                    <Box sx={{ ml: 2, width: "50%", display: "flex", mt: 7 }}>
+                      <Grid container spacing={1}>
+                        <Grid item xs={12}>
+                          <IconButton
+                            disabled={!Edit}
+                            onClick={envioDatos}
                             sx={{
-                              color: "white",
+                              width: "40px",
+                              height: "40px",
+                              borderRadius: "4px",
+                              backgroundColor: "blue",
+                              "&:hover": {
+                                backgroundColor: "darkblue",
+                              },
                             }}
-                          />
-                        </IconButton>
-                      </Grid>
-                      <Grid item xs={12}>
-                        <IconButton
-                          onClick={handleEdit}
-                          sx={{
-                            width: "40px",
-                            height: "40px",
-                            borderRadius: "4px",
-                            backgroundColor: "black",
-                            "&:hover": {
-                              backgroundColor: "darkgrey",
-                            },
-                          }}
-                        >
-                          <EditIcon
+                          >
+                            <SaveIcon
+                              sx={{
+                                color: "white",
+                              }}
+                            />
+                          </IconButton>
+                        </Grid>
+                        <Grid item xs={12}>
+                          <IconButton
+                            onClick={handleEdit}
                             sx={{
-                              color: "white",
+                              width: "40px",
+                              height: "40px",
+                              borderRadius: "4px",
+                              backgroundColor: "black",
+                              "&:hover": {
+                                backgroundColor: "darkgrey",
+                              },
                             }}
-                          />
-                        </IconButton>
+                          >
+                            <EditIcon
+                              sx={{
+                                color: "white",
+                              }}
+                            />
+                          </IconButton>
+                        </Grid>
                       </Grid>
-                    </Grid>
-                  </Box>
+                    </Box>
+                  )}
                 </Box>
               </Grid>
             </Grid>
@@ -262,7 +266,7 @@ function Row(props) {
   );
 }
 
-export default function TablaCatologo() {
+export default function TablaCatologo({ admin }) {
   const { catalogo, isLoading, error } = CatalogoDispatch();
   const rows = catalogo;
   const [openRowId, setOpenRowId] = React.useState(null);
@@ -297,6 +301,7 @@ export default function TablaCatologo() {
             <TableBody>
               {rows.map((row) => (
                 <Row
+                  admin={admin}
                   key={row.id}
                   row={row}
                   isOpen={openRowId === row.id}

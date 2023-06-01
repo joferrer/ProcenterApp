@@ -6,6 +6,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import { CardContext } from "../../context/CardContext";
 import { useContext } from "react";
+import dayjs from "dayjs";
 
 function PublicistaCard({ card }) {
   const { deletePublicista } = useContext(CardContext);
@@ -22,7 +23,11 @@ function PublicistaCard({ card }) {
         <p>Nombre: {card.nombre}</p>
         <p>Correo: {card.correo}</p>
         <p>Teléfono: {card.telefono}</p>
-        <p>Fecha de contratación: {card.fecha}</p>
+        <p>
+          Fecha de contratación:{" "}
+          {dayjs(card.fechaVincu.toDate()).format("DD-MM-YYYY")}
+        </p>
+        {console.log(card.fechaVincu)}
       </CardContent>
       <CardActions>
         <Button

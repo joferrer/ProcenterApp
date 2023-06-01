@@ -21,7 +21,7 @@ export const Catalogo = ({ admin }) => {
           mb: 4,
         }}
       >
-        <TablaCatologo />
+        <TablaCatologo admin={admin} />
       </Box>
     </ProcenterAppLayout>
   );
