@@ -63,6 +63,7 @@ export default function MiniDrawer({ children, Admin }) {
             height: 10,
             position: "fixed",
             maxwidth: "100%",
+            zIndex:1,
           }}
           className="fondo "
         >

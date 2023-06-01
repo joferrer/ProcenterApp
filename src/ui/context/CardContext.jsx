@@ -1,15 +1,17 @@
 import { createContext, useState, useEffect } from "react";
 import { cards as asesores } from "../data/cards";
-import { publicistas as data} from "../data/publicistas";
+import { publicistas as data } from "../data/publicistas";
 
 export const CardContext = createContext();
 
+
 export function CardContextProvider(props) {
+  
   const [cards, setCards] = useState([]);
   const [publicistas, setPublicistas] = useState([]);
 
   function createCard(card) {
-    if(card.rol == "Publicista"){
+    if (card.rol == "PUBLICISTA") {
       setPublicistas([
         ...publicistas,
         {
@@ -21,8 +23,7 @@ export function CardContextProvider(props) {
           fecha: card.fecha,
         },
       ]);
-    }
-    else if(card.rol == "Asesor"){
+    } else if (card.rol == "ASESOR") {
       setCards([
         ...cards,
         {
@@ -34,24 +35,22 @@ export function CardContextProvider(props) {
           fecha: card.fecha,
         },
       ]);
-    }else{
-      console.log("Error no se ha seleccionado ningún rol")
+    } else {
+      console.log("Error no se ha seleccionado ningún rol");
     }
-    
   }
 
-  function deleteCard(cardId) { 
+  function deleteCard(cardId) {
     setCards(cards.filter((card) => card.cedula !== cardId));
   }
 
-  function deletePublicista(cardId) { 
+  function deletePublicista(cardId) {
     setPublicistas(publicistas.filter((card) => card.cedula !== cardId));
   }
 
-
   useEffect(() => {
-      setCards(asesores);
-      setPublicistas(data)
+    setCards(asesores);
+    setPublicistas(data);
   }, []);
 
   return (

@@ -6,7 +6,7 @@ import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import UpdateIcon from "@mui/icons-material/Update";
 import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 import AutoStoriesIcon from "@mui/icons-material/AutoStories";
-
+import AddBusinessIcon from "@mui/icons-material/AddBusiness";
 export const ListadoAsesor = () => {
   return (
     <List
@@ -42,6 +42,11 @@ export const ListadoAsesor = () => {
         texto={"Adquisiciones"}
         link={"/adquisiciones"}
         icono={<DirectionsCarIcon sx={{ color: "white", width: 20 }} />}
+      />
+      <ListaItemDrawer
+        texto={"Registrar Adquisisciones"}
+        link={"/registrar-adquisiciones"}
+        icono={<AddBusinessIcon sx={{ color: "white", width: 20 }} />}
       />
     </List>
   );

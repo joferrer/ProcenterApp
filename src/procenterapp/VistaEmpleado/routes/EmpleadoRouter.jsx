@@ -5,6 +5,7 @@ import { Catalogo } from "./../../VistaAdmin/pages/Catalogo";
 import { RegistrarAdquisicion } from "./../../VistaPublicista/pages/RegistrarAdquisicion";
 import HistorialAsesor from "./../pages/HistorialAsesor";
 import { Simulador } from "./../../VistaAdmin/pages/Simulador";
+import { Adquisiciones } from "../../VistaPublicista/pages/Adquisiciones";
 
 export const EmpleadoRouter = () => {
   //const {status} = useCheckAuth();
@@ -31,14 +32,18 @@ export const EmpleadoRouter = () => {
       ></Route>
       <Route path="/simulador" element={<Simulador admin={"asesor"} />}></Route>
       <Route
-        path="/adquisiciones"
+        path="/registrar-adquisiciones"
         element={<RegistrarAdquisicion admin={"asesor"} />}
       ></Route>
-
+      <Route
+        path="/adquisiciones"
+        element={<Adquisiciones admin={"asesor"} />}
+      ></Route>
       <Route
         path="/historialAsesor"
         element={<HistorialAsesor admin={"asesor"} />}
       ></Route>
+      <Route path="/*" element={<Navigate to="/catalogo" />} />
     </Routes>
   );
 };
