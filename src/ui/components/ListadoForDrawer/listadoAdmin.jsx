@@ -9,6 +9,7 @@ import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 import AddCommentIcon from "@mui/icons-material/AddComment";
 import SettingsIcon from "@mui/icons-material/Settings";
+import AddBusinessIcon from "@mui/icons-material/AddBusiness";
 export const ListadoAdmin = () => {
   return (
     <List
@@ -16,7 +17,7 @@ export const ListadoAdmin = () => {
       sx={{
         height: "auto",
         "@media (min-width:599px)": {
-         height: "100%",
+          height: "100%",
         },
       }}
     >
@@ -49,6 +50,11 @@ export const ListadoAdmin = () => {
         texto={"Adquisiciones"}
         link={"/adquisiciones"}
         icono={<DirectionsCarIcon sx={{ color: "white", width: 20 }} />}
+      />
+      <ListaItemDrawer
+        texto={"Registrar Adquisisciones"}
+        link={"/registrarAdquisiciones"}
+        icono={<AddBusinessIcon sx={{ color: "white", width: 20 }} />}
       />
       <ListaItemDrawer
         texto={"Reseñas"}

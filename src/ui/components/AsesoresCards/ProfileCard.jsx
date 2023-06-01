@@ -4,7 +4,7 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
-import { CardContext } from "../context/CardContext";
+import { CardContext } from "../../context/CardContext";
 import { useContext } from "react";
 
 function ProfileCard({ card }) {
@@ -13,9 +13,9 @@ function ProfileCard({ card }) {
 
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: "400px" }}>
       <CardMedia
-        sx={{ height: 140 }}
+        sx={{ height: "140px" }}
         image="https://johannesippen.com/img/blog/humans-not-users/header.jpg"
         title="profile"
       />

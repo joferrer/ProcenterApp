@@ -31,7 +31,7 @@ export const EmpleadoRouter = () => {
       ></Route>
       <Route path="/simulador" element={<Simulador admin={"asesor"} />}></Route>
       <Route
-        path="/adquisiciones"
+        path="/registrar-adquisiciones"
         element={<RegistrarAdquisicion admin={"asesor"} />}
       ></Route>
 

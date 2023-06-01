@@ -19,6 +19,7 @@ import { Button, Grid, TextField } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import SaveIcon from "@mui/icons-material/Save";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
+import axios from "axios";
 
 function Row(props) {
   const { row, isOpen, onToggleOpen } = props;
@@ -31,23 +32,19 @@ function Row(props) {
     Edit ? setEdit(false) : setEdit(true);
   };
 
-  const handleUpload = () => {
-    const formData = new FormData();
+  const handleUpload = async () => {
+    const f = new FormData();
 
-    for (let i = 0; i < imagenes.length; i++) {
-      formData.append("image", imagenes[i]);
+    for (let index = 0; index < imagEnvio.length; index++) {
+      f.append("image", imagEnvio[index]);
     }
-
-    fetch("https://procenterapi-production.up.railway.app/subir-imagen", {
-      method: "POST",
-      body: formData,
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Images uploaded successfully:", data);
+    await axios
+      .post("https://testprocenter-production.up.railway.app/subir-imagen", f)
+      .then((response) => {
+        console.log(response.data);
       })
       .catch((error) => {
-        console.error("Error uploading images:", error);
+        console.log(error);
       });
   };
 
@@ -58,7 +55,7 @@ function Row(props) {
 
   return (
     <React.Fragment>
-      <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
+      <TableRow sx={{ "& > *": { borderBottom: "unset" }, zIndex: 0 }}>
         <TableCell>
           <IconButton
             aria-label="expand row"
@@ -255,7 +252,7 @@ function Row(props) {
               <ImagenesComponent
                 edit={Edit}
                 imagenesUrl={imagenes}
-                setImagenes={setImagenes}
+                setImagenes={setImagEnvio}
               />
             </Box>
           </Collapse>
@@ -277,8 +274,10 @@ export default function TablaCatologo() {
   return (
     <>
       {rows.estado === false ? (
-        <Paper sx={{ width: "100%", height:"30px" }}>
-          <Typography sx={{ display: "flex", justifyContent: "center" }}>
+        <Paper sx={{ width: "100%", height: "30px", height: "auto" }}>
+          <Typography
+            sx={{ display: "flex", justifyContent: "center", mt: 10 }}
+          >
             {rows.mensaje}
           </Typography>
         </Paper>
