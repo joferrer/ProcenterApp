@@ -11,11 +11,11 @@
 ## Pasos para conectarse a la rama
 
 1. Tener ya el repositorio
-2. git checkout sebaspro
+2. git checkout [NOMBRE_DE_LA_RAMA] 
 
 ## Pasos para hacer pull
 
-1. Parado en la rama suya,"git pull origin main"
+1. Conectado a la rama hacia donde se hará el pull, ejecutar: "git pull origin main"
 
 ## Rutas disponibles para usuarios no autenticados
 
