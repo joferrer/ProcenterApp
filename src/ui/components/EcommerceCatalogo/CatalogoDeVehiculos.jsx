@@ -4,7 +4,7 @@ import { GridCatalogo } from "./GridCatalogo"
 
 export const CatalogoDeVehiculos = () => {
   return (
-    <Grid container>
+    <Grid container flexWrap={"nowrap"}>
         <BarraDeFiltros />
         <GridCatalogo />
     </Grid>
