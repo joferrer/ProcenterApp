@@ -1,5 +1,5 @@
 import { ProcenterAppLayout } from "./../layout/ProcenterAppLayout";
-import { Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import React, { useState } from "react";
 
@@ -33,44 +33,169 @@ export const Simulador = ({admin}) => {
       <Typography variant="h4">Simulador de Crédito</Typography>
       <Box
         sx={{
-          "margin-top": "2em",
+          width: "73vw",
+          display: "flex",
+          justifyContent: "center",
+          alignContent: "center",
+          mt: 7,
         }}
       >
-        <form onSubmit={calcularInteres()}>
-          <div>
-            <label htmlFor="">Capital Inicial: </label>
-            <input
-              id="capital"
-              type="number"
-              placeholder="Ingrese el capital inicial"
-              onChange={(e) => setCapital(e.target.value)}
-              autoFocus
-              required
-            />
+        <Box
+          sx={{
+            // Mueve el componente hacia la mitad de la pantallas
+            // Centra verticalmente el componente
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: "1rem",
+            padding: "1rem",
+            backgroundColor: "#f9f9f9",
+            borderRadius: "8px",
+            boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
+            width: "60%", // Establece el ancho deseado para el componente
+            height: "60%",
+          }}
+        >
+          <form onSubmit={calcularInteres()}>
+            <Grid container justifyContent="center">
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  marginBottom: "1rem",
+                  width: "100%",
+                  mt: 2,
+                }}
+              >
+                <Grid item xs={12} sm={6}>
+                  <label
+                    htmlFor="capital"
+                    style={{
+                      fontSize: "1.5rem", // Aumenta el tamaño de la fuente
+                      width: "30%", // Ajusta el ancho del label
+                    }}
+                  >
+                    <strong>Capital Inicial:</strong>
+                  </label>
+                  <input
+                    id="capital"
+                    type="number"
+                    placeholder="Ingrese el capital inicial"
+                    onChange={(e) => setCapital(e.target.value)}
+                    autoFocus
+                    required
+                    style={{
+                      padding: "1rem",
+                      borderRadius: "4px",
+                      border: "1px solid #ccc",
+                      fontSize: "1.5rem", // Aumenta el tamaño de la fuente
+                      width: "90%", // Ajusta el ancho del input
+                    }}
+                  />
+                </Grid>
+              </div>
+            </Grid>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                marginBottom: "1rem",
+              }}
+            >
+              <Grid item xs={12} sm={6}>
+                <label
+                  htmlFor="interes"
+                  style={{
+                    fontSize: "1.5rem", // Aumenta el tamaño de la fuente
+                    width: "30%", // Ajusta el ancho del label
+                  }}
+                >
+                  <strong>Tasa de Interes:</strong>
+                </label>
+                <input
+                  id="interes"
+                  type="number"
+                  onChange={(e) => setInteres(e.target.value)}
+                  placeholder="Ingrese la tasa de interes"
+                  required
+                  style={{
+                    padding: "1rem",
+                    borderRadius: "4px",
+                    border: "1px solid #ccc",
+                    fontSize: "1.5rem", // Aumenta el tamaño de la fuente
+                    width: "90%", // Ajusta el ancho del input
+                  }}
+                />
+              </Grid>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                marginBottom: "1rem",
+              }}
+            >
+              <Grid item xs={12} sm={6}>
+                <label
+                  htmlFor="tiempo"
+                  style={{
+                    fontSize: "1.5rem", // Aumenta el tamaño de la fuente
+                    width: "30%", // Ajusta el ancho del label
+                  }}
+                >
+                  <strong>Tiempo:</strong>
+                </label>
+                <input
+                  id="tiempo"
+                  type="number"
+                  onChange={(e) => setTiempo(e.target.value)}
+                  placeholder="Ingrese la cantidad de meses"
+                  required
+                  style={{
+                    padding: "1rem",
+                    borderRadius: "4px",
+                    border: "1px solid #ccc",
+                    fontSize: "1.5rem", // Aumenta el tamaño de la fuente
+                    width: "90%", // Ajusta el ancho del input
+                  }}
+                />
+              </Grid>
+            </div>
+            <button
+              style={{
+                padding: "1rem 2rem",
+                borderRadius: "4px",
+                backgroundColor: "black",
+                color: "#fff",
+                border: "none",
+                cursor: "pointer",
+                fontSize: "1.5rem", // Aumenta el tamaño de la fuente
+                width: "100%", // Ajusta el ancho del botón
+              }}
+            >
+              <strong>Calcular</strong>
+            </button>
+          </form>
+
+          <div style={{ mb: 2 }}>
+            <span style={{ fontSize: "1.5rem" }}>Interes a pagar: </span>
+            {calculo && (
+              <span
+                style={{
+                  fontWeight: "bold",
+                  backgroundColor: "gray",
+                  color: "white",
+                  fontSize: "1.5rem",
+                }}
+              >
+                {calculo}
+              </span>
+            )}
           </div>
-          <div>
-            <label htmlFor="">Tasa de Interes: </label>
-            <input
-              id="interes"
-              type="number"
-              onChange={(e) => setInteres(e.target.value)}
-              placeholder="Ingrese la tasa de interes"
-              required
-            />
-          </div>
-          <div>
-            <label htmlFor="">Tiempo: </label>
-            <input
-              id="tiempo"
-              type="number"
-              onChange={(e) => setTiempo(e.target.value)}
-              placeholder="Ingrese la cantidad de meses"
-              required
-            />
-          </div>
-          <button>Calcular</button>
-        </form>
-        <div>Interes a pagar: {calculo}</div>
+        </Box>
       </Box>
     </ProcenterAppLayout>
   );

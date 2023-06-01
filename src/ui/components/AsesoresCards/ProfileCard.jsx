@@ -25,7 +25,7 @@ function ProfileCard({ card }) {
         <p>Teléfono: {card.telefono}</p>
         <p>
           Fecha de contratación:
-          {dayjs(card.fechaVincu).format("DD-MM-YYYY")}
+          {card.fechaVincu}
         </p>
         <p>Vehículos vendidos: 0</p>
       </CardContent>

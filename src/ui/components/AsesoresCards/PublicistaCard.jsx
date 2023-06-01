@@ -23,11 +23,7 @@ function PublicistaCard({ card }) {
         <p>Nombre: {card.nombre}</p>
         <p>Correo: {card.correo}</p>
         <p>Teléfono: {card.telefono}</p>
-        <p>
-          Fecha de contratación:{" "}
-          {dayjs(card.fechaVincu.toDate()).format("DD-MM-YYYY")}
-        </p>
-        {console.log(card.fechaVincu)}
+        <p>Fecha de contratación: {card.fechaVincu}</p>
       </CardContent>
       <CardActions>
         <Button

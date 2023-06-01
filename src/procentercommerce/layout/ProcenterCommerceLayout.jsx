@@ -17,10 +17,6 @@ import TextoImagenEcomerfooter from "./../../ui/components/GeneralComponents/Tex
 import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 import DiamondIcon from "@mui/icons-material/Diamond";
 import MinorCrashIcon from "@mui/icons-material/MinorCrash";
-const pages = [
-  { nombre: "Vehiculos", link: "/catalogo" },
-  { nombre: "Sobre Nosotros", link: "/sobre-nosotros" },
-];
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
@@ -80,18 +76,24 @@ function ProcenterCommerceLayout({ children }) {
                     display: { xs: "block", md: "none" },
                   }}
                 >
-                  {pages.map((page) => (
-                    <Link
-                      style={{ textDecoration: "none", color: "white" }}
-                      to={page.link}
-                    >
-                      <MenuItem key={page} onClick={handleCloseNavMenu}>
-                        <Typography textAlign="center">
-                          {page.nombre}
-                        </Typography>
-                      </MenuItem>
-                    </Link>
-                  ))}
+                  <Link
+                    style={{ textDecoration: "none", color: "black" }}
+                    to={"/catalogo"}
+                  >
+                    <MenuItem onClick={handleCloseNavMenu}>
+                      <Typography textAlign="center">{"vehiculo"}</Typography>
+                    </MenuItem>
+                  </Link>
+                  <Link
+                    style={{ textDecoration: "none", color: "black" }}
+                    to={"/sobre-nosotros"}
+                  >
+                    <MenuItem onClick={handleCloseNavMenu}>
+                      <Typography textAlign="center">
+                        {"Sobre Nosotros"}
+                      </Typography>
+                    </MenuItem>
+                  </Link>
                 </Menu>
                 <Box
                   sx={{
@@ -140,20 +142,28 @@ function ProcenterCommerceLayout({ children }) {
                   },
                 }}
               >
-                {pages.map((page) => (
-                  <Link
-                    style={{ textDecoration: "none", color: "white" }}
-                    to={page.link}
+                <Link
+                  style={{ textDecoration: "none", color: "white" }}
+                  to={"/catalogo"}
+                >
+                  <MenuItem
+                    sx={{ height: "65px", width: "140px" }}
+                    onClick={handleCloseNavMenu}
                   >
-                    <MenuItem
-                      key={page}
-                      sx={{ height: "65px", width: "140px" }}
-                      onClick={handleCloseNavMenu}
-                    >
-                      <Typography textAlign="center">{page.nombre}</Typography>
-                    </MenuItem>
-                  </Link>
-                ))}
+                    <Typography textAlign="center">{"Vehiculos"}</Typography>
+                  </MenuItem>
+                </Link>
+                <Link
+                  style={{ textDecoration: "none", color: "white" }}
+                  to={"/sobre-nosotros"}
+                >
+                  <MenuItem
+                    sx={{ height: "65px", width: "140px" }}
+                    onClick={handleCloseNavMenu}
+                  >
+                    <Typography textAlign="center">{"Sobre Nosotros"}</Typography>
+                  </MenuItem>
+                </Link>
               </Box>
             </Toolbar>
             <Toolbar
@@ -230,6 +240,7 @@ function ProcenterCommerceLayout({ children }) {
             mr: 3,
             borderRadius: "20px",
             top: "300px",
+            zIndex: 2,
           }}
         >
           <a href={"https://wa.me/c/573118931877"}>
