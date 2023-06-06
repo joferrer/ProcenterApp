@@ -14,6 +14,7 @@ export const BarraDeFiltros = () => {
                     <CollapseFiltro filtro={"Precio"}>
                       <SliderMuiComponent rango={[0,100]}/>
                     </CollapseFiltro>
+                    
             </Grid>
             
         </Grid>
