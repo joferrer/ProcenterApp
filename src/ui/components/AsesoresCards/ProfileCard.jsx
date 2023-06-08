@@ -6,11 +6,10 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import { CardContext } from "../../context/CardContext";
 import { useContext } from "react";
+import dayjs from "dayjs";
 
 function ProfileCard({ card }) {
-
   const { deleteCard } = useContext(CardContext);
-
 
   return (
     <Card sx={{ maxWidth: "400px" }}>
@@ -24,7 +23,10 @@ function ProfileCard({ card }) {
         <p>Nombre: {card.nombre}</p>
         <p>Correo: {card.correo}</p>
         <p>Teléfono: {card.telefono}</p>
-        <p>Fecha de contratación: {card.fecha}</p>
+        <p>
+          Fecha de contratación:
+          {card.fechaVincu}
+        </p>
         <p>Vehículos vendidos: 0</p>
       </CardContent>
       <CardActions>

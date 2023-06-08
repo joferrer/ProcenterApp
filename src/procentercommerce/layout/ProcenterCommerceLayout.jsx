@@ -17,7 +17,6 @@ import TextoImagenEcomerfooter from "./../../ui/components/GeneralComponents/Tex
 import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 import DiamondIcon from "@mui/icons-material/Diamond";
 import MinorCrashIcon from "@mui/icons-material/MinorCrash";
-const pages = ["Vehiculos", "Sobre Nosotros"];
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
@@ -77,11 +76,24 @@ function ProcenterCommerceLayout({ children }) {
                     display: { xs: "block", md: "none" },
                   }}
                 >
-                  {pages.map((page) => (
-                    <MenuItem key={page} onClick={handleCloseNavMenu}>
-                      <Typography textAlign="center">{page}</Typography>
+                  <Link
+                    style={{ textDecoration: "none", color: "black" }}
+                    to={"/catalogo"}
+                  >
+                    <MenuItem onClick={handleCloseNavMenu}>
+                      <Typography textAlign="center">{"vehiculo"}</Typography>
                     </MenuItem>
-                  ))}
+                  </Link>
+                  <Link
+                    style={{ textDecoration: "none", color: "black" }}
+                    to={"/sobre-nosotros"}
+                  >
+                    <MenuItem onClick={handleCloseNavMenu}>
+                      <Typography textAlign="center">
+                        {"Sobre Nosotros"}
+                      </Typography>
+                    </MenuItem>
+                  </Link>
                 </Menu>
                 <Box
                   sx={{
@@ -97,7 +109,9 @@ function ProcenterCommerceLayout({ children }) {
                   }}
                 >
                   <Box sx={{ width: "60px", height: "60px" }}>
-                    <img src="../../../public/Images/LUCKY5.png" id="im" />
+                    <a href="/home">
+                      <img src="../../../public/Images/LUCKY5.png" id="im" />
+                    </a>
                   </Box>
                 </Box>
               </Box>
@@ -115,7 +129,9 @@ function ProcenterCommerceLayout({ children }) {
                   },
                 }}
               >
-                <img src="../../../public/Images/LUCKY5.png" id="im" />
+                <a href="/home">
+                  <img src="../../../public/Images/LUCKY5.png" id="im" />
+                </a>
               </Box>
 
               <Box
@@ -126,15 +142,28 @@ function ProcenterCommerceLayout({ children }) {
                   },
                 }}
               >
-                {pages.map((page) => (
+                <Link
+                  style={{ textDecoration: "none", color: "white" }}
+                  to={"/catalogo"}
+                >
                   <MenuItem
-                    key={page}
                     sx={{ height: "65px", width: "140px" }}
                     onClick={handleCloseNavMenu}
                   >
-                    <Typography textAlign="center">{page}</Typography>
+                    <Typography textAlign="center">{"Vehiculos"}</Typography>
                   </MenuItem>
-                ))}
+                </Link>
+                <Link
+                  style={{ textDecoration: "none", color: "white" }}
+                  to={"/sobre-nosotros"}
+                >
+                  <MenuItem
+                    sx={{ height: "65px", width: "140px" }}
+                    onClick={handleCloseNavMenu}
+                  >
+                    <Typography textAlign="center">{"Sobre Nosotros"}</Typography>
+                  </MenuItem>
+                </Link>
               </Box>
             </Toolbar>
             <Toolbar
@@ -196,6 +225,32 @@ function ProcenterCommerceLayout({ children }) {
           </Box>
         </AppBar>
       </Box>
+      <Box
+        sx={{
+          float: "right",
+          width: 50,
+          height: 50,
+        }}
+      >
+        <Box
+          sx={{
+            position: "fixed",
+            backgroundColor: "black",
+            pr: 1,
+            mr: 3,
+            borderRadius: "20px",
+            top: "300px",
+            zIndex: 2,
+          }}
+        >
+          <a href={"https://wa.me/c/573118931877"}>
+            <WhatsAppIcon
+              sx={{ color: "white", width: 50, height: 50, mr: 3 }}
+            />
+          </a>
+        </Box>
+      </Box>
+
       <Box sx={{ mt: 3, mb: 3, height: "100%" }}>{children}</Box>
 
       <Box sx={{ width: "100%", pt: "20px" }}>
@@ -301,9 +356,21 @@ function ProcenterCommerceLayout({ children }) {
               <Typography sx={{ mb: 2, fontWeight: "bold" }}>
                 Visitanos en:
               </Typography>
-              <FacebookIcon sx={{ color: "blue", width: 40, height: 40 }} />
-              <InstagramIcon sx={{ color: "#FF0097", width: 40, height: 40 }} />
-              <WhatsAppIcon sx={{ color: "green", width: 40, height: 40 }} />
+              <a
+                href={"https://www.facebook.com/profile.php?id=100088245461203"}
+              >
+                <FacebookIcon sx={{ color: "blue", width: 40, height: 40 }} />
+              </a>
+
+              <a href={"https://www.instagram.com/procenterautos/"}>
+                <InstagramIcon
+                  sx={{ color: "#FF0097", width: 40, height: 40 }}
+                />
+              </a>
+
+              <a href={"https://wa.me/c/573118931877"}>
+                <WhatsAppIcon sx={{ color: "green", width: 40, height: 40 }} />
+              </a>
             </Grid>
           </Grid>
         </Box>
