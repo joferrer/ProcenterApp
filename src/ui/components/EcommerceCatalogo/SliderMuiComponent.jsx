@@ -14,7 +14,7 @@ export const SliderMuiComponent = ({rango=[20,37], filtrar=()=>{}}) => {
     useMemo(()=> setValue[rango],[rango])
     const onChange=(rango, pValor)=>{
       let nuevoRango = value
-      nuevoRango[rango] = pValor
+      nuevoRango[rango] = Number(pValor)
       setValue([...nuevoRango])
     }
     const handleChange = (event, newValue) => {
@@ -22,14 +22,14 @@ export const SliderMuiComponent = ({rango=[20,37], filtrar=()=>{}}) => {
     };
 
     const handleFiltro = ()=>{
-      filtrar(value)
+      filtrar([Number(value[0]),Number(value[1])])
     }
 
   return (
     <Grid container flexDirection={'row'} wrap='wrap' style={{paddingLeft: "18px"}}>
       <TextField variant='standard' 
         sx={{width:"100px",}} 
-        defaultValue={0}
+        defaultValue={rango[0]}
         type='number'
         onChange={(e)=>onChange(0,e.target.value)}
         inputProps={{style:{color:"white"}}} 
@@ -43,7 +43,7 @@ export const SliderMuiComponent = ({rango=[20,37], filtrar=()=>{}}) => {
       <TextField 
         variant='standard' 
         type='number'
-        defaultValue={0}
+        defaultValue={rango[1]}
         sx={{width:"100px",}} 
         onChange={(e)=>onChange(1,e.target.value)}
         inputProps={{style:{color:"white"},  }}  
