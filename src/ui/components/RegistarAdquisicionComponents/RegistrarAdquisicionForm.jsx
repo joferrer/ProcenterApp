@@ -13,7 +13,10 @@ const isDateValid = (value) => {
 
 export const RegistrarAdquisicionForm = () => {
     const onSubmit = (data)=>{
-        alert(JSON.stringify(data))
+        console.log(data.fechaMatricula)
+        const fechaMatriculaFormato = dayjs(data.fechaMatricula).format('DD/MM/YYYY')
+        const datos = {...data, fechaMatricula: dayjs(fechaMatriculaFormato).format('DD/MM/YYYY')}
+        alert(JSON.stringify(datos))
     }
     const {control,handleSubmit, reset ,watch,getValues} = useForm();
   
@@ -97,6 +100,22 @@ export const RegistrarAdquisicionForm = () => {
                             error={!!formState.errors.motor}
                             />}
             />
+            <Controller        
+                     name={"soat"}
+                     control={control}
+                     defaultValue={false}
+                     render={({field,fieldState,formState})=><Grid>
+                        <Typography variant="span">SOAT</Typography>
+                        <Checkbox 
+                            {...field}
+                            checked={field.value}
+                            onChange={(e) => field.onChange(e.target.checked)}
+                            
+                        />
+                     </Grid>
+                        
+                    }
+                 />
             </Grid>
             <Grid sx={{
             "@media (max-width:800px)": {
@@ -131,6 +150,7 @@ export const RegistrarAdquisicionForm = () => {
                          <DatePicker
                             {...field}
                             value={field.value}
+                            format='DD/MM/YYYY'
                             onChange={(newValue) => field.onChange(newValue)}
                             slotProps={{textField:{  variant: "filled", error: !!formState.errors.fechaMatricula, helperText: !!formState.errors.fechaMatricula ? "La fecha ingresada no es valida":"" }}}
                             
@@ -138,22 +158,7 @@ export const RegistrarAdquisicionForm = () => {
                      </LocalizationProvider>
                     }
                  />
-                 <Controller        
-                     name={"soat"}
-                     control={control}
-                     defaultValue={false}
-                     render={({field,fieldState,formState})=><Grid>
-                        <Typography variant="span">SOAT</Typography>
-                        <Checkbox 
-                            {...field}
-                            checked={field.value}
-                            onChange={(e) => field.onChange(e.target.checked)}
-                            
-                        />
-                     </Grid>
                         
-                    }
-                 />
                  <Controller        
                      name={"cc"}
                      control={control}
@@ -196,6 +201,20 @@ export const RegistrarAdquisicionForm = () => {
                              error={formState.errors.prenda}
                              />}
                  />
+                 <Controller        
+                 name={"correo"}
+                 control={control}
+                 rules={{required: true}}
+                 defaultValue=""
+                 render={({field,fieldState,formState})=>
+                     <TextInput 
+                        type="email"
+                         value={field.value} 
+                         label={"CORREO"} 
+                         onInputChange={field.onChange}
+                         error={formState.errors.correo}
+                         />}
+             />
             </Grid>
             <Grid sx={{"@media (max-width:1064px)": {
                 width: "100%",

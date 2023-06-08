@@ -17,8 +17,6 @@ const helperFiltos = ()=>{
   }
 
   const estaDentroDelRangoDePrecio = (precioVehiculo=0,precioBot=0, precioUp=0)=>{
-    console.log((precioBot <= precioVehiculo) && 
-    (precioVehiculo <= precioUp ))
     return (precioBot <= precioVehiculo) && 
           (precioVehiculo <= precioUp )
   }

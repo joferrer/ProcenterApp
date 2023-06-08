@@ -15,7 +15,6 @@ export const GridCatalogo = ({vehiculos}) => {
   useMemo(() => setcatalogo(init), [vehiculos])
 
   useEffect(() => {
-    console.log(page)
     const catalogPaginado = vehiculos.slice((page*12-12),page*12)
     setcatalogo(catalogPaginado)
   }, [page])

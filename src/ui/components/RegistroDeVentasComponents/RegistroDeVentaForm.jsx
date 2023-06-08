@@ -2,14 +2,14 @@ import { Button, Grid } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import { TextInput } from "./TextInput";
 import { PhoneMui } from "./PhoneMui";
-import { useDispatch, useSelector } from "react-redux";
-import { VehiculosDispatch } from "../../../store/vehiculos/VehiculosDispatch";
 import { UsuariosDispatch } from "../../../store/usuario/UsuariosDispatch";
 import { AutocompleteInput } from "./AutocompleteInput";
-import { useEffect, useMemo } from "react";
+import { useEffect, } from "react";
 import { SeleccionarVehiculo } from "./SeleccionarVehiculo";
 import { CatalogoDispatch } from "../../../store/catalogo/CatalogoDispatch";
 import { authDispatch } from "../../../store/auth/authDispatch";
+import { SnackbarComponent } from "../FeedbackComponents/Snackbar";
+import { Cliente, Venta } from "./Modelos";
 
 export const RegistroDeVentaForm = ()=>{
 
@@ -31,8 +31,10 @@ export const RegistroDeVentaForm = ()=>{
     }
   }, [cedula]);
     const onSubmit = (data)=>{
-        data = {...data,id}
-        alert(JSON.stringify(data))
+        data = {...data,idasesor: id}
+        const cliente = new Cliente(data.nombre,data.cedula,data.correo,data.telefono)
+        const venta = new Venta({idvehiculo: data.vehiculo ,idasesor:id, cliente})
+        alert(JSON.stringify(venta))
     }
     return <form  onSubmit={handleSubmit(onSubmit)}>
     <Grid 
@@ -46,6 +48,7 @@ export const RegistroDeVentaForm = ()=>{
             justifyContent:"space-between"}}>
         
         <Grid>
+        <SnackbarComponent mensaje={error} mostrar={typeof error !== undefined && error != "" && error != null} />
             <Controller        
                  name={"cedula"}
                  control={control}

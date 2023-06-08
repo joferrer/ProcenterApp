@@ -7,9 +7,9 @@ import { useMemo, useState } from "react"
 export const BarraDeFiltros = ({marcas=[], filtros, setfiltros}) => {
 
   const [precio, setprecio] = useState(filtros.precio)
-  const [marca, setmarca] = useState(filtros.marca)
+  
   useMemo(() => setprecio(filtros.precio), [filtros])
-  console.log(filtros)
+
   const filtrarPrecio = (nRango)=>{
     setfiltros({...filtros, precio: nRango })
   }

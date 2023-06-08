@@ -48,9 +48,12 @@ export const SeleccionarVehiculo = ({label,textoBoton,vehiculos = [], onFormChan
                             <CardMedia image={v.imagenes[0]} title={v.nombre}   sx={{ height: 140 , width: 250}} />
                             <CardContent >
                                 <Typography gutterBottom variant="h5" component="div" sx={{fontSize:"18px", }}>{v?.nombre}</Typography>
-                                <Typography variant="body2" color="text.secondary">{v?.modelo}</Typography>
-                                <Typography variant="body2" color="text.secondary">{v?.anio}</Typography>
                                 <Typography variant="body2" color="text.secondary" sx={{}}>Placa: {v?.placa}</Typography>
+                                <Typography variant="body2" 
+                                    color="text.secondary" 
+                                    sx={{fontWeight:"bold"}}
+                                >COP {v?.precio.toLocaleString()}$
+                            </Typography>
                             </CardContent>
                             </CardActionArea>
                         </Card>
