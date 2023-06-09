@@ -7,15 +7,15 @@ import Button from "@mui/material/Button";
 import { CardContext } from "../../context/CardContext";
 import { useContext } from "react";
 import dayjs from "dayjs";
-
+import asesor from "../../../../public/Images/asesore.png";
 function ProfileCard({ card }) {
   const { deleteCard } = useContext(CardContext);
-
+  
   return (
     <Card sx={{ maxWidth: "400px" }}>
       <CardMedia
         sx={{ height: "140px" }}
-        image="https://johannesippen.com/img/blog/humans-not-users/header.jpg"
+        image={asesor}
         title="profile"
       />
       <CardContent>
