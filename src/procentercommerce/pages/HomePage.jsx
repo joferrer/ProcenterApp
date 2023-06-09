@@ -5,11 +5,13 @@ import CarouselComponent from "../../ui/components/GeneralComponents/carousel";
 import Boton from "./../../ui/components/GeneralComponents/BotonesEspeciales";
 import HorizontalCollapse from "./../../ui/components/GeneralComponents/Collap";
 import { GridHomeFoto } from "../../ui/components/GeneralComponents/GridHomeFoto";
-import { CatalogoDispatch } from "./../../store/catalogo/CatalogoDispatch";
+import { CatalogoDispatch } from "../../store/catalogo/CatalogoDispatch";
 
 export const HomePage = () => {
   const [isSelected, setIsSelected] = useState(false);
-  const { catalogo } = CatalogoDispatch();
+  const { catalogoNum } = CatalogoDispatch();
+  catalogoNum(2).then;
+
   const handleButtonClick = () => {
     setIsSelected(!isSelected);
   };
@@ -59,12 +61,8 @@ export const HomePage = () => {
         />
       </Box>
 
-      <Box sx={{ mt: 5, height: "50px", width: "100%" }}>
-        <HorizontalCollapse />
-      </Box>
-      <Box>
-        <GridHomeFoto vehiculos={catalogo} />
-      </Box>
+      <HorizontalCollapse />
+      <GridHomeFoto />
     </ProcenterCommerceLayout>
   );
 };

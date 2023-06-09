@@ -1,0 +1,44 @@
+import * as React from "react";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Typography from "@mui/material/Typography";
+import { Box, CardActionArea } from "@mui/material";
+
+export default function CardCarro({ vehiculo }) {
+  return (
+    <Box sx={{ display: "flex", justifyContent: "center",m:3}}>
+      <Card
+        sx={{ width:800, backgroundColor: "white" }}
+        //onClick={() => handleClick(vehiculo.id)}
+      >
+        <CardActionArea>
+          <CardMedia sx={{ height: 400}}>
+            <img
+              id="im"
+              src="../../../../public/Images/black.png"
+              height={"200"}
+            />
+          </CardMedia>
+          <CardContent>
+            <Typography
+              gutterBottom
+              variant="h5"
+              fontSize={"17px"}
+              component="div"
+            >
+              blablablab
+            </Typography>
+            <Typography
+              variant="body2"
+              color="text.secondary"
+              sx={{ fontWeight: "bold" }}
+            >
+              blablablablab
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+      </Card>
+    </Box>
+  );
+}

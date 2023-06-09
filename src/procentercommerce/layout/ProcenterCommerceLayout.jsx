@@ -43,7 +43,7 @@ function ProcenterCommerceLayout({ children }) {
   };
   return (
     <Box sx={{ width: "100%" }}>
-      <Box sx={{ width: "100%", height: "100%", mb: 10 }}>
+      <Box sx={{ width: "100%", height: "100%", mb: 8.2 }}>
         <AppBar sx={{ backgroundColor: "black", width: "100%" }}>
           <Box sx={{ display: "flex", width: "100%" }}>
             <Toolbar sx={{ display: "flex", width: { xs: "100%", md: "80%" } }}>
@@ -161,7 +161,9 @@ function ProcenterCommerceLayout({ children }) {
                     sx={{ height: "65px", width: "140px" }}
                     onClick={handleCloseNavMenu}
                   >
-                    <Typography textAlign="center">{"Sobre Nosotros"}</Typography>
+                    <Typography textAlign="center">
+                      {"Sobre Nosotros"}
+                    </Typography>
                   </MenuItem>
                 </Link>
               </Box>
@@ -198,28 +200,28 @@ function ProcenterCommerceLayout({ children }) {
                     container
                     justifyContent={"center"}
                     alignItems={"center"}
-                  >
-                    <SearchIcon />
-                    <Typography sx={{ fontSize: "10pt", textAlign: "center" }}>
-                      buscador
-                    </Typography>
-                  </Grid>
+                  ></Grid>
                 </MenuItem>
-                <MenuItem
-                  sx={{ height: "65px", width: "100px" }}
-                  onClick={handleCloseNavMenu}
+                <Link
+                  style={{ textDecoration: "none", color: "white" }}
+                  to="https://wa.me/c/573118931877"
                 >
-                  <Grid
-                    container
-                    justifyContent={"center"}
-                    alignItems={"center"}
+                  <MenuItem
+                    sx={{ height: "65px", width: "100px" }}
+                    onClick={handleCloseNavMenu}
                   >
-                    <PersonIcon />
-                    <Typography sx={{ fontSize: "10pt" }}>
-                      contactanos
-                    </Typography>
-                  </Grid>
-                </MenuItem>
+                    <Grid
+                      container
+                      justifyContent={"center"}
+                      alignItems={"center"}
+                    >
+                      <PersonIcon />
+                      <Typography sx={{ fontSize: "10pt" }}>
+                        contactanos
+                      </Typography>
+                    </Grid>
+                  </MenuItem>
+                </Link>
               </Box>
             </Toolbar>
           </Box>
@@ -229,7 +231,6 @@ function ProcenterCommerceLayout({ children }) {
         sx={{
           float: "right",
           width: 50,
-          height: 50,
         }}
       >
         <Box
