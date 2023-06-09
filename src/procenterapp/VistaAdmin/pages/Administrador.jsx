@@ -3,6 +3,7 @@ import { ProcenterAppLayout } from "../layout/ProcenterAppLayout";
 import { Titulo } from "../../../ui/components/GeneralComponents/TituloPagina";
 import { Grid } from "@mui/material";
 import { CampoEditable } from "../../../ui/components/InformacionEmpresarialComponets/CampoEditable";
+import ImagenesComponent from "../../../ui/components/GeneralComponents/ImagenesComponent";
 
 export const Administrador = () => {
   const [informacion, setinformacion] = useState({
@@ -61,7 +62,10 @@ export const Administrador = () => {
           guardarCambios={guardarCambios}
           handledChange={handledChange}
           onClickEditar={onClickEditar}
-          />
+        />
+        <Grid>
+          <ImagenesComponent />
+        </Grid>
       </Grid>      
     </ProcenterAppLayout>
   );
