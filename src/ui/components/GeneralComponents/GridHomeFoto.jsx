@@ -1,4 +1,5 @@
 import {
+  Box,
   Card,
   CardActionArea,
   CardContent,
@@ -7,16 +8,42 @@ import {
   Typography,
 } from "@mui/material";
 import { useState } from "react";
-import CarouselComponent from "./CarouselDcomponentes";
+import CardCarro from "./CardCarro";
 
-export const GridHomeFoto = ({ vehiculos }) => {
-  const [catalogo, setcatalogo] = useState(vehiculos);
-  const handleClick = () => {
-    alert("Ops, aun no esta hecho esto :/");
-  };
+export const GridHomeFoto = () => {
   return (
-    <Grid sx={{ mt: "100px", ml: "10px" }}>
-      <CarouselComponent vehiculo={catalogo} />
-    </Grid>
+    <Box sx={{p:3,pl:4}}>
+      <Grid
+        container
+        spacing={2}
+        sx={{
+          mt: 2,
+          pb: 4,
+          pt: 4,
+          display: "flex",
+          backgroundColor: "lightgrey",
+          justifyContent: "center",
+          alignItems: "center",
+          borderRadius: "5px",
+        }}
+      >
+        <Grid item sm={6} xs={12}>
+          <Box>
+            <CardCarro />
+          </Box>
+          <Box sx={{ mt: 2 }}>
+            <CardCarro />
+          </Box>
+        </Grid>
+        <Grid item sm={6} xs={12}>
+          <Box>
+            <CardCarro />
+          </Box>
+          <Box sx={{ mt: 2 }}>
+            <CardCarro />
+          </Box>
+        </Grid>
+      </Grid>
+    </Box>
   );
 };

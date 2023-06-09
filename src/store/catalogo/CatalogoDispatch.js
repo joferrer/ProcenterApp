@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { startCargarCatalogo } from "./CatalogoThunks";
+import { cargaCata, startCargarCatalogo } from "./CatalogoThunks";
 
 export const CatalogoDispatch = () => {
   const dispatch = useDispatch();
@@ -10,6 +10,10 @@ export const CatalogoDispatch = () => {
     await dispatch(startCargarCatalogo());
   };
 
+  const cargarNumCatalogo = async (num) => {
+    const catago = await dispatch(cargaCata(num));
+    return catago.catalogo;
+  };
   useEffect(() => {
     if (catalogo.length == 0) {
       cargarCatalogo();
@@ -17,6 +21,7 @@ export const CatalogoDispatch = () => {
   }, [catalogo]);
   return {
     catalogo,
+    catalogoNum: cargarNumCatalogo,
     isLoading,
     error,
   };

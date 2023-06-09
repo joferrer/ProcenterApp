@@ -10,20 +10,28 @@ export default function CheckboxList({ marca }) {
     marca(event.target.value);
   };
 
+  const columns = Math.ceil(marcas.length / 3); // Calcula la cantidad de columnas necesarias
+
   return (
     <Box display={"flex"}>
-      {marcas.map((marca, index) => (
-        <FormControlLabel
-          key={index}
-          control={
-            <Checkbox
-              checked={selectedMarca === marca}
-              onChange={handleCheckboxChange}
-              value={marca}
-            />
-          }
-          label={marca}
-        />
+      {Array.from({ length: columns }, (_, colIndex) => (
+        <Box key={colIndex} flex={1}>
+          {marcas
+            .slice(colIndex * columns, colIndex * columns + columns) // Obtiene las marcas para la columna actual
+            .map((marca, index) => (
+              <FormControlLabel
+                key={index}
+                control={
+                  <Checkbox
+                    checked={selectedMarca === marca}
+                    onChange={handleCheckboxChange}
+                    value={marca}
+                  />
+                }
+                label={marca}
+              />
+            ))}
+        </Box>
       ))}
     </Box>
   );
