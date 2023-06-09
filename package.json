@@ -26,6 +26,7 @@
     "react-modal": "^3.16.1",
     "react-phone-number-input": "^3.2.23",
     "react-redux": "^8.0.5",
+    "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "6"
   },
   "devDependencies": {

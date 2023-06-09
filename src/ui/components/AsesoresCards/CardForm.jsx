@@ -41,7 +41,7 @@ function CardForm() {
   const [nombre, setNombre] = useState("");
   const [correo, setCorreo] = useState("");
   const [telefono, setTelefono] = useState("");
-  const [fecha, setFecha] = useState("");
+  const [fecha, setFecha] = useState(dayjs(fechaact, "MM-DD-YYYY"));
   const { createCard } = useContext(CardContext);
 
   const [checked1, setChecked1] = useState(false);
@@ -50,13 +50,13 @@ function CardForm() {
   const handleCheckbox1Change = () => {
     setChecked1(true);
     setChecked2(false);
-    setRol("Asesor");
+    setRol("ASESOR");
   };
 
   const handleCheckbox2Change = () => {
     setChecked1(false);
     setChecked2(true);
-    setRol("Publicista");
+    setRol("PUBLICISTA");
   };
 
   const handleSubmit = (e) => {
@@ -74,7 +74,7 @@ function CardForm() {
     setNombre("");
     setCorreo("");
     setTelefono("");
-    setFecha(fechaact);
+    setFecha(dayjs(fechaact, "MM-DD-YYYY"));
   };
 
   return (
@@ -297,6 +297,9 @@ function CardForm() {
                       <DatePicker
                         sx={{ width: "100%" }}
                         label="Fecha de Ingreso"
+                        value={fecha}
+                        minDate={dayjs(fechaact, "MM-DD-YYYY")}
+                        onChange={(date) => setStartDate(date)}
                       />
                     </DemoContainer>
                   </LocalizationProvider>
