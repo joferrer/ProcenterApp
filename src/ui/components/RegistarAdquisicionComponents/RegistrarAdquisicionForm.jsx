@@ -210,7 +210,7 @@ export const RegistrarAdquisicionForm = () => {
                      <TextInput 
                         type="email"
                          value={field.value} 
-                         label={"CORREO"} 
+                         label={"Correo"} 
                          onInputChange={field.onChange}
                          error={formState.errors.correo}
                          />}
