@@ -12,7 +12,8 @@ const HorizontalCollapse = () => {
   const handleToggleCollapse = () => {
     setIsExpanded(!isExpanded);
   };
-  const formu = marca !== "" && precio === 0;
+
+  const formu = marca === "" && precio === 0;
   const handleSubmit = () => {
     setFormulario({ marca: marca, precio: precio });
   };
@@ -74,7 +75,7 @@ const HorizontalCollapse = () => {
                   <NonLinearSlider precio={setPrecio} />
                 </Grid>
                 <Grid item>
-                  {formu ? (
+                  {!formu ? (
                     <Link
                       style={{ textDecoration: "none", color: "white" }}
                       to={"/catalogo?marcar=" + marca + "&precio=" + precio}
