@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { cargaCata, startCargarCatalogo } from "./CatalogoThunks";
 
 export const CatalogoDispatch = () => {
   const dispatch = useDispatch();

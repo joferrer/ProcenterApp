@@ -5,11 +5,11 @@ import CarouselComponent from "../../ui/components/GeneralComponents/carousel";
 import Boton from "./../../ui/components/GeneralComponents/BotonesEspeciales";
 import HorizontalCollapse from "./../../ui/components/GeneralComponents/Collap";
 import { GridHomeFoto } from "../../ui/components/GeneralComponents/GridHomeFoto";
-import { CatalogoDispatch } from "../../store/catalogo/CatalogoDispatch";
+
 
 export const HomePage = () => {
   const [isSelected, setIsSelected] = useState(false);
-  //const { catalogoNum } = CatalogoDispatch();
+
   const error = "";
   const handleButtonClick = () => {
     setIsSelected(!isSelected);
