@@ -9,9 +9,8 @@ import { CatalogoDispatch } from "../../store/catalogo/CatalogoDispatch";
 
 export const HomePage = () => {
   const [isSelected, setIsSelected] = useState(false);
-  const { catalogoNum } = CatalogoDispatch();
-  catalogoNum(2).then;
-
+  //const { catalogoNum } = CatalogoDispatch();
+  const error = "";
   const handleButtonClick = () => {
     setIsSelected(!isSelected);
   };

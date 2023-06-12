@@ -10,10 +10,6 @@ export const CatalogoDispatch = () => {
     await dispatch(startCargarCatalogo());
   };
 
-  const cargarNumCatalogo = async (num) => {
-    const catago = await dispatch(cargaCata(num));
-    return catago.catalogo;
-  };
   useEffect(() => {
     if (catalogo.length == 0) {
       cargarCatalogo();
@@ -21,7 +17,6 @@ export const CatalogoDispatch = () => {
   }, [catalogo]);
   return {
     catalogo,
-    catalogoNum: cargarNumCatalogo,
     isLoading,
     error,
   };

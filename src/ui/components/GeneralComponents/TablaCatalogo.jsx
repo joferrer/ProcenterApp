@@ -23,29 +23,29 @@ import axios from "axios";
 
 function Row(props) {
   const { row, isOpen, onToggleOpen } = props;
+  const ids = row.id;
   const [Edit, setEdit] = React.useState(false);
   const [placa, setPlaca] = React.useState(row.placa);
   const [imagenes, setImagenes] = React.useState(row.imagenes);
   const [imagEnvio, setImagEnvio] = React.useState(null);
-  //console.log(imagenes);
   const handleEdit = () => {
     Edit ? setEdit(false) : setEdit(true);
   };
 
   const handleUpload = async () => {
-    const f = new FormData();
+    const fData = new FormData();
+    const data = { id: ids, imagenes: imagEnvio };
+    fData.append("data", data);
 
-    for (let index = 0; index < imagEnvio.length; index++) {
-      f.append("image", imagEnvio[index]);
+    try {
+      const response = await axios.post(
+        "https://procenterapi-production.up.railway.app/subir-imagen/",
+        fData
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
     }
-    await axios
-      .post("https://testprocenter-production.up.railway.app/subir-imagen", f)
-      .then((response) => {
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
   };
 
   const envioDatos = () => {
