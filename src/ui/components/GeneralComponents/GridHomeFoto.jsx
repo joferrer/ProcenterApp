@@ -10,9 +10,31 @@ import {
 import { useState } from "react";
 import CardCarro from "./CardCarro";
 
-export const GridHomeFoto = () => {
+export const GridHomeFoto = ({ carrito }) => {
+  const carritos = [
+    {
+      imagenes: ["/public/Images/ima1.jpg", "/public/Images/ima2.jpg"],
+      nombre: "hola",
+      precio: "$50.000.000",
+    },
+    {
+      imagenes: ["/public/Images/ima1.jpg", "/public/Images/ima2.jpg"],
+      nombre: "hola",
+      precio: "$50.000.000",
+    },
+    {
+      imagenes: ["/public/Images/ima1.jpg", "/public/Images/ima2.jpg"],
+      nombre: "hola",
+      precio: "$50.000.000",
+    },
+    {
+      imagenes: ["/public/Images/ima1.jpg", "/public/Images/ima2.jpg"],
+      nombre: "hola",
+      precio: "$50.000.000",
+    },
+  ];
   return (
-    <Box sx={{p:3,pl:4}}>
+    <Box sx={{ p: 3, pl: 4 }}>
       <Grid
         container
         spacing={2}
@@ -29,18 +51,18 @@ export const GridHomeFoto = () => {
       >
         <Grid item sm={6} xs={12}>
           <Box>
-            <CardCarro />
+            <CardCarro vehiculo={carritos[0]} />
           </Box>
           <Box sx={{ mt: 2 }}>
-            <CardCarro />
+            <CardCarro vehiculo={carritos[1]} />
           </Box>
         </Grid>
         <Grid item sm={6} xs={12}>
           <Box>
-            <CardCarro />
+            <CardCarro vehiculo={carritos[2]} />
           </Box>
           <Box sx={{ mt: 2 }}>
-            <CardCarro />
+            <CardCarro vehiculo={carritos[3]} />
           </Box>
         </Grid>
       </Grid>

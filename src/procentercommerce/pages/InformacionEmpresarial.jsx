@@ -1,5 +1,6 @@
 import { Box, Grid, Typography } from "@mui/material";
 import ProcenterCommerceLayout from "../layout/ProcenterCommerceLayout";
+import CarouselComponent from "../../ui/components/GeneralComponents/carousel";
 
 export const InformacionEmpresarial = () => {
   return (
@@ -7,12 +8,24 @@ export const InformacionEmpresarial = () => {
       <Grid container display={"flex"} justifyContent={"center"} spacing={2}>
         <Grid item sm={6} xs={12} sx={{ textAlign: "center" }}>
           <Typography
-            sx={{ fontSize: "30pt", color: "gray", fontWeight: "bold" }}
+            sx={{
+              fontSize: "30pt",
+              color: "gray",
+              fontWeight: "bold",
+              pt: 25,
+              "@media (max-width:599px)": {
+                pt: 5,
+              },
+            }}
           >
             ¿QUIENES SOMOS?
           </Typography>
         </Grid>
-        <Grid item sm={6} xs={12}></Grid>
+        <Grid item sm={6} xs={12}>
+          <Box sx={{ p: 2 }}>
+            <CarouselComponent />
+          </Box>
+        </Grid>
       </Grid>
       <Grid
         container

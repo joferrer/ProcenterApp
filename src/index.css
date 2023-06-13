@@ -1,3 +1,8 @@
+.css-11tzadx-MuiBadge-badge {
+  width: 30px;
+  background-color: black;
+}
+
 img {
   width: 40%;
 }
@@ -26,6 +31,10 @@ img {
 #im {
   width: 100%;
   height: 100%;
+}
+.imagenesPeque {
+  width: 100%;
+  height: 127.53px;
 }
 #img4 {
   width: 50%;
@@ -170,7 +179,7 @@ p {
 }
 .imagenescc {
   width: 100%;
-  height: 650px;
+  height: 500px;
 }
 @media (max-width: 600px) {
   .imagenescc {
@@ -190,4 +199,79 @@ p {
 
 .boton.selected {
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4); /* Estilo de la sombra cuando está seleccionado */
+}
+
+.carro {
+  width: 100%;
+  height: 420px;
+}
+
+.profile-image {
+  position: relative;
+  top: 0.5%;
+  left: 1%; /* Ajusta la posición izquierda según tus necesidades */
+  transform: translateY(-50%);
+  border-radius: 50%;
+  width: 300px; /* Ajusta el ancho de la imagen de perfil según tus necesidades */
+  height: 300px; /* Ajusta la altura de la imagen de perfil según tus necesidades */
+  object-fit: cover;
+  border: 4px solid #fff; /* Ajusta el color del borde según tus necesidades */
+}
+
+.imagenesModal {
+  width: 100%;
+  height: 450px;
+}
+
+.profile-titulo {
+  position: relative;
+  top: -40%;
+  left: 38%; /* Ajusta la posición izquierda según tus necesidades */
+  transform: translateY(-50%);
+  object-fit: cover;
+}
+
+@media (max-width: 1030px) {
+  .profile-titulo {
+    position: relative;
+    top: -42%;
+    left: 42%; /* Ajusta la posición izquierda según tus necesidades */
+    transform: translateY(-50%);
+    object-fit: cover;
+  }
+}
+@media (max-width: 899px) {
+  .imagenesModal {
+    height: 250px;
+  }
+  .carro {
+    width: 100%;
+    height: 250px;
+  }
+
+  .profile-image {
+    position: relative;
+    top: 0.5%;
+    left: 50%; /* Ajusta la posición izquierda según tus necesidades */
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    width: 250px; /* Ajusta el ancho de la imagen de perfil según tus necesidades */
+    height: 250px; /* Ajusta la altura de la imagen de perfil según tus necesidades */
+    object-fit: cover;
+    border: 4px solid #fff; /* Ajusta el color del borde según tus necesidades */
+  }
+  .profile-titulo {
+    position: relative;
+    top: -10%;
+    left: 1%; /* Ajusta la posición izquierda según tus necesidades */
+    transform: translateY(-50%);
+    object-fit: cover;
+  }
+
+  @media (max-width: 599px) {
+    .imagenesModal {
+      width: 100%;
+      height: 150px;
+    }
+  }
 }

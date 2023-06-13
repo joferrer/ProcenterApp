@@ -7,18 +7,14 @@ import { Box, CardActionArea } from "@mui/material";
 
 export default function CardCarro({ vehiculo }) {
   return (
-    <Box sx={{ display: "flex", justifyContent: "center",m:3}}>
+    <Box sx={{ display: "flex", justifyContent: "center", m: 3 }}>
       <Card
-        sx={{ width:800, backgroundColor: "white" }}
+        sx={{ width: 800, backgroundColor: "white" }}
         //onClick={() => handleClick(vehiculo.id)}
       >
         <CardActionArea>
-          <CardMedia sx={{ height: 400}}>
-            <img
-              id="im"
-              src="../../../../public/Images/black.png"
-              height={"200"}
-            />
+          <CardMedia sx={{ height: 400 }}>
+            <img id="im" src={vehiculo.imagenes[0]} height={"200"} />
           </CardMedia>
           <CardContent>
             <Typography
@@ -27,14 +23,14 @@ export default function CardCarro({ vehiculo }) {
               fontSize={"17px"}
               component="div"
             >
-              blablablab
+              {vehiculo.nombre}
             </Typography>
             <Typography
               variant="body2"
               color="text.secondary"
               sx={{ fontWeight: "bold" }}
             >
-              blablablablab
+              {vehiculo.precio}
             </Typography>
           </CardContent>
         </CardActionArea>
