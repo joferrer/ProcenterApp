@@ -278,7 +278,7 @@ export default function TablaCatologo({ admin }) {
   return (
     <>
       {rows.estado === false ? (
-        <Paper sx={{ width: "100%", height: "30px", height: "auto" }}>
+        <Paper sx={{ width: "100%", height: "auto" }}>
           <Typography
             sx={{ display: "flex", justifyContent: "center", mt: 10 }}
           >
