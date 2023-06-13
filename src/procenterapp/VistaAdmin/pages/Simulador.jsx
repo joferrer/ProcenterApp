@@ -1,7 +1,16 @@
 import { ProcenterAppLayout } from "./../layout/ProcenterAppLayout";
-import { Grid, Typography } from "@mui/material";
+import {
+  Alert,
+  Button,
+  Grid,
+  Snackbar,
+  TextField,
+  Typography,
+} from "@mui/material";
 import Box from "@mui/material/Box";
 import React, { useState } from "react";
+import { Titulo } from "./../../../ui/components/GeneralComponents/TituloPagina";
+import TextLabel from "./../../../ui/components/GeneralComponents/TextLabel";
 
 /*let capital = 0;
 let interes = 0;
@@ -18,19 +27,71 @@ function calcularInteres() {
   calculo = capital * interes * tiempo;
 }*/
 
-export const Simulador = ({admin}) => {
-  const [capital, setCapital] = useState("");
+export const Simulador = ({ admin }) => {
+  const [cap, setCap] = useState("");
   const [interes, setInteres] = useState("");
   const [tiempo, setTiempo] = useState("");
-  let calculo = 0;
+  const [cuota, setCuo] = useState("");
+  const [errorCap, setErrorCap] = useState(false);
+  const [errorInt, setErrorInt] = useState(false);
+  const [errorMes, setErrorMes] = useState(false);
+  const [msg, setErrorMsg] = useState("");
+  const [open, setOpen] = useState(false);
+  const calcular = () => {
+    if (
+      (cap <= 0 && interes < 0 && tiempo < 0) ||
+      (cap === "" && interes === "" && tiempo === "")
+    ) {
+      setErrorCap(true);
+      setErrorMes(true);
+      setErrorInt(true);
+      setErrorMsg("Diligencie los campos, por favor!");
+      setCuo("");
+      setOpen(true);
+    } else if (cap <= 0 || cap === "") {
+      setErrorCap(true);
+      setErrorMsg("Diligencie el campo, por favor!");
+      setOpen(true);
+      setCuo("");
+    } else if (interes === "" || interes < 0) {
+      setErrorInt(true);
+      setErrorMsg("Diligencie el campo, por favor!");
+      setOpen(true);
+      setCuo("");
+    } else if (tiempo < 0 || tiempo === "") {
+      setErrorMes(true);
+      setCuo("");
+      setErrorMsg("Diligencie el campo, por favor!");
+      setOpen(true);
+    } else {
+      setCuo((cap * (1 + (interes / 100) * (tiempo / 12))) / tiempo);
+    }
+  };
 
-  function calcularInteres() {
-    calculo = capital * interes * tiempo;
-  }
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+    setErrorInt(false);
+    setErrorCap(false);
+    setErrorMes(false);
+  };
 
   return (
     <ProcenterAppLayout Admin={admin}>
-      <Typography variant="h4">Simulador de Crédito</Typography>
+      {open ? (
+        <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
+          <Alert onClose={handleClose} severity="error">
+            {msg}
+          </Alert>
+        </Snackbar>
+      ) : (
+        <></>
+      )}
+
+      <Titulo titulo={"Simulador de Crédito"} />
       <Box
         sx={{
           width: "73vw",
@@ -38,163 +99,116 @@ export const Simulador = ({admin}) => {
           justifyContent: "center",
           alignContent: "center",
           mt: 7,
+          "@media (max-width:599px)": {
+            width: "94vw",
+          },
         }}
       >
         <Box
           sx={{
-            // Mueve el componente hacia la mitad de la pantallas
-            // Centra verticalmente el componente
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
             gap: "1rem",
             padding: "1rem",
-            backgroundColor: "#f9f9f9",
             borderRadius: "8px",
             boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
-            width: "60%", // Establece el ancho deseado para el componente
-            height: "60%",
+            width: "60%",
+            "@media (max-width:940px)": {
+              width: "80%",
+            },
+            "@media (max-width:599px)": {
+              width: "100%",
+              mr: 2,
+            },
           }}
         >
-          <form onSubmit={calcularInteres()}>
-            <Grid container justifyContent="center">
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  marginBottom: "1rem",
-                  width: "100%",
-                  mt: 2,
-                }}
-              >
-                <Grid item xs={12} sm={6}>
-                  <label
-                    htmlFor="capital"
-                    style={{
-                      fontSize: "1.5rem", // Aumenta el tamaño de la fuente
-                      width: "30%", // Ajusta el ancho del label
-                    }}
-                  >
-                    <strong>Capital Inicial:</strong>
-                  </label>
-                  <input
-                    id="capital"
-                    type="number"
-                    placeholder="Ingrese el capital inicial"
-                    onChange={(e) => setCapital(e.target.value)}
-                    autoFocus
-                    required
-                    style={{
-                      padding: "1rem",
-                      borderRadius: "4px",
-                      border: "1px solid #ccc",
-                      fontSize: "1.5rem", // Aumenta el tamaño de la fuente
-                      width: "90%", // Ajusta el ancho del input
-                    }}
-                  />
-                </Grid>
-              </div>
-            </Grid>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                marginBottom: "1rem",
-              }}
+          <Box width={"100%"}>
+            <Typography
+              fontFamily={"Segoe UI"}
+              sx={{ width: "100%", float: "left", fontSize: "15pt" }}
             >
-              <Grid item xs={12} sm={6}>
-                <label
-                  htmlFor="interes"
-                  style={{
-                    fontSize: "1.5rem", // Aumenta el tamaño de la fuente
-                    width: "30%", // Ajusta el ancho del label
-                  }}
-                >
-                  <strong>Tasa de Interes:</strong>
-                </label>
-                <input
-                  id="interes"
-                  type="number"
-                  onChange={(e) => setInteres(e.target.value)}
-                  placeholder="Ingrese la tasa de interes"
-                  required
-                  style={{
-                    padding: "1rem",
-                    borderRadius: "4px",
-                    border: "1px solid #ccc",
-                    fontSize: "1.5rem", // Aumenta el tamaño de la fuente
-                    width: "90%", // Ajusta el ancho del input
-                  }}
-                />
-              </Grid>
-            </div>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                marginBottom: "1rem",
-              }}
-            >
-              <Grid item xs={12} sm={6}>
-                <label
-                  htmlFor="tiempo"
-                  style={{
-                    fontSize: "1.5rem", // Aumenta el tamaño de la fuente
-                    width: "30%", // Ajusta el ancho del label
-                  }}
-                >
-                  <strong>Tiempo:</strong>
-                </label>
-                <input
-                  id="tiempo"
-                  type="number"
-                  onChange={(e) => setTiempo(e.target.value)}
-                  placeholder="Ingrese la cantidad de meses"
-                  required
-                  style={{
-                    padding: "1rem",
-                    borderRadius: "4px",
-                    border: "1px solid #ccc",
-                    fontSize: "1.5rem", // Aumenta el tamaño de la fuente
-                    width: "90%", // Ajusta el ancho del input
-                  }}
-                />
-              </Grid>
-            </div>
-            <button
-              style={{
-                padding: "1rem 2rem",
-                borderRadius: "4px",
-                backgroundColor: "black",
-                color: "#fff",
-                border: "none",
-                cursor: "pointer",
-                fontSize: "1.5rem", // Aumenta el tamaño de la fuente
-                width: "100%", // Ajusta el ancho del botón
-              }}
-            >
-              <strong>Calcular</strong>
-            </button>
-          </form>
+              Capital Inicia
+            </Typography>
+            <TextField
+              id="outlined-basic"
+              variant="outlined"
+              placeholder={"0000.00"}
+              fullWidth
+              error={errorCap}
+              value={cap}
+              onChange={(e) => setCap(e.target.value)}
+              type="number"
+              sx={{ backgroundColor: "#d6d4d4" }}
+            />
+          </Box>
 
-          <div style={{ mb: 2 }}>
-            <span style={{ fontSize: "1.5rem" }}>Interes a pagar: </span>
-            {calculo && (
-              <span
-                style={{
-                  fontWeight: "bold",
-                  backgroundColor: "gray",
-                  color: "white",
-                  fontSize: "1.5rem",
-                }}
-              >
-                {calculo}
-              </span>
-            )}
-          </div>
+          <Grid container spacing={2}>
+            <Grid item sm={7} xs={12}>
+              <TextLabel
+                hold={"Tasa Anual"}
+                value={interes}
+                error={errorInt}
+                setValue={setInteres}
+                titulo={"Tasa de Interes(%)"}
+              ></TextLabel>
+            </Grid>
+            <Grid item sm={5} xs={12}>
+              <TextLabel
+                titulo={"Tiempos"}
+                value={tiempo}
+                error={errorMes}
+                setValue={setTiempo}
+                hold={"Meses"}
+              ></TextLabel>
+            </Grid>
+          </Grid>
+          <Box width={"100%"}>
+            <Button
+              onClick={calcular}
+              sx={{
+                width: "190px",
+                height: "55.8px",
+                borderRadius: "8px",
+                backgroundColor: "black",
+                color: "white",
+                float: "left",
+                fontWeight: 200,
+                mb: 2,
+                "&:hover": {
+                  backgroundColor: "darkgrey",
+                },
+              }}
+            >
+              Calcular
+            </Button>
+            <Grid container>
+              <Grid item sm={5} xs={12}>
+                <Typography
+                  fontFamily={"Segoe UI"}
+                  sx={{
+                    width: "100%",
+                    float: "left",
+                    fontSize: "15pt",
+                    mt: 1,
+                  }}
+                >
+                  Cuota a Pagar
+                </Typography>
+              </Grid>
+              <Grid item sm={7} xs={12}>
+                <TextField
+                  disabled={true}
+                  id="outlined-basic"
+                  variant="outlined"
+                  fullWidth
+                  type="text"
+                  value={cuota}
+                  sx={{ backgroundColor: "#d6d4d4" }}
+                />
+              </Grid>
+            </Grid>
+          </Box>
         </Box>
       </Box>
     </ProcenterAppLayout>

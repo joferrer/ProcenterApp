@@ -22,24 +22,6 @@ export const startCargarCatalogo = () => {
     }
   };
 };
-export const cargaCata = (num) => {
-  return async (dispatch) => {
-    try {
-      const catalogo = await consultarApi("catalogoRango/" + num);
-      return {
-        ok: true,
-        catalogo,
-      };
-    } catch (error) {
-      dispatch(registrarError({ error }));
-      return {
-        ok: false,
-        error,
-      };
-    }
-  };
-};
-
 export const startRegistrarVenta = (data) => {
   return async (dispatch) => {
     try {
