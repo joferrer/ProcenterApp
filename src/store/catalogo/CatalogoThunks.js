@@ -11,7 +11,24 @@ export const startCargarCatalogo = () => {
       dispatch(setCatalogo({ catalogo: catalogo }));
 
       return {
-        ok: true, 
+        ok: true,
+      };
+    } catch (error) {
+      dispatch(registrarError({ error }));
+      return {
+        ok: false,
+        error,
+      };
+    }
+  };
+};
+export const cargaCata = (num) => {
+  return async (dispatch) => {
+    try {
+      const catalogo = await consultarApi("catalogoRango/" + num);
+      return {
+        ok: true,
+        catalogo,
       };
     } catch (error) {
       dispatch(registrarError({ error }));
@@ -23,17 +40,16 @@ export const startCargarCatalogo = () => {
   };
 };
 
-
-export const startRegistrarVenta =(data) =>{
-  return async (dispatch)=>{
+export const startRegistrarVenta = (data) => {
+  return async (dispatch) => {
     try {
-      const registrar = await postApi(data)
-      if(!registrar.estado) {
-        return dispatch(registrarError({error: registrar.mensaje}))
+      const registrar = await postApi(data);
+      if (!registrar.estado) {
+        return dispatch(registrarError({ error: registrar.mensaje }));
       }
       return {
-        ok:true,
-      }
+        ok: true,
+      };
     } catch (error) {
       dispatch(registrarError({ error }));
       return {
@@ -41,5 +57,5 @@ export const startRegistrarVenta =(data) =>{
         error,
       };
     }
-  }
-}
+  };
+};
