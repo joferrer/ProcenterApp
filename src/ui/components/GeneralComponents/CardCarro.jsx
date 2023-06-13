@@ -9,12 +9,12 @@ export default function CardCarro({ vehiculo }) {
   return (
     <Box sx={{ display: "flex", justifyContent: "center", m: 3 }}>
       <Card
-        sx={{ width: 800, backgroundColor: "white" }}
+        sx={{ width: 400,height:300, backgroundColor: "white" }}
         //onClick={() => handleClick(vehiculo.id)}
       >
         <CardActionArea>
-          <CardMedia sx={{ height: 400 }}>
-            <img id="im" src={vehiculo.imagenes[0]} height={"200"} />
+          <CardMedia sx={{ height: 220 }}>
+            <img id="im" src={vehiculo.imagenes[0]} height={"100"} />
           </CardMedia>
           <CardContent>
             <Typography

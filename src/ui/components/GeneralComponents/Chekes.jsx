@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { FormControlLabel, Checkbox, Box } from "@mui/material";
+import { FormControlLabel, Checkbox, Box, Grid } from "@mui/material";
 
 export default function CheckboxList({ marca }) {
   const [selectedMarca, setSelectedMarca] = useState("");
 
-  const marcas = ["KIA", "RENAULT", "MERCEDES", "TOYOTA", "BMW"];
+  const marcas = ["KIA", "RENAULT", "MERCEDES", "TOYOTA", "BMW", "CHEVROLET"];
 
   const handleCheckboxChange = (event) => {
     const value = event.target.value;
@@ -17,29 +17,22 @@ export default function CheckboxList({ marca }) {
     }
   };
 
-  const columns = Math.ceil(marcas.length / 3);
-
   return (
-    <Box display="flex">
-      {Array.from({ length: columns }, (_, colIndex) => (
-        <Box key={colIndex} flex={1}>
-          {marcas
-            .slice(colIndex * columns, colIndex * columns + columns)
-            .map((marca, index) => (
-              <FormControlLabel
-                key={index}
-                control={
-                  <Checkbox
-                    checked={selectedMarca === marca}
-                    onChange={handleCheckboxChange}
-                    value={marca}
-                  />
-                }
-                label={marca}
-              />
-            ))}
-        </Box>
+    <Grid container>
+      {marcas.map((marca, index) => (
+        <FormControlLabel
+          key={index}
+          control={
+            <Checkbox
+              checked={selectedMarca === marca}
+              onChange={handleCheckboxChange}
+              value={marca}
+            />
+          }
+          label={marca}
+          labelPlacement="end"
+        />
       ))}
-    </Box>
+    </Grid>
   );
 }

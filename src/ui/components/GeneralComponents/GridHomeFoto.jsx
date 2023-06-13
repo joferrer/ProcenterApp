@@ -34,10 +34,10 @@ export const GridHomeFoto = ({ carrito }) => {
     },
   ];
   return (
-    <Box sx={{ p: 3, pl: 4 }}>
+    <Box sx={{ p: 3, pl: 4, ml: 10, mr: 10 }}>
       <Grid
         container
-        spacing={2}
+        spacing={1}
         sx={{
           mt: 2,
           pb: 4,

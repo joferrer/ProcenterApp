@@ -50,6 +50,7 @@ const HorizontalCollapse = () => {
               <Grid container sx={{ backgroundColor: "white" }}>
                 <Grid
                   item
+                  sm={5}
                   sx={{
                     backgroundColor: "lightgray",
                     m: 1,
@@ -78,7 +79,7 @@ const HorizontalCollapse = () => {
                   {!formu ? (
                     <Link
                       style={{ textDecoration: "none", color: "white" }}
-                      to={"/catalogo?marcar=" + marca + "&precio=" + precio}
+                      to={"/catalogo?marca=" + marca + "&precio=" + precio}
                     >
                       <Button
                         onClick={handleSubmit}
