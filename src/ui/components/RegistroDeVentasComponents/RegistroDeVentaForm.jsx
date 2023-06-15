@@ -1,21 +1,27 @@
+import { useEffect,useState } from "react";
 import { Button, Grid } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import { TextInput } from "./TextInput";
 import { PhoneMui } from "./PhoneMui";
 import { UsuariosDispatch } from "../../../store/usuario/UsuariosDispatch";
 import { AutocompleteInput } from "./AutocompleteInput";
-import { useEffect, } from "react";
 import { SeleccionarVehiculo } from "./SeleccionarVehiculo";
 import { CatalogoDispatch } from "../../../store/catalogo/CatalogoDispatch";
 import { authDispatch } from "../../../store/auth/authDispatch";
 import { SnackbarComponent } from "../FeedbackComponents/Snackbar";
 import { Cliente, Venta } from "./Modelos";
+import { useDispatch } from "react-redux";
+import { startRegistrarVenta } from "../../../store/catalogo/CatalogoThunks";
+
 
 export const RegistroDeVentaForm = ()=>{
 
     const {control,handleSubmit, reset ,watch,getValues} = useForm();
     const {catalogo,isLoading, error } = CatalogoDispatch()
+    const [notificacion, setnotificacion] = useState({mostrar:false,error: false ,msg: ""})
     const {id}= authDispatch()
+    const dispatch = useDispatch()
+
     const vehiculos = catalogo || []
     const {usuarios, clientes, isLoadingUsuarios, errorUsuarios, getUsuarioPorCedula} = UsuariosDispatch()
    
@@ -30,12 +36,24 @@ export const RegistroDeVentaForm = ()=>{
       }
     }
   }, [cedula]);
-    const onSubmit = (data)=>{
+
+    const onSubmit = async (data)=>{
         data = {...data,idasesor: id}
+        console.log(JSON.stringify(data))
         const cliente = new Cliente(data.nombre,data.cedula,data.correo,data.telefono)
-        const venta = new Venta({idvehiculo: data.vehiculo ,idasesor:id, cliente})
-        alert(JSON.stringify(venta))
+        const venta = new Venta({idvehiculo: data.vehiculo ,idasesor:id, cliente,descripcion: data.detalles, precio: data.precio})
+        
+        const confirmar = confirm(`Los datos de la venta son:\n ${venta.toString()}`)
+        if(!confirmar) return;
+
+        const resp = await dispatch(startRegistrarVenta(venta))
+        console.log(JSON.stringify(resp))
+        if(!resp.ok) return setnotificacion({mostrar:true, error: true ,msg: `${resp.error || "Ha ocurrido un error! "}`})
+        setnotificacion({mostrar:true, error: false, msg: "La aquisición ha sido registrada exitosamente."})
+        reset()
+
     }
+
     return <form  onSubmit={handleSubmit(onSubmit)}>
     <Grid 
         container 
@@ -48,7 +66,9 @@ export const RegistroDeVentaForm = ()=>{
             justifyContent:"space-between"}}>
         
         <Grid>
-        <SnackbarComponent mensaje={error} mostrar={typeof error !== undefined && error != "" && error != null} />
+        <SnackbarComponent mensaje={notificacion.msg} 
+         mostrar={notificacion.mostrar}
+         tipo={notificacion.error ? "error": "success"} />
             <Controller        
                  name={"cedula"}
                  control={control}

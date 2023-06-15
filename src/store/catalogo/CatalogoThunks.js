@@ -29,7 +29,10 @@ export const startRegistrarVenta = (data) => {
     try {
       const registrar = await postApi(POST_VENTA,data);
       if (!registrar.estado) {
-        return dispatch(registrarError({ error: registrar.mensaje }));
+        return {
+          ok:false,
+          error: registrar.mensaje
+        }
       }
       return {
         ok: true,

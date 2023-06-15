@@ -3,6 +3,7 @@ import { VehiculosSlice } from "./vehiculos/VehiculosSlice";
 import { usuariosSlice } from "./usuario/UsuarioSlice";
 import { authSlice } from "./auth";
 import { catalogoSlice } from "./catalogo/CatalogoSlice";
+import { informacionSlice } from "./informacion/InformacionSlice";
 
 
 
@@ -12,6 +13,7 @@ export const store = configureStore({
         usuarios: usuariosSlice.reducer,
         auth: authSlice.reducer,
         catalogo: catalogoSlice.reducer,
+        informacion: informacionSlice.reducer
     }
     
 })
