@@ -1,5 +1,5 @@
-import { consultarApi, postApi } from "../api/conexion";
-import { informacionSlice, load, setInformacion } from "./InformacionSlice";
+import { consultarApi, updateApi } from "../api/conexion";
+import {  load, setInformacion } from "./InformacionSlice";
 
 const LINKS_API_INFO = Object.freeze({
     GET_INFO_LINK : "info-empresa",
@@ -32,15 +32,23 @@ export const startActualizarInformacion = (data)=>{
     return async(dispatch )=>{
     try {
         dispatch(load());
-        const informacion = await postApi(LINKS_API_INFO.PUT_INFO_LINK, data);
+        console.log(data)
+        const informacion = await updateApi(LINKS_API_INFO.PUT_INFO_LINK, data);
         console.log(informacion)
+        if (informacion.error) {
+            console.log("ñonga",informacion.data.mensaje)
+            return {
+              ok:false,
+              error: informacion.data.mensaje
+            }
+          }
         dispatch(setInformacion({ informacion: informacion.data }));
   
         return {
           ok: true,
         };
       } catch (error) {
-        dispatch(registrarError({ error }));
+        
         return {
           ok: false,
           error,

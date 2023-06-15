@@ -17,7 +17,7 @@ export const InformacionDispatch = () => {
     await dispatch(startCargarInformacionEmpresarial());
   };
   const actualizarInformacion = async(informacion)=>{
-    await dispatch(startActualizarInformacion(informacion))
+    return await dispatch(startActualizarInformacion(informacion))
   }
 
   useEffect(() => {
@@ -29,5 +29,6 @@ export const InformacionDispatch = () => {
     informacion,
     isLoading,
     error,
+    actualizarInformacion,
   };
 };
