@@ -17,14 +17,21 @@ const consulta = async(url,metodo,body) =>{
     try{
         const URL       = url;
         const operacion = operaciones[metodo];
-        const {data}    = await operacion(URL,body);
-        return data;
+        const response    = await operacion(URL,body);
+        return response.data;
     }
-    catch(e){
-        return {
-            error: true,
-            msg: 'Ha ocurrido un error: '+ e
-        }
+    catch(error){
+        if (error.response && error.response.data) {
+            return {
+              error: true,
+              msg: 'Ha ocurrido un error: ' + JSON.stringify(error.response.data)
+            };
+          } else {
+            return {
+              error: true,
+              msg: 'Ha ocurrido un error: ' + error
+            };
+          }
 
     }
 

@@ -78,7 +78,7 @@ const HorizontalCollapse = () => {
                   {!formu ? (
                     <Link
                       style={{ textDecoration: "none", color: "white" }}
-                      to={"/catalogo?marcar=" + marca + "&precio=" + precio}
+                      to={"/catalogo?marca=" + marca + "&precio=" + precio}
                     >
                       <Button
                         onClick={handleSubmit}
