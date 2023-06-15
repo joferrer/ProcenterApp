@@ -225,7 +225,7 @@ p {
 
 .profile-titulo {
   position: relative;
-  top: -42%;
+  top: -39%;
   left: 35%;
   width: 60%; /* Ajusta la posición izquierda según tus necesidades */
   transform: translateY(-50%);
@@ -234,8 +234,8 @@ p {
 @media (max-width: 1234px) {
   .profile-titulo {
     position: relative;
-    top: -42%;
-    left: 39%;
+    top: -38%;
+    left: 42%;
     width: 60%; /* Ajusta la posición izquierda según tus necesidades */
     transform: translateY(-50%);
     object-fit: cover;
@@ -287,34 +287,4 @@ p {
       height: 150px;
     }
   }
-}
-@keyframes loading {
-  0% {
-    left: -100%;
-  }
-
-  100% {
-    left: 100%;
-  }
-}
-
-.wrapper {
-  border: 3px solid blue;
-  padding: 4px;
-  width: 160px;
-  height: 16px;
-}
-
-.space {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-}
-.loading {
-  position: absolute;
-  background-color: red;
-  width: 100%;
-  height: 100%;
-  animation: loading 5s steps(40) infinite;
 }

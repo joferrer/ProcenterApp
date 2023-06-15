@@ -33,6 +33,10 @@ const Vvehiculo = () => {
   const [vehiculo, setVehiculo] = useState(vehiculoIni);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     if (JSON.stringify(vehiculo) === JSON.stringify(vehiculoIni)) {
       const imprimir = async () => {
         try {
@@ -60,14 +64,22 @@ const Vvehiculo = () => {
             width: "100%",
             height: "100%",
             display: "flex",
-            justifyContent: "cente",
+            justifyContent: "center",
+            alignItems: "center",
+            textAlign: "center",
           }}
         >
-          <div className="wrapper">
-            <div className="space">
-              <div className="loading"></div>
-            </div>
-          </div>
+          <Typography
+            sx={{
+              width: "100%",
+              height: "100%",
+              fontSize: "40pt",
+              mt: "250px",
+              color: "black",
+            }}
+          >
+            Cargando...
+          </Typography>
         </Box>
       ) : (
         <>
