@@ -69,6 +69,7 @@ function Row(props) {
 
       if (response.data.estado === true) {
         setOpen(true);
+        setAce("success");
         setErro(response.data.mensaje);
       } else {
         setOpen(true);

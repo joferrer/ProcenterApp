@@ -8,7 +8,7 @@ import { CardContext } from "../../context/CardContext";
 import { useContext } from "react";
 import dayjs from "dayjs";
 import { useState } from "react";
-import { Box, Modal } from "@mui/material";
+import { Box, Grid, Modal } from "@mui/material";
 import ModalEdita from "./ModalEdita";
 import ModalElim from "./ModalElim";
 function PublicistaCard({ card }) {
@@ -24,7 +24,12 @@ function PublicistaCard({ card }) {
 
   return (
     <Box>
-      <Card sx={{ maxWidth: "400px" }}>
+      <Card
+        sx={{
+          maxWidth: "400px",
+          "@media (max-width:599px)": { maxWidth: "100%" },
+        }}
+      >
         <CardMedia sx={{ height: "140px" }} image={card.img} title="profile" />
         <CardContent>
           <p>Cedula: {card.cedula}</p>
@@ -38,32 +43,38 @@ function PublicistaCard({ card }) {
           <p>Vehículos vendidos: 0</p>
         </CardContent>
         <CardActions>
-          <Button
-            variant="outlined"
-            size="small"
-            onClick={() => deletePublicista(card.cedula)}
-            sx={{
-              "&:hover": {
-                backgroundColor: "lightred",
-                color: "red",
-              },
-            }}
-          >
-            Eliminar
-          </Button>
-          <Button
-            sx={{
-              "&:hover": {
-                backgroundColor: "lightblue",
-                color: "blue",
-              },
-            }}
-            variant="outlined"
-            size="small"
-            onClick={handleOpen}
-          >
-            Editar
-          </Button>
+          <Grid container spacing={2}>
+            <Grid item>
+              <Button
+                variant="outlined"
+                size="small"
+                onClick={handleOpenElim}
+                sx={{
+                  "&:hover": {
+                    backgroundColor: "lightred",
+                    color: "red",
+                  },
+                }}
+              >
+                Desvincular
+              </Button>
+            </Grid>
+            <Grid item>
+              <Button
+                sx={{
+                  "&:hover": {
+                    backgroundColor: "lightblue",
+                    color: "blue",
+                  },
+                }}
+                variant="outlined"
+                size="small"
+                onClick={handleOpen}
+              >
+                Editar
+              </Button>
+            </Grid>
+          </Grid>
         </CardActions>
       </Card>
 

@@ -23,6 +23,9 @@ import timezone from "dayjs/plugin/timezone";
 import localizedFormat from "dayjs/plugin/localizedFormat";
 import updateLocale from "dayjs/plugin/updateLocale";
 import ImageUploader from "./imagen";
+import { startCrearUsuario } from "../../../store/usuario/UsuarioThunks";
+import { SnackbarComponent } from "../FeedbackComponents/Snackbar";
+import { useDispatch } from "react-redux";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -35,6 +38,7 @@ dayjs.tz.setDefault(timezoneLocation);
 const fechaact = dayjs().tz(timezoneLocation).format("DD-MM-YYYY");
 
 function CardForm() {
+  const dispatch = useDispatch();
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -51,6 +55,9 @@ function CardForm() {
   const [checked2, setChecked2] = useState(false);
 
   const [errorSnackbarOpen, setErrorSnackbarOpen] = useState(false);
+  const [mensaje, setMensaje] = useState("");
+  const [oopen, setOopen] = useState(false);
+  const [tipo, setTipo] = useState("");
 
   const handleCheckbox1Change = () => {
     setChecked1(true);
@@ -68,7 +75,11 @@ function CardForm() {
     setErrorSnackbarOpen(false);
   };
 
-  const handleSubmit = (e) => {
+  const handleClosed = () => {
+    setOopen(false);
+  };
+
+  const handleSubmit = async (e) => {
     if (rol === "") {
       e.preventDefault();
       setErrorSnackbarOpen(true);
@@ -76,24 +87,43 @@ function CardForm() {
     } else {
       const fechaVincu = dayjs(fecha).format("DD-MM-YYYY");
       e.preventDefault();
-      createCard({
-        rol,
-        cedula,
-        nombre,
-        correo,
-        telefono,
-        fechaVincu,
-        img,
-      });
-      setRol("");
-      setCedula(0);
-      setNombre("");
-      setCorreo("");
-      setTelefono("");
-      setFecha(dayjs(fechaact, "DD-MM-YYYY"));
-      setImg(null);
-      setChecked1(false);
-      setChecked2(false);
+      const form = {
+        rol: rol,
+        cedula: cedula,
+        nombre: nombre,
+        correo: correo,
+        telefono: telefono,
+        fechaVincu: fechaVincu,
+        image: img,
+      };
+      const resp = await dispatch(startCrearUsuario(form));
+      if (resp.ok) {
+        setOopen(true);
+        setMensaje("Empleado Agregado");
+        setTipo("success");
+        createCard({
+          rol,
+          cedula,
+          nombre,
+          correo,
+          telefono,
+          fechaVincu,
+          img,
+        });
+        setRol("");
+        setCedula(0);
+        setNombre("");
+        setCorreo("");
+        setTelefono("");
+        setFecha(dayjs(fechaact, "DD-MM-YYYY"));
+        setImg(null);
+        setChecked1(false);
+        setChecked2(false);
+      } else {
+        setMensaje(resp.error);
+        setOopen(true);
+        setTipo("error");
+      }
     }
   };
 
@@ -109,6 +139,12 @@ function CardForm() {
         },
       }}
     >
+      <SnackbarComponent
+        mostrar={oopen}
+        mensaje={mensaje}
+        tipo={tipo}
+        cerrar={handleClosed}
+      />
       <Button
         variant="contained"
         onClick={handleOpen}
@@ -345,6 +381,7 @@ function CardForm() {
                           <DatePicker
                             sx={{ width: "100%" }}
                             label="Fecha de Ingreso"
+                            disabled
                             value={fecha}
                             minDate={dayjs(fechaact, "DD-MM-YYYY")}
                             onChange={(date) => setFecha(date)}

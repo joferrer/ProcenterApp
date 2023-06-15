@@ -18,18 +18,22 @@ function ListaPublicistas() {
       spacing={2}
       sx={{
         display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
         width: "100%",
         mt: 2,
         zIndex: 0,
+        "@media (max-width:599px)": {
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          alignContent: "center",
+        },
       }}
     >
       {ini.map((card) => (
         <Grid
           item
-          xs={10}
-          sm={4}
+          xs={12}
+          sm={6}
           sx={{
             width: "100%",
             zIndex: 0,

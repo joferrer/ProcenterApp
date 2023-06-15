@@ -12,20 +12,11 @@ import timezone from "dayjs/plugin/timezone";
 import localizedFormat from "dayjs/plugin/localizedFormat";
 import updateLocale from "dayjs/plugin/updateLocale";
 import ImageUploader from "./imagen";
-import { Box, Modal } from "@mui/material";
+import { Box, Grid, Modal } from "@mui/material";
 
 import { useState } from "react";
 import ModalEdita from "./ModalEdita";
-
-dayjs.extend(utc);
-dayjs.extend(timezone);
-dayjs.extend(localizedFormat);
-dayjs.extend(updateLocale);
-
-const timezoneLocation = "America/Bogota";
-dayjs.tz.setDefault(timezoneLocation);
-
-const fechaact = dayjs().tz(timezoneLocation).format("DD-MM-YYYY");
+import ModalElim from "./ModalElim";
 
 function ProfileCard({ card }) {
   const [open, setOpen] = useState(false);
@@ -36,10 +27,16 @@ function ProfileCard({ card }) {
 
   const handleOpenElim = () => setOpenElim(true);
   const handleCloseElim = () => setOpenElim(false);
-  const [fechaElim, setFechaElim] = useState(fechaact);
+
+  
   return (
     <Box>
-      <Card sx={{ maxWidth: "400px" }}>
+      <Card
+        sx={{
+          maxWidth: "400px",
+          "@media (max-width:599px)": { maxWidth: "100%" },
+        }}
+      >
         <CardMedia sx={{ height: "140px" }} image={card.img} title="profile" />
         <CardContent>
           <p>Cedula: {card.cedula}</p>
@@ -53,32 +50,38 @@ function ProfileCard({ card }) {
           <p>Vehículos vendidos: 0</p>
         </CardContent>
         <CardActions>
-          <Button
-            variant="outlined"
-            size="small"
-            sx={{
-              "&:hover": {
-                backgroundColor: "lightred",
-                color: "red",
-              },
-            }}
-            onClick={handleOpenElim}
-          >
-            Eliminar
-          </Button>
-          <Button
-            sx={{
-              "&:hover": {
-                backgroundColor: "lightblue",
-                color: "blue",
-              },
-            }}
-            variant="outlined"
-            size="small"
-            onClick={handleOpen}
-          >
-            Editar
-          </Button>
+          <Grid container spacing={2}>
+            <Grid item>
+              <Button
+                variant="outlined"
+                size="small"
+                sx={{
+                  "&:hover": {
+                    backgroundColor: "lightred",
+                    color: "red",
+                  },
+                }}
+                onClick={handleOpenElim}
+              >
+                Desvincular
+              </Button>
+            </Grid>
+            <Grid item>
+              <Button
+                sx={{
+                  "&:hover": {
+                    backgroundColor: "lightblue",
+                    color: "blue",
+                  },
+                }}
+                variant="outlined"
+                size="small"
+                onClick={handleOpen}
+              >
+                Editar
+              </Button>
+            </Grid>
+          </Grid>
         </CardActions>
       </Card>
       {open ? (
@@ -112,14 +115,15 @@ function ProfileCard({ card }) {
           sx={{
             display: "flex",
             justifyContent: "center",
-            overflowY: "auto",
             mt: 5,
             mb: 4,
             "@media (max-width:599px)": {
               mb: 0,
             },
           }}
-        ></Modal>
+        >
+          <ModalElim />
+        </Modal>
       ) : (
         <></>
       )}

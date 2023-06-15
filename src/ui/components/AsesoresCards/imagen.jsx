@@ -51,7 +51,7 @@ const ImageUploader = ({ img, setImg }) => {
         <input
           type="file"
           style={{ display: "none" }}
-          accept="jpg"
+          accept=".jpg"
           onChange={handleImageUpload}
         />
       </Button>

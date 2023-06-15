@@ -20,6 +20,8 @@ import timezone from "dayjs/plugin/timezone";
 import localizedFormat from "dayjs/plugin/localizedFormat";
 import updateLocale from "dayjs/plugin/updateLocale";
 import ImageUploader from "./imagen";
+import { startActualizarInfo } from "./../../../store/usuario/UsuarioThunks";
+import { useDispatch } from "react-redux";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -32,6 +34,7 @@ dayjs.tz.setDefault(timezoneLocation);
 const fechaact = dayjs().tz(timezoneLocation).format("DD-MM-YYYY");
 
 const ModalEdita = ({ card }) => {
+  const dispatch = useDispatch();
   const [rol, setRol] = useState(card.rol);
   const [cedula, setCedula] = useState(card.cedula);
   const [nombre, setNombre] = useState(card.nombre);
@@ -42,6 +45,10 @@ const ModalEdita = ({ card }) => {
 
   const [checked1, setChecked1] = useState(card.rol === "ASESOR");
   const [checked2, setChecked2] = useState(card.rol === "PUBLICISTA");
+
+  const [mensaje, setMensaje] = useState("");
+  const [oopen, setOopen] = useState(false);
+  const [tipo, setTipo] = useState("");
 
   const handleCheckbox1Change = () => {
     setChecked1(true);
@@ -55,12 +62,27 @@ const ModalEdita = ({ card }) => {
     setRol("PUBLICISTA");
   };
 
-  const handleSubmit = (e) => {
-    if (rol === "") {
-      e.preventDefault();
-      setErrorSnackbarOpen(true);
+  const handleSubmit = async (e) => {
+    const form = {
+      id: card.id,
+      rol: card.rol,
+      cedula: card.cedula,
+      nombre: card.nombre,
+      correo: card.correo,
+      telefono: card.telefono,
+      fechaVincu: card.fechaVincu,
+      image: card.img,
+    };
+    const resp = await dispatch(startActualizarInfo(form));
+    if (resp.ok) {
+      setOopen(true);
+      setMensaje("Información Actualizada");
+      setTipo("success");
     } else {
       e.preventDefault();
+      setMensaje(resp.error);
+      setOopen(true);
+      setTipo("error");
     }
   };
 
@@ -85,6 +107,12 @@ const ModalEdita = ({ card }) => {
         },
       }}
     >
+      <SnackbarComponent
+        mostrar={oopen}
+        mensaje={mensaje}
+        tipo={tipo}
+        cerrar={handleClosed}
+      />
       <form onSubmit={handleSubmit}>
         <Grid
           container
