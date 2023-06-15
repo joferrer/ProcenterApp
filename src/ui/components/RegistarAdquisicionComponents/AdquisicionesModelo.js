@@ -40,4 +40,15 @@ export class Adquisicion {
         this.correo   = correo
         this.idpublic = idpublic
     }
+
+    toString() {
+        let result = '';
+        for (const key in this) {
+         
+          if (this.hasOwnProperty(key) && key != "idpublic") {
+            result += `${key}: ${this[key]}\n`;
+          }
+        }
+        return result;
+      }
 }

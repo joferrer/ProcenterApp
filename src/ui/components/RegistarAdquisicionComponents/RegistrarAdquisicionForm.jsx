@@ -13,6 +13,7 @@ import { startRegistrarAdquisicion } from '../../../store/catalogo/CatalogoThunk
 import { useState } from 'react';
 import { SnackbarComponent } from '../FeedbackComponents/Snackbar';
 import { useEffect } from 'react';
+import AlertDialog from '../FeedbackComponents/AlertDialog';
 
 
 const isDateValid = (value) => {
@@ -20,20 +21,35 @@ const isDateValid = (value) => {
     return value && dayjs(value).isValid();
   };
 
+const initAlerta = {
+    mostrar: false,
+    msg: "",
+    resultado: 0
+}
 export const RegistrarAdquisicionForm = () => {
 
     const [notificacion, setnotificacion] = useState({mostrar:false,error: false ,msg: ""})
-    console.log(notificacion)
+    const [alerta, setalerta] = useState(initAlerta)
+
+
     const dispatch = useDispatch()
     const {id} = authDispatch()
     const {control,handleSubmit, reset ,watch,getValues} = useForm();
+
+   
     
+
     const onSubmit = async (data)=>{
-       
+        
         setnotificacion({mostrar:false,error: false ,msg: ""})
+        setalerta({...alerta, msg: `Los datos enviados son: `})
+        
+
         const fechaMatriculaFormato = dayjs(data.fechaMatricula).format('DD/MM/YYYY')
         const adquicision = new Adquisicion({...data,fechaMatricula: fechaMatriculaFormato, idpublic: id })
-        alert(JSON.stringify(adquicision,null,2))
+
+        const confirmado = confirm(`Estos son los datos que enviará: \n${adquicision.toString()}`)
+        if(!confirmado) return;
 
         const resp = await dispatch(startRegistrarAdquisicion(adquicision))
         console.log(JSON.stringify(resp))
@@ -45,6 +61,8 @@ export const RegistrarAdquisicionForm = () => {
    
     return (
     <Grid container>
+      
+
          <SnackbarComponent mensaje={notificacion.msg} 
          mostrar={notificacion.mostrar}
          tipo={notificacion.error ? "error": "success"} />

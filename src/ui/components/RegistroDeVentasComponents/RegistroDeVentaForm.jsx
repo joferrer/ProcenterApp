@@ -16,7 +16,7 @@ export const RegistroDeVentaForm = ()=>{
     const {control,handleSubmit, reset ,watch,getValues} = useForm();
     const {catalogo,isLoading, error } = CatalogoDispatch()
     const {id}= authDispatch()
-    const vehiculos = catalogo
+    const vehiculos = catalogo || []
     const {usuarios, clientes, isLoadingUsuarios, errorUsuarios, getUsuarioPorCedula} = UsuariosDispatch()
    
     //console.log(getUsuarioPorCedula(clientes,watch().cedula))

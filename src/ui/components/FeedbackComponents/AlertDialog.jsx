@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from '@mui/material'
 
-export default function AlertDialog({texto, titulo, opciones, mostrar,confirmar, cerrar}) {
+export default function AlertDialog({texto, titulo, opciones, mostrar,confirmar, cancelar}) {
   const [open, setOpen] = React.useState(mostrar);
 
   const handleClickOpen = () => {
@@ -10,7 +10,7 @@ export default function AlertDialog({texto, titulo, opciones, mostrar,confirmar,
 
   const handleClose = () => {
     setOpen(false);
-    cerrar(false)
+    cancelar()
   };
 
 
