@@ -15,11 +15,15 @@ import timezone from "dayjs/plugin/timezone";
 import localizedFormat from "dayjs/plugin/localizedFormat";
 import updateLocale from "dayjs/plugin/updateLocale";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
-
+import { SnackbarComponent } from "./../FeedbackComponents/Snackbar";
+import isBefore from "dayjs/plugin/isBetween";
+import isAfter from "dayjs/plugin/isBetween";
 dayjs.extend(utc);
 dayjs.extend(timezone);
 dayjs.extend(localizedFormat);
 dayjs.extend(updateLocale);
+dayjs.extend(isBefore);
+dayjs.extend(isAfter);
 
 const timezoneLocation = "America/Bogota";
 dayjs.tz.setDefault(timezoneLocation);
@@ -27,6 +31,10 @@ dayjs.tz.setDefault(timezoneLocation);
 const fechaact = dayjs().tz(timezoneLocation).format("DD-MM-YYYY");
 
 const ModalElim = () => {
+  const [mensaje, setMensaje] = useState("");
+  const [oopen, setOopen] = useState(false);
+  const [tipo, setTipo] = useState("");
+
   const [fecha, setFecha] = useState(dayjs(fechaact, "DD-MM-YYYY"));
   const [checked1, setChecked1] = useState(false);
   const [checked2, setChecked2] = useState(false);
@@ -36,11 +44,27 @@ const ModalElim = () => {
     setChecked2(false);
   };
 
+  const handleClosed = () => {
+    setOopen(false);
+  };
+
   const handleCheckbox2Change = () => {
     setChecked1(false);
     setChecked2(true);
   };
 
+  const prueba = () => {
+    if (
+      dayjs(fecha, "DD-MM-YYYY").isBefore(
+        dayjs(fechaact, "DD-MM-YYY").add(2, "day")
+      ) ||
+      dayjs(fecha, "DD-MM-YYYY").isAfter(dayjs(fechaact, "DD-MM-YYY"))
+    ) {
+      setMensaje("Fecha Invalida");
+      setOopen(true);
+      setTipo("error");
+    }
+  };
   return (
     <Box
       sx={{
@@ -63,6 +87,12 @@ const ModalElim = () => {
             justifyContent: "center",
           }}
         >
+          <SnackbarComponent
+            mostrar={oopen}
+            mensaje={mensaje}
+            tipo={tipo}
+            cerrar={handleClosed}
+          />
           <Typography sx={{ mt: 1, pr: 4 }}> Tomar Fecha Actual</Typography>
           <FormControlLabel
             control={
@@ -118,9 +148,11 @@ const ModalElim = () => {
         {checked1 || checked2 ? (
           <Box sx={{ display: "flex", justifyContent: "end", p: 2, mr: 2 }}>
             <Button
+              onClick={prueba}
               sx={{
                 backgroundColor: "gray",
                 color: "white",
+
                 "&:hover": {
                   backgroundColor: "lightgreen",
                   color: "green",

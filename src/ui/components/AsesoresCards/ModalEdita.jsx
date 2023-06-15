@@ -22,6 +22,7 @@ import updateLocale from "dayjs/plugin/updateLocale";
 import ImageUploader from "./imagen";
 import { startActualizarInfo } from "./../../../store/usuario/UsuarioThunks";
 import { useDispatch } from "react-redux";
+import { SnackbarComponent } from "./../FeedbackComponents/Snackbar";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -54,6 +55,9 @@ const ModalEdita = ({ card }) => {
     setChecked1(true);
     setChecked2(false);
     setRol("ASESOR");
+  };
+  const handleClosed = () => {
+    setOopen(false);
   };
 
   const handleCheckbox2Change = () => {
@@ -239,7 +243,7 @@ const ModalEdita = ({ card }) => {
                     label="Correo"
                     id="filled-basic"
                     variant="filled"
-                    type="text"
+                    type="email"
                     placeholder="Ingresar correo"
                     onChange={(e) => setCorreo(e.target.value)}
                     value={correo}

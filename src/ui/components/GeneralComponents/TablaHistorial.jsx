@@ -19,13 +19,14 @@ import { Button, Grid, TextField } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import SaveIcon from "@mui/icons-material/Save";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
+import { UsuariosDispatch } from "../../../store/usuario/UsuariosDispatch";
 
 function Row(props) {
   const { row, isOpen, onToggleOpen } = props;
   const [Edit, setEdit] = React.useState(false);
   const [placa, setPlaca] = React.useState(row.placa);
   const [imagenes, setImagenes] = React.useState(row.imagenes);
-  
+
   return (
     <React.Fragment>
       <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
@@ -177,8 +178,8 @@ function Row(props) {
 }
 
 export default function TablaHistorial() {
-  const { catalogo, isLoading, error } = CatalogoDispatch();
-  const rows = catalogo;
+  const { asesor } = UsuariosDispatch();
+  const rows = asesor;
   const [openRowId, setOpenRowId] = React.useState(null);
 
   const handleToggleOpen = (rowId) => {
@@ -186,29 +187,31 @@ export default function TablaHistorial() {
   };
 
   return (
-    <TableContainer component={Paper} sx={{ width: "100%" }}>
-      <Table aria-label="collapsible table">
-        <TableHead>
-          <TableRow>
-            <TableCell />
-            <TableCell>Nombre</TableCell>
-            <TableCell align="right">Placa</TableCell>
-            <TableCell align="right">Año</TableCell>
-            <TableCell align="right">Precio</TableCell>
-            <TableCell align="right">Fecha</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <Row
-              key={row.id}
-              row={row}
-              isOpen={openRowId === row.id}
-              onToggleOpen={handleToggleOpen}
-            />
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <>
+      <TableContainer component={Paper} sx={{ width: "100%" }}>
+        <Table aria-label="collapsible table">
+          <TableHead>
+            <TableRow>
+              <TableCell />
+              <TableCell> Nombre </TableCell>
+              <TableCell />
+              <TableCell />
+              <TableCell />
+              <TableCell />
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rows.map((row) => (
+              <Row
+                key={row.id}
+                row={row}
+                isOpen={openRowId === row.id}
+                onToggleOpen={handleToggleOpen}
+              />
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </>
   );
 }

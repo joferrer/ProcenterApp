@@ -324,7 +324,7 @@ function CardForm() {
                         label="Correo"
                         id="filled-basic"
                         variant="filled"
-                        type="text"
+                        type="email"
                         placeholder="Ingresar correo"
                         onChange={(e) => setCorreo(e.target.value)}
                         value={correo}
