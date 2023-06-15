@@ -28,10 +28,10 @@ export const startRegistrarVenta = (data) => {
   return async (dispatch) => {
     try {
       const registrar = await postApi(POST_VENTA,data);
-      if (!registrar.estado) {
+      if (!registrar.error) {
         return {
           ok:false,
-          error: registrar.mensaje
+          error: registrar.data.mensaje
         }
       }
       return {
@@ -53,11 +53,11 @@ export const startRegistrarAdquisicion = (data)=>{
     console.log(nombre)
     try {
       const registrar = await postApi(POST_AQUISICION,data);
-      if (!registrar.estado) {
+      if (!registrar.error) {
         console.log(registrar)
         return {
           ok:false,
-          error: registrar.mensaje
+          error: registrar.data.mensaje
         }
       }
       return {

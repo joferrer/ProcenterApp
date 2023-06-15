@@ -24,7 +24,8 @@ const consulta = async(url,metodo,body) =>{
         if (error.response && error.response.data) {
             return {
               error: true,
-              msg: 'Ha ocurrido un error: ' + JSON.stringify(error.response.data)
+              msg: 'Ha ocurrido un error: ' + JSON.stringify(error.response.data),
+              data: error.response.data
             };
           } else {
             return {
@@ -46,7 +47,7 @@ export const postApi = async (url, body)=>{;
 export const deleteApi= async (url) =>{
     return await consulta(url, metodos[2]);
 }
-export const updateApi= async (url) =>{
-    return await consulta(url, metodos[3]);
+export const updateApi= async (url,body) =>{
+    return await consulta(url, metodos[3],body);
 }
 

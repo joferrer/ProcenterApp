@@ -38,6 +38,7 @@ export const RegistroDeVentaForm = ()=>{
   }, [cedula]);
 
     const onSubmit = async (data)=>{
+        setnotificacion({mostrar:false,error: false ,msg: ""})
         data = {...data,idasesor: id}
         console.log(JSON.stringify(data))
         const cliente = new Cliente(data.nombre,data.cedula,data.correo,data.telefono)
