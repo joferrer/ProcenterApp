@@ -2,6 +2,8 @@ import { consultarApi, postApi } from "../api/conexion";
 import { loadcatalogo, registrarError, setCatalogo } from "./CatalogoSlice";
 
 const GET_CATALOGO = "catalogo";
+const POST_VENTA = "crear-venta"
+const POST_AQUISICION = "agregar-adquisicion"
 
 export const startCargarCatalogo = () => {
   return async (dispatch) => {
@@ -25,7 +27,7 @@ export const startCargarCatalogo = () => {
 export const startRegistrarVenta = (data) => {
   return async (dispatch) => {
     try {
-      const registrar = await postApi(data);
+      const registrar = await postApi(POST_VENTA,data);
       if (!registrar.estado) {
         return dispatch(registrarError({ error: registrar.mensaje }));
       }
@@ -41,3 +43,29 @@ export const startRegistrarVenta = (data) => {
     }
   };
 };
+
+export const startRegistrarAdquisicion = (data)=>{
+  return async (dispatch) => {
+    const {nombre}= data
+    console.log(nombre)
+    try {
+      const registrar = await postApi(POST_AQUISICION,data);
+      if (!registrar.estado) {
+        console.log(registrar)
+        return {
+          ok:false,
+          error: registrar.mensaje
+        }
+      }
+      return {
+        ok: true,
+      };
+    } catch (error) {
+      console.log(error)
+      return {
+        ok: false,
+        error,
+      };
+    }
+  };
+}

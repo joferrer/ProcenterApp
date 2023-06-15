@@ -5,6 +5,7 @@ import { CatalogoDispatch } from "../../../store/catalogo/CatalogoDispatch"
 import { useState } from "react"
 import { useEffect } from "react"
 import { useMemo } from "react"
+import { useLocation, useParams } from "react-router-dom"
 
 const helperFiltos = ()=>{
   const {catalogo}= CatalogoDispatch()
@@ -30,11 +31,35 @@ const helperFiltos = ()=>{
 
 export const CatalogoDeVehiculos = () => {
 
+  const location = useLocation();
+  
+  const initFiltros = ()=>{
+    const searchParams = new URLSearchParams(location.search);
+    let filtrosIniciales = {
+      marca: "",
+      precio: [0,0]
+    }
+    
+    if(searchParams.get("marca") != null) {
+      filtrosIniciales["marca"] = searchParams.get("marca")
+    } 
+    if(searchParams.get("precio") != null && searchParams.get("precio") != 0 ) {
+      filtrosIniciales["precio"] = [0,Number(searchParams.get("precio"))]
+    } 
+    return filtrosIniciales
+  }
+ 
   const {catalogo, estaDentroDelRangoDePrecio} = helperFiltos() 
   const [catalogofiltrado, setcatalogofiltrado] = useState(catalogo)
-  const [filtros, setfiltros] = useState({precio: [0,0], marca: ""})
+  const [filtros, setfiltros] = useState(initFiltros)
+ 
 
-  useMemo(() => setcatalogofiltrado(catalogo), [catalogo])
+
+  useMemo(() => {
+    setcatalogofiltrado(catalogo)
+    console.log(filtros)
+    setfiltros({...filtros})
+  }, [catalogo])
 
   const marcas = ()=>{
     const m = catalogo.map(v => v.marca.toUpperCase())
@@ -42,11 +67,11 @@ export const CatalogoDeVehiculos = () => {
   }
 
   useEffect(() => {
-
+    
     const aplicarFiltroDePrecio = JSON.stringify(filtros.precio) != JSON.stringify([0,0])
     const aplicarFiltroDeMarca  = filtros.marca != ""
-  
-    if(aplicarFiltroDeMarca || aplicarFiltroDePrecio){
+    
+    if((aplicarFiltroDeMarca || aplicarFiltroDePrecio) && catalogo.length != 0){
       const aplicandoFiltros = catalogo.filter(v => 
         (aplicarFiltroDePrecio? estaDentroDelRangoDePrecio(v.precio,filtros.precio[0],filtros.precio[1]):true )
         &&

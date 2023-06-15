@@ -1,47 +1,72 @@
 import React, { useState } from "react";
 import { ProcenterAppLayout } from "../layout/ProcenterAppLayout";
-
-const Contenedor = ({ nombre, id, id2 }) => {
-  return (
-    <div id="contenedor">
-      <textarea id={nombre} readOnly></textarea>
-
-      <button
-        id={id}
-        onClick={() => {
-          document.getElementById(nombre).removeAttribute("readOnly");
-          var i = document.getElementById(id2);
-          i.className = "accion";
-        }}
-      >
-        
-      </button>
-      <button
-        id={id2}
-        className="ocultar"
-        onClick={() => {
-          document.getElementById(nombre).setAttribute("readOnly", "true");
-          var i = document.getElementById(id2);
-          i.className = "ocultar";
-        }}
-      ></button>
-    </div>
-  );
-};
+import { Titulo } from "../../../ui/components/GeneralComponents/TituloPagina";
+import { Grid } from "@mui/material";
+import { CampoEditable } from "../../../ui/components/InformacionEmpresarialComponets/CampoEditable";
+import ImagenesComponent from "../../../ui/components/GeneralComponents/ImagenesComponent";
 
 export const Administrador = () => {
+  const [informacion, setinformacion] = useState({
+    mision: "",
+    vision: "",
+    quienesSomos: "",
+    imagenes: {}
+  })
+  const [editar, seteditar] = useState({
+    mision: false,
+    vision: false,
+    quienesSomos: false,
+    imagenes: false
+  })
+
+  const handledChange = ( propiedad, valor )=>{
+    let nueva = {... informacion}
+    nueva[propiedad] = valor
+    setinformacion({...nueva})
+  }
+
+  const onClickEditar = (propiedad)=>{
+    console.log(propiedad)
+    let nueva = {... editar}
+    nueva[propiedad] = !nueva[propiedad]
+    seteditar({...nueva})
+  } 
+
+  const guardarCambios =()=> {
+    alert(JSON.stringify(informacion))
+  }
+  
   return (
     <ProcenterAppLayout Admin={"admin"}>
-      <h2>Administrador</h2>
-      <h3>PROCENTER AUTOS</h3>
-
-      <h1>Mision</h1>
-      <Contenedor nombre="mision" id="botonNegro1" id2="botonVerde1" />
-      <h1>Vision</h1>
-      <Contenedor nombre="vision" id="botonNegro2" id2="botonVerde2" />
-      <h1>¿Quienes Somos?</h1>
-      <Contenedor nombre="quienessomos" id="botonNegro3" id2="botonVerde3" />
-      <h1>Gestion de Imagenes (Cliente Feliz)</h1>
+      <Titulo titulo={"Administrar"} />
+      <Grid container direction={"column"} justifyContent={"space-around"} height={"70vh"} width={"60vw"} >
+        <CampoEditable 
+          valor={informacion.mision}
+          propiedad={"mision"}
+          editar={editar.mision}
+          guardarCambios={guardarCambios}
+          handledChange={handledChange}
+          onClickEditar={onClickEditar}
+        />
+        <CampoEditable 
+          valor={informacion.vision}
+          propiedad={"vision"}
+          editar={editar.vision}
+          guardarCambios={guardarCambios}
+          handledChange={handledChange}
+          onClickEditar={onClickEditar}
+        />
+        <CampoEditable valor={informacion.quienesSomos} 
+          propiedad={"quienesSomos"}
+          editar={editar.quienesSomos} 
+          guardarCambios={guardarCambios}
+          handledChange={handledChange}
+          onClickEditar={onClickEditar}
+        />
+        <Grid>
+          <ImagenesComponent />
+        </Grid>
+      </Grid>      
     </ProcenterAppLayout>
   );
 };

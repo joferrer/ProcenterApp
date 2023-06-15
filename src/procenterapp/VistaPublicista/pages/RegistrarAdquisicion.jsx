@@ -6,7 +6,7 @@ export const RegistrarAdquisicion = ({admin}) => {
     
   return (
     <ProcenterAppLayout Admin={admin}>
-        <Titulo titulo={"Registra vehiculo"}/>
+        <Titulo titulo={"Registrar vehiculo"}/>
 
         <RegistrarAdquisicionForm />
 

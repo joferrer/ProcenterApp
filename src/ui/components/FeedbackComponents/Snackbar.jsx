@@ -6,8 +6,7 @@ import { useState } from 'react'
 
 export const SnackbarComponent = ({mostrar = false, mensaje= "", tipo="error", cerrar=()=>{}}) => {
     const [open, setOpen] = useState(mostrar)
-    console.log("snack")
-
+    
     useMemo(()=>setOpen(mostrar),[mostrar])    
       const handleClose = (event, reason) => {
         if (reason === 'clickaway') {
