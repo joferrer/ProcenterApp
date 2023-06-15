@@ -6,7 +6,7 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import CloseIcon from "@mui/icons-material/Close";
 import { Typography } from "@material-ui/core";
 
-const ImagenesPreview = () => {
+const ImagenesPreview = ({ imagenes }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -35,14 +35,7 @@ const ImagenesPreview = () => {
     setCurrentIndex(0);
   };
 
-  const images = [
-    "../../../../public/Images/ima2.jpg",
-    "../../../../public/Images/ima1.jpg",
-    "../../../../public/Images/asesore.png",
-    "../../../../public/Images/PUBLI.png",
-    "../../../../public/Images/ima3.jpg",
-    "../../../../public/Images/black.png",
-  ];
+  const images = imagenes;
 
   const remainingImages = images.slice(4);
 
@@ -69,15 +62,16 @@ const ImagenesPreview = () => {
             {index === 3 && remainingImages.length > 0 && (
               <Box
                 sx={{
-                  backdropFilter: "blur(10px)",
-                  width: "50px",
-                  height: "50px",
+                  backdropFilter: "blur(15px)",
+                  width: "90px",
+                  height: "90px",
                   position: "absolute",
-                  bottom: "45px",
+                  bottom: "30px",
                   zIndex: 1,
-                  borderRadius: "50%",
-                  p: 1.5,
+                  borderRadius: "10px",
+                  p: 3.4,
                   fontWeight: "bold",
+                  fontSize: "15pt",
                   color: "white",
                 }}
               >
@@ -101,6 +95,7 @@ const ImagenesPreview = () => {
             width: "70%",
             height: "500px",
             backgroundColor: "lightgray",
+            borderRadius: "5px",
 
             "@media (max-width:899px)": {
               height: "300px",
