@@ -50,6 +50,7 @@ const HorizontalCollapse = () => {
               <Grid container sx={{ backgroundColor: "white" }}>
                 <Grid
                   item
+                  sm={5}
                   sx={{
                     backgroundColor: "lightgray",
                     m: 1,

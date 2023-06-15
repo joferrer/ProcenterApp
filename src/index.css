@@ -34,7 +34,7 @@ img {
 }
 .imagenesPeque {
   width: 100%;
-  height: 127.53px;
+  height: 160px;
 }
 #img4 {
   width: 50%;
@@ -225,17 +225,29 @@ p {
 
 .profile-titulo {
   position: relative;
-  top: -40%;
-  left: 38%; /* Ajusta la posición izquierda según tus necesidades */
+  top: -39%;
+  left: 35%;
+  width: 60%; /* Ajusta la posición izquierda según tus necesidades */
   transform: translateY(-50%);
   object-fit: cover;
+}
+@media (max-width: 1234px) {
+  .profile-titulo {
+    position: relative;
+    top: -38%;
+    left: 42%;
+    width: 60%; /* Ajusta la posición izquierda según tus necesidades */
+    transform: translateY(-50%);
+    object-fit: cover;
+  }
 }
 
 @media (max-width: 1030px) {
   .profile-titulo {
     position: relative;
-    top: -42%;
-    left: 42%; /* Ajusta la posición izquierda según tus necesidades */
+    top: -38%;
+    width: 50%;
+    left: 52%; /* Ajusta la posición izquierda según tus necesidades */
     transform: translateY(-50%);
     object-fit: cover;
   }
@@ -263,7 +275,8 @@ p {
   .profile-titulo {
     position: relative;
     top: -10%;
-    left: 1%; /* Ajusta la posición izquierda según tus necesidades */
+    left: 1%;
+    width: 100%; /* Ajusta la posición izquierda según tus necesidades */
     transform: translateY(-50%);
     object-fit: cover;
   }
