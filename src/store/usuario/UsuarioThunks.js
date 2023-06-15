@@ -20,7 +20,7 @@ export const startCargarUsuarios = () => {
           ...element,
           fechaVincu: dayjs(
             new Date(element.fechaVincu._seconds * 1000)
-          ).format("MM-DD-YYYY"),
+          ).format("DD-MM-YYYY"),
         };
         re.push(newRe);
       });

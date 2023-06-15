@@ -36,7 +36,7 @@ function ListaPublicistas() {
           }}
           key={card.cedula}
         >
-          <PublicistaCard  card={card} />
+          <PublicistaCard card={card} />
         </Grid>
       ))}
     </Grid>
