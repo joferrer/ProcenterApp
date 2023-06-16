@@ -6,17 +6,36 @@ import Boton from "./../../ui/components/GeneralComponents/BotonesEspeciales";
 import HorizontalCollapse from "./../../ui/components/GeneralComponents/Collap";
 import { GridHomeFoto } from "../../ui/components/GeneralComponents/GridHomeFoto";
 
+import img1 from "../../../public/Images/ima1.jpg";
+import img2 from "../../../public/Images/ima2.jpg";
+import img3 from "../../../public/Images/ima3.jpg";
 
 export const HomePage = () => {
   const [isSelected, setIsSelected] = useState(false);
-
+  const images = [
+    {
+      src: img1,
+      alt: "Imagen 1",
+      title: "Título de la imagen 1",
+    },
+    {
+      src: img2,
+      alt: "Imagen 2",
+      title: "Título de la imagen 2",
+    },
+    {
+      src: img3,
+      alt: "Imagen 3",
+      title: "Título de la imagen 3",
+    },
+  ];
   const error = "";
   const handleButtonClick = () => {
     setIsSelected(!isSelected);
   };
   return (
     <ProcenterCommerceLayout>
-      <CarouselComponent />
+      <CarouselComponent images={images} txt={"PROCENTER AUTOS"} />
       <Box
         sx={{
           width: "100%",

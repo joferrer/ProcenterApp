@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import Box from "@mui/material/Box";
 import Collapse from "@mui/material/Collapse";
@@ -21,156 +21,51 @@ import SaveIcon from "@mui/icons-material/Save";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import { UsuariosDispatch } from "../../../store/usuario/UsuariosDispatch";
 import { VentasDispatch } from "./../../../store/ventas/VentasDispatch";
+import dayjs from "dayjs";
 
-function Row(props) {
-  const { row, isOpen, onToggleOpen } = props;
-  const [Edit, setEdit] = React.useState(false);
-  const [placa, setPlaca] = React.useState(row.placa);
-  const [imagenes, setImagenes] = React.useState(row.imagenes);
+function GroupRow(props) {
+  const { asesor, rows, isOpen, onToggleOpen } = props;
 
   return (
     <React.Fragment>
-      <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
-        <TableCell>
-          <IconButton
-            aria-label="expand row"
-            size="small"
-            onClick={() => {
-              onToggleOpen(row.id), setEdit(false);
-            }}
-          >
-            {isOpen ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-          </IconButton>
+      <TableRow>
+        <TableCell colSpan={4}>
+          <Box display={"flex"} width={"100%"}>
+            <IconButton
+              aria-label="expand group"
+              size="small"
+              onClick={() => onToggleOpen(asesor)}
+            >
+              {isOpen ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+            </IconButton>
+            <Typography sx={{ fontSize: "15pt" }}>{asesor}</Typography>
+          </Box>
         </TableCell>
-        <TableCell component="th" scope="row">
-          {row.asesor}
-        </TableCell>
-        <TableCell align="right">{row.placa}</TableCell>
-        <TableCell align="right">{row.anio}</TableCell>
-        <TableCell align="right">{row.precio}</TableCell>
-        <TableCell align="right">{row.fechaCreacion}</TableCell>
       </TableRow>
       <TableRow>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={4}>
           <Collapse in={isOpen} timeout="auto" unmountOnExit>
-            <Grid
-              container
-              display={"flex"}
-              flexWrap={"wrap"}
-              spacing={1}
-              sx={{ mt: 2, width: "100%" }}
-            >
-              <Grid item xs={8} sm={3} sx={{ width: "100%", mr: 1, ml: 2 }}>
-                <strong>Información</strong>
-                <table
-                  width={"90%"}
-                  style={{
-                    border: "1px solid lightgray",
-                    borderRadius: "1px",
-                  }}
-                >
-                  <tbody>
-                    <tr>
-                      <th>Nombre</th>
-                      <td>
-                        <TextField
-                          id="standard-basic"
-                          variant="standard"
-                          disabled={true}
-                          value={row.nombre}
-                          inputProps={{
-                            style: { fontSize: "12px" },
-                          }}
-                        />
-                      </td>
-                    </tr>
-                    <tr>
-                      <th>Placa</th>
-                      <td>
-                        <TextField
-                          id="standard-basic"
-                          variant="standard"
-                          disabled={!Edit}
-                          value={placa}
-                          name="placa"
-                          onChange={(event) => {
-                            setPlaca(event.target.value);
-                          }}
-                          inputProps={{
-                            style: { fontSize: "12px" },
-                          }}
-                        />
-                      </td>
-                    </tr>
-                    <tr>
-                      <th>Año</th>
-                      <td>
-                        <TextField
-                          id="standard-basic"
-                          variant="standard"
-                          disabled={true}
-                          value={row.anio}
-                          inputProps={{
-                            style: { fontSize: "12px" },
-                          }}
-                        />
-                      </td>
-                    </tr>
-                    <tr>
-                      <th>
-                        <Typography
-                          sx={{ fontSize: "14px", mb: 1, fontWeight: "bold" }}
-                        >
-                          Precio
-                        </Typography>
-                      </th>
-                      <td>
-                        <Typography
-                          sx={{ fontSize: "12px", mb: 1, color: "lightgrey" }}
-                        >
-                          {row.precio}
-                        </Typography>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </Grid>
-              <Grid item xs={11} sm={6} sx={{ width: "100%", ml: 2 }}>
-                <Box sx={{ width: "100%", display: "flex" }}>
-                  <Box sx={{ width: "100%" }}>
-                    <strong>Detalles</strong>
-                    <TextField
-                      sx={{ width: "100%", borderRadius: "1px" }}
-                      inputProps={{
-                        style: { fontSize: "13px" },
-                      }}
-                      disabled={true}
-                      multiline
-                      rows={4}
-                      value={row.otros}
-                    />
-                  </Box>
+            <Table>
+              <TableBody>
+                <Box sx={{ m: 2 }}>
+                  <table style={{ border: "1px solid black", width: "100%" }}>
+                    <th style={{ borderBottom: "1px solid black" }}>Fecha</th>
+                    <th style={{ borderBottom: "1px solid black" }}>Cliente</th>
+                    <th style={{ borderBottom: "1px solid black" }}>
+                      Vehiculo
+                    </th>
+                    {rows.map((row) => (
+                      <Row
+                        key={row.id}
+                        row={row}
+                        isOpen={false} // Las filas individuales no tendrán collapse, solo el grupo
+                        onToggleOpen={() => {}} // No se necesita toggle para las filas individuales
+                      />
+                    ))}
+                  </table>
                 </Box>
-              </Grid>
-            </Grid>
-
-            <Box
-              sx={{
-                width: "95%",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                m: 2,
-                mt: 4,
-                mb: 5,
-              }}
-            >
-              <ImagenesComponent
-                edit={false}
-                imagenesUrl={imagenes}
-                setImagenes={setImagenes}
-              />
-            </Box>
+              </TableBody>
+            </Table>
           </Collapse>
         </TableCell>
       </TableRow>
@@ -178,15 +73,64 @@ function Row(props) {
   );
 }
 
+function Row(props) {
+  const { row } = props;
+
+  return (
+    <tr>
+      <td
+        style={{
+          borderRight: "1px solid black",
+          borderBottom: "1px solid black",
+        }}
+      >
+        {dayjs(new Date(row.fechaCreacion._seconds * 1000)).format(
+          "DD-MM-YYYY"
+        )}
+      </td>
+      <td
+        style={{
+          borderRight: "1px solid black",
+          borderBottom: "1px solid black",
+        }}
+      >
+        {row.cliente.nombre}
+      </td>
+      <td
+        style={{
+          borderRight: "1px solid black",
+          borderBottom: "1px solid black",
+        }}
+      >
+        {row.vehiculo.nombre}
+      </td>
+    </tr>
+  );
+}
+
 export default function TablaHistorial() {
   const { ventas } = VentasDispatch();
+  const [openGroups, setOpenGroups] = useState([]);
   const rows = ventas;
-  console.log(rows);
-  const [openRowId, setOpenRowId] = React.useState(null);
 
-  const handleToggleOpen = (rowId) => {
-    setOpenRowId((prevOpenRowId) => (prevOpenRowId === rowId ? null : rowId));
+  const handleToggleOpen = (asesor) => {
+    setOpenGroups((prevOpenGroups) =>
+      prevOpenGroups.includes(asesor)
+        ? prevOpenGroups.filter((group) => group !== asesor)
+        : [...prevOpenGroups, asesor]
+    );
   };
+
+  const isGroupOpen = (asesor) => openGroups.includes(asesor);
+
+  const groupedRows = rows.reduce((groups, row) => {
+    const { asesor } = row;
+    if (!groups[asesor.nombre]) {
+      groups[asesor.nombre] = [];
+    }
+    groups[asesor.nombre].push(row);
+    return groups;
+  }, {});
 
   return (
     <>
@@ -194,20 +138,16 @@ export default function TablaHistorial() {
         <Table aria-label="collapsible table">
           <TableHead>
             <TableRow>
-              <TableCell />
-              <TableCell> Nombre </TableCell>
-              <TableCell />
-              <TableCell />
-              <TableCell />
-              <TableCell />
+              <TableCell>Asesores Ventas Realizadas</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
-              <Row
-                key={row.id}
-                row={row}
-                isOpen={openRowId === row.id}
+            {Object.entries(groupedRows).map(([asesor, rows]) => (
+              <GroupRow
+                key={asesor}
+                asesor={asesor}
+                rows={rows}
+                isOpen={isGroupOpen(asesor)}
                 onToggleOpen={handleToggleOpen}
               />
             ))}
