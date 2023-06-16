@@ -343,8 +343,7 @@ function ProcenterCommerceLayout({ children }) {
                 Sobre Nosotros:
               </Typography>
               <p>
-                blablblablablblalbalblablbl blablblablablblalbalblablblab
-                blablablblalbalblblblblblalbl
+                ¡Compra y vende tu vehículo con nosotros!
               </p>
               <Link
                 to="/login"

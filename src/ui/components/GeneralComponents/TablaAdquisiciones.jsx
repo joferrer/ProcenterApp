@@ -13,11 +13,9 @@ import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import { ImagenesComponent } from "./ImagenesComponent";
 import { CatalogoDispatch } from "./../../../store/catalogo/CatalogoDispatch";
 import { Button, Grid, TextField } from "@mui/material";
-import EditIcon from "@mui/icons-material/Edit";
-import SaveIcon from "@mui/icons-material/Save";
+
 import DoneOutlineRoundedIcon from "@mui/icons-material/DoneOutlineRounded";
 
 function Row(props) {
@@ -51,9 +49,9 @@ function Row(props) {
         <TableCell component="th" scope="row">
           {row.nombre}
         </TableCell>
-        <TableCell align="right">{row.placa}</TableCell>
-        <TableCell align="right">{row.anio}</TableCell>
-        <TableCell align="right">{row.precio}</TableCell>
+        <TableCell align="right">{row?.placa}</TableCell>
+        <TableCell align="right">{row?.anio}</TableCell>
+        <TableCell align="right">{row?.precioDueno}</TableCell>
         <TableCell align="right">
           <IconButton
             sx={{

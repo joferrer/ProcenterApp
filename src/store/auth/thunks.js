@@ -21,9 +21,10 @@ export const startGoogleSingIn = () =>{
         const result = await singInWithGoogle();
         if(!result.ok) return dispatch( logout(result.errorMessage) );
         const usuarios = await consultarApi(USUARIOS_URL);
+        
         if(!usuarios.estado){ 
             //TODO: Logout google
-            return dispatch(logout({errorMessage: usuarios.mensaje}))
+            return dispatch(logout({errorMessage: usuarios.mensaje || "No se encontro el usuario."}))
         }
         const existe = usuarios.data.find(u => u.correo == result.email && u.estado && u.rol != "CLIENTE")
         if(!existe){
@@ -66,7 +67,7 @@ export const startLoginWithEmailPassword = (email, password)=>{
         if(!existe){
             console.log("WAT")
             return dispatch(logout({errorMessage: 
-                `El usuario con el email ${result.email} no se encuentra registrado o ya no está viculado con la empresa.` }))
+                `El usuario con el email ${email} no se encuentra registrado o ya no está viculado con la empresa.` }))
         }
        
         const {ok,uid,displayName, photoURL, errorMessage} = await loginWithEmailPassword({email, password});
