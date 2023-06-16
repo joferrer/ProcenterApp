@@ -12,6 +12,7 @@ import { SnackbarComponent } from "../FeedbackComponents/Snackbar";
 import { Cliente, Venta } from "./Modelos";
 import { useDispatch } from "react-redux";
 import { startRegistrarVenta } from "../../../store/catalogo/CatalogoThunks";
+import { useLocation } from "react-router-dom";
 
 
 export const RegistroDeVentaForm = ()=>{
@@ -21,6 +22,9 @@ export const RegistroDeVentaForm = ()=>{
     const [notificacion, setnotificacion] = useState({mostrar:false,error: false ,msg: ""})
     const {id}= authDispatch()
     const dispatch = useDispatch()
+
+    const location = useLocation();
+    const searchParams = new URLSearchParams(location.search);
 
     const vehiculos = catalogo || []
     const {usuarios, clientes, isLoadingUsuarios, errorUsuarios, getUsuarioPorCedula} = UsuariosDispatch()
@@ -34,6 +38,9 @@ export const RegistroDeVentaForm = ()=>{
       if (usuarioPorCedula) {
         reset({ ...watch(), ...usuarioPorCedula });
       }
+    }
+    if(searchParams.get("id")){
+        reset({...watch(), vehiculo: searchParams.get("id") })
     }
   }, [cedula]);
 

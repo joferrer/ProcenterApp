@@ -21,7 +21,6 @@ export const GridCatalogo = ({vehiculos}) => {
   
 
   const handleClick = (id = 0)=>{
-    alert("Ops, aun no esta hecho esto :/ " + id)
     window.location.href = "/carro?id="+id;
   }
   return (

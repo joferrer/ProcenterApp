@@ -15,7 +15,7 @@ export const Administrador = () => {
     mision: false,
     vision: false,
     quienesSomos: false,
-    imagenes: false
+
   })
 
   useMemo(() => setinformacion(infoDispatch.informacion), [infoDispatch.informacion])
@@ -42,6 +42,7 @@ export const Administrador = () => {
 
     if(!resp.ok) return setnotificacion({mostrar:true, error: true ,msg: `${resp.error || "Ha ocurrido un error! "}`})
     setnotificacion({mostrar:true, error: false, msg: "Información actualizada correctamente."})
+    window.location.href = "/administrar"
   }
   
   return (
@@ -52,7 +53,7 @@ export const Administrador = () => {
       <Titulo titulo={"Administrar"} />
       <Grid container direction={"column"} justifyContent={"space-around"} height={"70vh"} width={"60vw"} >
         <CampoEditable 
-          valor={informacion.mision || ""}
+          valor={informacion?.mision || ""}
           propiedad={"mision"}
           editar={editar.mision}
           guardarCambios={guardarCambios}
@@ -60,14 +61,14 @@ export const Administrador = () => {
           onClickEditar={onClickEditar}
         />
         <CampoEditable 
-          valor={informacion.vision || ""}
+          valor={informacion?.vision || ""}
           propiedad={"vision"}
           editar={editar.vision}
           guardarCambios={guardarCambios}
           handledChange={handledChange}
           onClickEditar={onClickEditar}
         />
-        <CampoEditable valor={informacion.quienesSomos || ""} 
+        <CampoEditable valor={informacion?.quienesSomos || ""} 
           propiedad={"quienesSomos"}
           editar={editar.quienesSomos} 
           guardarCambios={guardarCambios}
@@ -84,11 +85,11 @@ export const Administrador = () => {
 
 class Informacion {
 
-  constructor({mision, vision, quienesSomos,imagenes}){
+  constructor({mision, vision, quienesSomos}){
     this.mision = mision
     this.vision = vision
     this.quienesSomos = quienesSomos
-    this.imagenes = imagenes
+    
   }
   toString() {
     let result = "";
