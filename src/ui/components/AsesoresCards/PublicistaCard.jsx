@@ -11,16 +11,29 @@ import { useState } from "react";
 import { Box, Grid, Modal } from "@mui/material";
 import ModalEdita from "./ModalEdita";
 import ModalElim from "./ModalElim";
+import publi from "../../../../public/Images/PUBLI.png";
+import { startEliminar } from "../../../store/usuario/UsuarioThunks";
+import { useDispatch } from "react-redux";
 function PublicistaCard({ card }) {
+  const dispatch = useDispatch();
   const { deletePublicista } = useContext(CardContext);
   const [openElim, setOpenElim] = useState(false);
   const [open, setOpen] = useState(false);
 
+  const [errorSnackbarOpen, setErrorSnackbarOpen] = useState(false);
+  const [mensaje, setMensaje] = useState("");
+  const [oopen, setOopen] = useState(false);
+  const [tipo, setTipo] = useState("");
+
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const handleOpenElim = () => setOpenElim(true);
-  const handleCloseElim = () => setOpenElim(false);
+  const handleOpenElim = async (e) => {
+    const resp = await dispatch(startEliminar(card.id));
+    if (resp.ok) {
+      window.location.reload();
+    }
+  };
 
   return (
     <Box>
@@ -30,7 +43,7 @@ function PublicistaCard({ card }) {
           "@media (max-width:599px)": { maxWidth: "100%" },
         }}
       >
-        <CardMedia sx={{ height: "140px" }} image={card.img} title="profile" />
+        <CardMedia sx={{ height: "140px" }} image={publi} title="profile" />
         <CardContent>
           <p>Cedula: {card.cedula}</p>
           <p>Nombre: {card.nombre}</p>
@@ -43,38 +56,42 @@ function PublicistaCard({ card }) {
           <p>Vehículos vendidos: 0</p>
         </CardContent>
         <CardActions>
-          <Grid container spacing={2}>
-            <Grid item>
-              <Button
-                variant="outlined"
-                size="small"
-                onClick={handleOpenElim}
-                sx={{
-                  "&:hover": {
-                    backgroundColor: "lightred",
-                    color: "red",
-                  },
-                }}
-              >
-                Desvincular
-              </Button>
+          {card.estado ? (
+            <Grid container spacing={2}>
+              <Grid item>
+                <Button
+                  variant="outlined"
+                  size="small"
+                  onClick={handleOpenElim}
+                  sx={{
+                    "&:hover": {
+                      backgroundColor: "lightred",
+                      color: "red",
+                    },
+                  }}
+                >
+                  Desvincular
+                </Button>
+              </Grid>
+              <Grid item>
+                <Button
+                  sx={{
+                    "&:hover": {
+                      backgroundColor: "lightblue",
+                      color: "blue",
+                    },
+                  }}
+                  variant="outlined"
+                  size="small"
+                  onClick={handleOpen}
+                >
+                  Editar
+                </Button>
+              </Grid>
             </Grid>
-            <Grid item>
-              <Button
-                sx={{
-                  "&:hover": {
-                    backgroundColor: "lightblue",
-                    color: "blue",
-                  },
-                }}
-                variant="outlined"
-                size="small"
-                onClick={handleOpen}
-              >
-                Editar
-              </Button>
-            </Grid>
-          </Grid>
+          ) : (
+            <></>
+          )}
         </CardActions>
       </Card>
 
@@ -96,28 +113,6 @@ function PublicistaCard({ card }) {
           }}
         >
           <ModalEdita card={card} />
-        </Modal>
-      ) : (
-        <></>
-      )}
-      {openElim ? (
-        <Modal
-          open={openElim}
-          onClose={handleCloseElim}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            overflowY: "auto",
-            mt: 5,
-            mb: 4,
-            "@media (max-width:599px)": {
-              mb: 0,
-            },
-          }}
-        >
-          <ModalElim />
         </Modal>
       ) : (
         <></>

@@ -20,6 +20,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import SaveIcon from "@mui/icons-material/Save";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import { UsuariosDispatch } from "../../../store/usuario/UsuariosDispatch";
+import { VentasDispatch } from "./../../../store/ventas/VentasDispatch";
 
 function Row(props) {
   const { row, isOpen, onToggleOpen } = props;
@@ -42,7 +43,7 @@ function Row(props) {
           </IconButton>
         </TableCell>
         <TableCell component="th" scope="row">
-          {row.nombre}
+          {row.asesor}
         </TableCell>
         <TableCell align="right">{row.placa}</TableCell>
         <TableCell align="right">{row.anio}</TableCell>
@@ -178,8 +179,9 @@ function Row(props) {
 }
 
 export default function TablaHistorial() {
-  const { asesor } = UsuariosDispatch();
-  const rows = asesor;
+  const { ventas } = VentasDispatch();
+  const rows = ventas;
+  console.log(rows);
   const [openRowId, setOpenRowId] = React.useState(null);
 
   const handleToggleOpen = (rowId) => {

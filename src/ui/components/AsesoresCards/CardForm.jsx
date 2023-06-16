@@ -24,8 +24,8 @@ import localizedFormat from "dayjs/plugin/localizedFormat";
 import updateLocale from "dayjs/plugin/updateLocale";
 import ImageUploader from "./imagen";
 import { startCrearUsuario } from "../../../store/usuario/UsuarioThunks";
-import { SnackbarComponent } from "../FeedbackComponents/Snackbar";
 import { useDispatch } from "react-redux";
+import { SnackbarComponent } from "./../FeedbackComponents/Snackbar";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -44,7 +44,7 @@ function CardForm() {
   const handleClose = () => setOpen(false);
 
   const [rol, setRol] = useState("");
-  const [cedula, setCedula] = useState("");
+  const [cedula, setCedula] = useState(0);
   const [nombre, setNombre] = useState("");
   const [img, setImg] = useState(null);
   const [correo, setCorreo] = useState("");
@@ -85,17 +85,14 @@ function CardForm() {
       setErrorSnackbarOpen(true);
       return;
     } else {
-      const fechaVincu = dayjs(fecha).format("DD-MM-YYYY");
-      e.preventDefault();
       const form = {
-        rol: rol,
-        cedula: cedula,
         nombre: nombre,
         correo: correo,
         telefono: telefono,
-        fechaVincu: fechaVincu,
-        image: img,
+        cedula: cedula,
+        rol: rol,
       };
+      e.preventDefault();
       const resp = await dispatch(startCrearUsuario(form));
       if (resp.ok) {
         setOopen(true);
@@ -107,7 +104,6 @@ function CardForm() {
           nombre,
           correo,
           telefono,
-          fechaVincu,
         });
         setRol("");
         setCedula(0);
@@ -118,6 +114,7 @@ function CardForm() {
         setImg(null);
         setChecked1(false);
         setChecked2(false);
+        window.location.reload();
       } else {
         setMensaje(resp.error);
         setOopen(true);
@@ -350,7 +347,7 @@ function CardForm() {
                         label="Telefono"
                         id="filled-basic"
                         variant="filled"
-                        type="number"
+                        type="text"
                         placeholder="Ingresar teléfono"
                         onChange={(e) => setTelefono(e.target.value)}
                         value={telefono}

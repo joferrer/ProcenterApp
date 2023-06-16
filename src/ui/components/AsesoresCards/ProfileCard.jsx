@@ -11,24 +11,37 @@ import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
 import localizedFormat from "dayjs/plugin/localizedFormat";
 import updateLocale from "dayjs/plugin/updateLocale";
-import ImageUploader from "./imagen";
-import { Box, Grid, Modal } from "@mui/material";
 
+import { Box, Grid, Modal } from "@mui/material";
+import asesor from "../../../../public/Images/asesore.png";
 import { useState } from "react";
 import ModalEdita from "./ModalEdita";
-import ModalElim from "./ModalElim";
+import { useDispatch } from "react-redux";
+import { SnackbarComponent } from "../FeedbackComponents/Snackbar";
+import { startEliminar } from "../../../store/usuario/UsuarioThunks";
 
 function ProfileCard({ card }) {
+  const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
-  const [openElim, setOpenElim] = useState(false);
   const { deleteCard } = useContext(CardContext);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const handleOpenElim = () => setOpenElim(true);
-  const handleCloseElim = () => setOpenElim(false);
+  const [mensaje, setMensaje] = useState("");
+  const [oopen, setOopen] = useState(false);
+  const [tipo, setTipo] = useState("");
 
-  
+  const handleOpenElim = async (e) => {
+    const resp = await dispatch(startEliminar(card.id));
+    if (resp.ok) {
+      window.location.reload();
+    }
+  };
+
+  const handleClosed = () => {
+    setOopen(false);
+  };
+
   return (
     <Box>
       <Card
@@ -37,7 +50,7 @@ function ProfileCard({ card }) {
           "@media (max-width:599px)": { maxWidth: "100%" },
         }}
       >
-        <CardMedia sx={{ height: "140px" }} image={card.img} title="profile" />
+        <CardMedia sx={{ height: "140px" }} image={asesor} title="profile" />
         <CardContent>
           <p>Cedula: {card.cedula}</p>
           <p>Nombre: {card.nombre}</p>
@@ -50,40 +63,45 @@ function ProfileCard({ card }) {
           <p>Vehículos vendidos: 0</p>
         </CardContent>
         <CardActions>
-          <Grid container spacing={2}>
-            <Grid item>
-              <Button
-                variant="outlined"
-                size="small"
-                sx={{
-                  "&:hover": {
-                    backgroundColor: "lightred",
-                    color: "red",
-                  },
-                }}
-                onClick={handleOpenElim}
-              >
-                Desvincular
-              </Button>
+          {card.estado ? (
+            <Grid container spacing={2}>
+              <Grid item>
+                <Button
+                  variant="outlined"
+                  onClick={handleOpenElim}
+                  size="small"
+                  sx={{
+                    "&:hover": {
+                      backgroundColor: "lightred",
+                      color: "red",
+                    },
+                  }}
+                >
+                  Desvincular
+                </Button>
+              </Grid>
+              <Grid item>
+                <Button
+                  sx={{
+                    "&:hover": {
+                      backgroundColor: "lightblue",
+                      color: "blue",
+                    },
+                  }}
+                  variant="outlined"
+                  size="small"
+                  onClick={handleOpen}
+                >
+                  Editar
+                </Button>
+              </Grid>
             </Grid>
-            <Grid item>
-              <Button
-                sx={{
-                  "&:hover": {
-                    backgroundColor: "lightblue",
-                    color: "blue",
-                  },
-                }}
-                variant="outlined"
-                size="small"
-                onClick={handleOpen}
-              >
-                Editar
-              </Button>
-            </Grid>
-          </Grid>
+          ) : (
+            <></>
+          )}
         </CardActions>
       </Card>
+
       {open ? (
         <Modal
           open={open}
@@ -102,27 +120,6 @@ function ProfileCard({ card }) {
           }}
         >
           <ModalEdita card={card} />
-        </Modal>
-      ) : (
-        <></>
-      )}
-      {openElim ? (
-        <Modal
-          open={openElim}
-          onClose={handleCloseElim}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            mt: 5,
-            mb: 4,
-            "@media (max-width:599px)": {
-              mb: 0,
-            },
-          }}
-        >
-          <ModalElim />
         </Modal>
       ) : (
         <></>
