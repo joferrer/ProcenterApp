@@ -1,7 +1,7 @@
 import { Box, Grid, Typography } from "@mui/material";
 import ProcenterCommerceLayout from "../layout/ProcenterCommerceLayout";
 import CarouselComponent from "../../ui/components/GeneralComponents/carousel";
-
+import img2 from "../../../public/Images/LUCKY5.png";
 export const InformacionEmpresarial = () => {
   return (
     <ProcenterCommerceLayout>
@@ -35,7 +35,7 @@ export const InformacionEmpresarial = () => {
       >
         <Grid item sm={6} xs={12} sx={{ textAlign: "center" }}>
           <Box sx={{ width: "100%", mt: 2, mb: 2 }}>
-            <img id="img4" src="../../../public/Images/LUCKY5.png" />
+            <img id="img4" src={img2} />
           </Box>
         </Grid>
         <Grid item sm={6} xs={12}>
