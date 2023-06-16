@@ -2,6 +2,7 @@ import React from "react";
 import { ProcenterAppLayout } from "../../VistaAdmin/layout/ProcenterAppLayout";
 import { Titulo } from "../../../ui/components/GeneralComponents/TituloPagina";
 import { Box } from "@mui/material";
+import TablaHistorialSolo from "../../../ui/components/GeneralComponents/TablaHistorialSolo";
 
 const HistorialAsesor = ({ admin }) => {
   return (
@@ -20,7 +21,9 @@ const HistorialAsesor = ({ admin }) => {
           mt: 5,
           mb: 4,
         }}
-      ></Box>
+      >
+        <TablaHistorialSolo />
+      </Box>
     </ProcenterAppLayout>
   );
 };
