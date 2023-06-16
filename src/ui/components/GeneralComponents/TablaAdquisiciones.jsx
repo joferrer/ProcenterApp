@@ -1,5 +1,4 @@
 import * as React from "react";
-import PropTypes from "prop-types";
 import Box from "@mui/material/Box";
 import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
@@ -9,17 +8,18 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { CatalogoDispatch } from "./../../../store/catalogo/CatalogoDispatch";
-import { Button, Grid, TextField } from "@mui/material";
+import {  Grid, TextField } from "@mui/material";
 
 import DoneOutlineRoundedIcon from "@mui/icons-material/DoneOutlineRounded";
+import { adquisicionesDispatch } from "../../../store/adquisiciones/adquisicionesDispatch";
+import { SnackbarComponent } from "../FeedbackComponents/Snackbar";
 
 function Row(props) {
-  const { row, isOpen, onToggleOpen } = props;
+  const { row, isOpen, onToggleOpen, publicar } = props;
   const [Edit, setEdit] = React.useState(false);
   const [placa, setPlaca] = React.useState(row.placa);
   const [imagenes, setImagenes] = React.useState(row.imagenes);
@@ -47,13 +47,14 @@ function Row(props) {
           </IconButton>
         </TableCell>
         <TableCell component="th" scope="row">
-          {row.nombre}
+          {row?.nombre}
         </TableCell>
         <TableCell align="right">{row?.placa}</TableCell>
         <TableCell align="right">{row?.anio}</TableCell>
         <TableCell align="right">{row?.precioDueno}</TableCell>
         <TableCell align="right">
           <IconButton
+            onClick={()=>publicar({id: row?.id, nombre: row?.nombre, placa: row?.placa})}
             sx={{
               width: "30px",
               height: "30px",
@@ -75,10 +76,11 @@ function Row(props) {
               container
               display={"flex"}
               flexWrap={"wrap"}
+              flexDirection={"row"}
               spacing={1}
               sx={{ mt: 2, width: "100%" }}
             >
-              <Grid item xs={8} sm={3} sx={{ width: "100%", mr: 1, ml: 2 }}>
+              <Grid item  sx={{ width: "100%", mr: 1, ml: 1 }}>
                 <strong>Información</strong>
                 <table
                   width={"90%"}
@@ -88,30 +90,46 @@ function Row(props) {
                   }}
                 >
                   <tbody>
-                    <tr>
-                      <th>Nombre</th>
-                      <td>{row.nombre}</td>
+                  <tr>
+                      <th>Estado</th>
+                      <td>{row?.estado ? "Pendiente":"Publicado" }</td>
                     </tr>
                     <tr>
-                      <th>Nombre</th>
-                      <td>{row.nombre}</td>
+                      <th>Marca</th>
+                      <td>{row?.marca}</td>
                     </tr>
                     <tr>
-                      <th>Nombre</th>
-                      <td>{row.nombre}</td>
+                      <th>Fecha de Matricula</th>
+                      <td>{row?.fechaMatricula}</td>
                     </tr>
                     <tr>
-                      <th>Nombre</th>
-                      <td>{row.nombre}</td>
+                      <th>Prenda</th>
+                      <td>{row?.prenda}</td>
                     </tr>
                     <tr>
-                      <th>Nombre</th>
-                      <td>{row.nombre}</td>
+                      <th>Nombre del cliente</th>
+                      <td>{row?.cliente?.nombre}</td>
+                    </tr>
+                    <tr>
+                      <th>Telefono del cliente</th>
+                      <td>{row?.cliente?.telefono}</td>
+                    </tr>
+                    <tr>
+                      <th>Impuestos al día</th>
+                      <td>{row?.impuestos? "Si":"No"}</td>
+                    </tr>
+                    <tr>
+                      <th>Soat</th>
+                      <td>{row?.soat? "Si":"No"}</td>
+                    </tr>
+                    <tr>
+                      <th>Color</th>
+                      <td>{row?.color}</td>
                     </tr>
                   </tbody>
                 </table>
               </Grid>
-              <Grid item xs={11} sm={6} sx={{ width: "100%", ml: 2 }}>
+              <Grid item sx={{ width: "100%", ml: 2 }}>
                 <Box sx={{ width: "100%", display: "flex" }}>
                   <Box sx={{ width: "100%" }}>
                     <strong>Detalles</strong>
@@ -123,7 +141,7 @@ function Row(props) {
                       disabled={true}
                       multiline
                       rows={4}
-                      value={row.otros}
+                      value={row?.detalles}
                     />
                   </Box>
                   <Box
@@ -150,16 +168,31 @@ function Row(props) {
 }
 
 export default function TablaAbquisiciones() {
-  const { catalogo, isLoading, error } = CatalogoDispatch();
-  const rows = catalogo;
+  const {adquisiciones, desactivarAdquisicion} = adquisicionesDispatch()
+  const rows = adquisiciones;
   const [openRowId, setOpenRowId] = React.useState(null);
+  const [notificacion, setnotificacion] = React.useState({mostrar:false,error: false ,msg: ""})
 
   const handleToggleOpen = (rowId) => {
     setOpenRowId((prevOpenRowId) => (prevOpenRowId === rowId ? null : rowId));
   };
 
+  const registarPublicacion = async({id,nombre,placa})=> {
+    const confirmado = confirm(`Esta seguro de que desea registrar la publicación del vehiculo ${nombre} de placa ${placa}`)
+    if(!confirmado) return;
+
+    const resp = await desactivarAdquisicion(id)
+
+    if(!resp.ok) return setnotificacion({mostrar:true, error: true ,msg: `${resp.error || "Ha ocurrido un error! "}`})
+    setnotificacion({mostrar:true, error: false, msg: "La aquisición ha sido registrada como publicada exitosamente."})
+    window.location.href = "/adquisiciones"
+  }
+
   return (
     <TableContainer component={Paper} sx={{ width: "100%" }}>
+      <SnackbarComponent mensaje={notificacion.msg} 
+         mostrar={notificacion.mostrar}
+         tipo={notificacion.error ? "error": "success"} />
       <Table aria-label="collapsible table">
         <TableHead>
           <TableRow>
@@ -178,6 +211,7 @@ export default function TablaAbquisiciones() {
               row={row}
               isOpen={openRowId === row.id}
               onToggleOpen={handleToggleOpen}
+              publicar={registarPublicacion}
             />
           ))}
         </TableBody>

@@ -5,6 +5,7 @@ import { authSlice } from "./auth";
 import { catalogoSlice } from "./catalogo/CatalogoSlice";
 import { informacionSlice } from "./informacion/InformacionSlice";
 import { VentasSlice } from "./ventas/VentasSlice";
+import { adquisicionesSlice } from "./adquisiciones/adquisicionesSilce";
 
 export const store = configureStore({
   reducer: {
@@ -14,5 +15,6 @@ export const store = configureStore({
     catalogo: catalogoSlice.reducer,
     informacion: informacionSlice.reducer,
     ventas: VentasSlice.reducer,
+    adquisiciones: adquisicionesSlice.reducer,
   },
 });
