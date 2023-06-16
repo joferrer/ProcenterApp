@@ -20,6 +20,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import SaveIcon from "@mui/icons-material/Save";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 function eliminarURL(imagenes) {
   var imagenesFiltradas = imagenes.filter(function (elemento) {
@@ -109,19 +110,24 @@ function Row(props) {
           <TableCell align="right">{row.anio}</TableCell>
           <TableCell align="right">{row.precio}</TableCell>
           <TableCell align="right">
-            <IconButton
-              sx={{
-                width: "30px",
-                height: "30px",
-                borderRadius: "4px",
-                border: "1px solid green",
-                "&:hover": {
-                  backgroundColor: "lightgrey",
-                },
-              }}
+            <Link
+              style={{ textDecoration: "none", color: "white" }}
+              to={"/registrar-venta?id=" + row.id}
             >
-              <MonetizationOnIcon sx={{ width: "16px", color: "green" }} />
-            </IconButton>
+              <IconButton
+                sx={{
+                  width: "30px",
+                  height: "30px",
+                  borderRadius: "4px",
+                  border: "1px solid green",
+                  "&:hover": {
+                    backgroundColor: "lightgrey",
+                  },
+                }}
+              >
+                <MonetizationOnIcon sx={{ width: "16px", color: "green" }} />
+              </IconButton>
+            </Link>
           </TableCell>
         </TableRow>
         <TableRow>

@@ -67,21 +67,21 @@ const ModalEdita = ({ card }) => {
   };
 
   const handleSubmit = async (e) => {
+    e.preventDefault();
     const form = {
-      id: card.id,
-      rol: card.rol,
-      cedula: card.cedula,
-      nombre: card.nombre,
-      correo: card.correo,
-      telefono: card.telefono,
-      fechaVincu: card.fechaVincu,
-      image: card.img,
+      nombre: nombre,
+      correo: correo,
+      telefono: telefono,
+      cedula: parseInt(card.cedula),
+      rol: rol,
     };
-    const resp = await dispatch(startActualizarInfo(form));
+
+    const resp = await dispatch(startActualizarInfo(card.id, form));
     if (resp.ok) {
       setOopen(true);
       setMensaje("Información Actualizada");
       setTipo("success");
+      window.location.reload();
     } else {
       e.preventDefault();
       setMensaje(resp.error);

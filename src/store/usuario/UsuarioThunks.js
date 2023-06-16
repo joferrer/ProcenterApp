@@ -1,11 +1,12 @@
 import { Timestamp } from "firebase/firestore/lite";
-import { consultarApi } from "../api/conexion";
+import { consultarApi, deleteApi, postApi, updateApi } from "../api/conexion";
 import { loadusuarios, registrarError, setUsuarios } from "./UsuarioSlice";
 import dayjs from "dayjs";
 
 const GET_USUARIOS = "usuarios";
 const POST_USUARIOS = "crear-usuario";
 const PUT_USUARIOS = "actualizar-usuario";
+const DELETE_USUARIOS = "desactivar-usuario";
 
 export const startCargarUsuarios = () => {
   return async (dispatch) => {
@@ -37,10 +38,10 @@ export const startCrearUsuario = (data) => {
   return async (dispatch) => {
     try {
       const registrar = await postApi(POST_USUARIOS, data);
-      if (!registrar.estado) {
+      if (registrar.error) {
         return {
           ok: false,
-          error: registrar.mensaje,
+          error: registrar.data.error || registrar.data.mensaje,
         };
       }
       return {
@@ -56,14 +57,37 @@ export const startCrearUsuario = (data) => {
   };
 };
 
-export const startActualizarInfo = (data) => {
+export const startActualizarInfo = (id, data) => {
   return async (dispatch) => {
     try {
-      const registrar = await updateApi(PUT_USUARIOS + "/" + data.id, data);
-      if (!registrar.estado) {
+      const registrar = await updateApi(PUT_USUARIOS + "/" + id, data);
+      if (registrar.error) {
         return {
           ok: false,
-          error: registrar.mensaje,
+          error: registrar.data.error || registrar.data.mensaje,
+        };
+      }
+      return {
+        ok: true,
+      };
+    } catch (error) {
+      dispatch(registrarError({ error }));
+      return {
+        ok: false,
+        error,
+      };
+    }
+  };
+};
+
+export const startEliminar = (id) => {
+  return async (dispatch) => {
+    try {
+      const registrar = await deleteApi(DELETE_USUARIOS + "/" + id);
+      if (registrar.error) {
+        return {
+          ok: false,
+          error: registrar.data.error || registrar.data.mensaje,
         };
       }
       return {
