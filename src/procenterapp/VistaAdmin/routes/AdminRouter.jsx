@@ -11,6 +11,7 @@ import {
 } from "../pages/";
 import { Adquisiciones } from "../../VistaPublicista/pages/Adquisiciones";
 import { RegistrarAdquisicion } from "./../../VistaPublicista/pages/RegistrarAdquisicion";
+import { Resenias } from "../pages/Resenias";
 /**! CAMBIAR POR JX PARA ESO*/
 export const AdminRouter = () => {
   console.log("wat");
@@ -22,6 +23,7 @@ export const AdminRouter = () => {
       <Route path="/historial" element={<Historial admin={"admin"} />}></Route>
       <Route path="/asesores" element={<Asesores admin={"admin"} />}></Route>
       <Route path="/administrar" element={<Administrador />}></Route>
+      <Route path="/resenias" element={<Resenias admin={"admin"} />}></Route>
       <Route
         path="/registrar-venta"
         element={<RegistrarVenta admin={"admin"} />}
