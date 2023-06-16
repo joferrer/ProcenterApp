@@ -108,7 +108,6 @@ function CardForm() {
           correo,
           telefono,
           fechaVincu,
-          img,
         });
         setRol("");
         setCedula(0);

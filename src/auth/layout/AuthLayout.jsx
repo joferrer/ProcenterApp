@@ -1,6 +1,7 @@
 import { Box, Grid, Hidden } from "@mui/material";
 
 import React from "react";
+import img3 from "../../../public/Images/LUCKY5.png";
 
 export const AuthLayout = ({ children, title = "" }) => {
   return (
@@ -16,7 +17,7 @@ export const AuthLayout = ({ children, title = "" }) => {
             height: "20vw",
           }}
         >
-          <img id="im2" src="../../../public/Images/LUCKY5.png" />
+          <img id="im2" src={img3} />
         </Box>
         {children}
       </Hidden>
@@ -49,7 +50,7 @@ export const AuthLayout = ({ children, title = "" }) => {
               backgroundColor: "black",
             }}
           >
-            <img src="../../../public/Images/LUCKY5.png" />
+            <img src={img3} />
           </Box>
         </Grid>
       </Hidden>

@@ -23,6 +23,8 @@ import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import SearchIcon from "@mui/icons-material/Search";
 import PersonIcon from "@mui/icons-material/Person";
 import { Link } from "react-router-dom";
+import im from "../../../public/Images/LUCKY5.png";
+import blac from "../../../public/Images/black.png";
 
 function ProcenterCommerceLayout({ children }) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -110,7 +112,7 @@ function ProcenterCommerceLayout({ children }) {
                 >
                   <Box sx={{ width: "60px", height: "60px" }}>
                     <a href="/home">
-                      <img src="../../../public/Images/LUCKY5.png" id="im" />
+                      <img src={im} id="im" />
                     </a>
                   </Box>
                 </Box>
@@ -130,7 +132,7 @@ function ProcenterCommerceLayout({ children }) {
                 }}
               >
                 <a href="/home">
-                  <img src="../../../public/Images/LUCKY5.png" id="im" />
+                  <img src={im} id="im" />
                 </a>
               </Box>
 
@@ -333,7 +335,7 @@ function ProcenterCommerceLayout({ children }) {
           >
             <Grid item sm={4} xs={12} sx={{ mb: 2 }}>
               <Box sx={{ width: "100%", pt: 2 }}>
-                <img id="im2<<" src="../../../public/Images/black.png" />
+                <img id="im2" src={blac} />
               </Box>
             </Grid>
             <Grid item sm={4} xs={12}>
