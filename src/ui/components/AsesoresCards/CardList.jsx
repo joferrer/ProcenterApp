@@ -3,7 +3,6 @@ import ProfileCard from "./ProfileCard";
 import { CardContext } from "../../context/CardContext";
 import Grid from "@mui/material/Grid";
 import { UsuariosDispatch } from "../../../store/usuario/UsuariosDispatch";
-
 function CardList() {
   const { cards } = useContext(CardContext);
   const { asesor } = UsuariosDispatch();
