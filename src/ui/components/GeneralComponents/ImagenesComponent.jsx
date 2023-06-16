@@ -51,7 +51,7 @@ export const ImagenesComponent = ({ imagenesUrl, edit, setImagenes }) => {
       <input
         id="image-input"
         type="file"
-        accept="image/*"
+        accept=".jpg"
         multiple
         onChange={handleImageChange}
         style={{ display: "none" }}

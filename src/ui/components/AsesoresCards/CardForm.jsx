@@ -6,10 +6,12 @@ import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { CardContext } from "../../context/CardContext";
 import { useState, useContext } from "react";
 import {
+  Alert,
   Checkbox,
   FormControlLabel,
   FormGroup,
   Grid,
+  Snackbar,
   TextField,
   Typography,
 } from "@mui/material";
@@ -20,6 +22,10 @@ import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
 import localizedFormat from "dayjs/plugin/localizedFormat";
 import updateLocale from "dayjs/plugin/updateLocale";
+import ImageUploader from "./imagen";
+import { startCrearUsuario } from "../../../store/usuario/UsuarioThunks";
+import { SnackbarComponent } from "../FeedbackComponents/Snackbar";
+import { useDispatch } from "react-redux";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -29,9 +35,10 @@ dayjs.extend(updateLocale);
 const timezoneLocation = "America/Bogota";
 dayjs.tz.setDefault(timezoneLocation);
 
-const fechaact = dayjs().tz(timezoneLocation).format("MM-DD-YYYY");
+const fechaact = dayjs().tz(timezoneLocation).format("DD-MM-YYYY");
 
 function CardForm() {
+  const dispatch = useDispatch();
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -39,13 +46,18 @@ function CardForm() {
   const [rol, setRol] = useState("");
   const [cedula, setCedula] = useState("");
   const [nombre, setNombre] = useState("");
+  const [img, setImg] = useState(null);
   const [correo, setCorreo] = useState("");
   const [telefono, setTelefono] = useState("");
-  const [fecha, setFecha] = useState(dayjs(fechaact, "MM-DD-YYYY"));
+  const [fecha, setFecha] = useState(dayjs(fechaact, "DD-MM-YYYY"));
   const { createCard } = useContext(CardContext);
-
   const [checked1, setChecked1] = useState(false);
   const [checked2, setChecked2] = useState(false);
+
+  const [errorSnackbarOpen, setErrorSnackbarOpen] = useState(false);
+  const [mensaje, setMensaje] = useState("");
+  const [oopen, setOopen] = useState(false);
+  const [tipo, setTipo] = useState("");
 
   const handleCheckbox1Change = () => {
     setChecked1(true);
@@ -59,22 +71,59 @@ function CardForm() {
     setRol("PUBLICISTA");
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    createCard({
-      rol,
-      cedula,
-      nombre,
-      correo,
-      telefono,
-      fecha,
-    });
-    setRol("");
-    setCedula(0);
-    setNombre("");
-    setCorreo("");
-    setTelefono("");
-    setFecha(dayjs(fechaact, "MM-DD-YYYY"));
+  const handleCloseSnackbar = () => {
+    setErrorSnackbarOpen(false);
+  };
+
+  const handleClosed = () => {
+    setOopen(false);
+  };
+
+  const handleSubmit = async (e) => {
+    if (rol === "") {
+      e.preventDefault();
+      setErrorSnackbarOpen(true);
+      return;
+    } else {
+      const fechaVincu = dayjs(fecha).format("DD-MM-YYYY");
+      e.preventDefault();
+      const form = {
+        rol: rol,
+        cedula: cedula,
+        nombre: nombre,
+        correo: correo,
+        telefono: telefono,
+        fechaVincu: fechaVincu,
+        image: img,
+      };
+      const resp = await dispatch(startCrearUsuario(form));
+      if (resp.ok) {
+        setOopen(true);
+        setMensaje("Empleado Agregado");
+        setTipo("success");
+        createCard({
+          rol,
+          cedula,
+          nombre,
+          correo,
+          telefono,
+          fechaVincu,
+        });
+        setRol("");
+        setCedula(0);
+        setNombre("");
+        setCorreo("");
+        setTelefono("");
+        setFecha(dayjs(fechaact, "DD-MM-YYYY"));
+        setImg(null);
+        setChecked1(false);
+        setChecked2(false);
+      } else {
+        setMensaje(resp.error);
+        setOopen(true);
+        setTipo("error");
+      }
+    }
   };
 
   return (
@@ -89,6 +138,12 @@ function CardForm() {
         },
       }}
     >
+      <SnackbarComponent
+        mostrar={oopen}
+        mensaje={mensaje}
+        tipo={tipo}
+        cerrar={handleClosed}
+      />
       <Button
         variant="contained"
         onClick={handleOpen}
@@ -110,232 +165,259 @@ function CardForm() {
         sx={{
           display: "flex",
           justifyContent: "center",
-          height: "100%",
-          width: "100%",
+          overflowY: "auto",
+          mt: 5,
+          mb: 4,
+          "@media (max-width:599px)": {
+            mb: 0,
+          },
         }}
       >
         <Box
           sx={{
+            borderRadius: "20px",
             backgroundColor: "white",
-            width: "50%",
-            height: "75%",
-            maxWidth: "500px",
-            maxHeight: "490px",
-            mt: 10,
+            width: "59%",
+            height: "77%",
+            "@media (max-width:799px)": {
+              width: "80%",
+              height: "77%",
+            },
+            "@media (max-width:599px)": {
+              width: "70%",
+              height: "100%",
+              mt: 0,
+            },
           }}
         >
+          <Snackbar
+            open={errorSnackbarOpen}
+            autoHideDuration={5000}
+            onClose={handleCloseSnackbar}
+          >
+            <Alert onClose={handleCloseSnackbar} severity="error">
+              No ha seleccionado ningún rol.
+            </Alert>
+          </Snackbar>
           <form onSubmit={handleSubmit}>
             <Grid
               container
-              sx={{ display: "flex", justifyContent: "center" }}
-              spacing={2}
+              sx={{ backgroundColor: "white", borderRadius: "10px", p: 1 }}
             >
-              <Grid item sm={12} xs={12}>
-                <Box
-                  sx={{
-                    width: "100%",
-                    display: "flex",
-                    justifyContent: "center",
-                  }}
-                >
-                  <Typography
-                    sx={{ fontWeight: "bold", mt: 1, ml: 2, width: "20%" }}
-                  >
-                    Rol:
-                  </Typography>
-                  <FormControlLabel
-                    sx={{ width: "40%" }}
-                    control={
-                      <Checkbox
-                        checked={checked1}
-                        onChange={handleCheckbox1Change}
-                      />
-                    }
-                    label="Asesor"
-                  />
-                  <FormControlLabel
-                    sx={{ width: "40%" }}
-                    control={
-                      <Checkbox
-                        checked={checked2}
-                        onChange={handleCheckbox2Change}
-                      />
-                    }
-                    label="Publicista"
-                  />
-                </Box>
+              <Grid item sm={6} xs={12}>
+                <ImageUploader img={img} setImg={setImg} />
               </Grid>
-
-              <Grid item sm={12} xs={12}>
-                <Box
-                  sx={{
-                    width: "100%",
-                    display: "flex",
-                    justifyContent: "center",
-                    pr: 2,
-                    pl: 2,
-                  }}
+              <Grid item sm={6} xs={12} sx={{ mt: 2 }}>
+                <Grid
+                  container
+                  sx={{ display: "flex", justifyContent: "center" }}
+                  spacing={2}
                 >
-                  <TextField
-                    sx={{
-                      width: "100%",
-                      display: "flex",
-                      justifyContent: "center",
-                    }}
-                    type="number"
-                    id="filled-basic"
-                    variant="filled"
-                    placeholder="Ingresar cédula"
-                    onChange={(e) => setCedula(e.target.value)}
-                    value={cedula}
-                    required
-                    label="Cedula"
-                  />
-                </Box>
-              </Grid>
-              <Grid item sm={12} xs={12}>
-                <Box
-                  sx={{
-                    width: "100%",
-                    display: "flex",
-                    justifyContent: "center",
-                    pr: 2,
-                    pl: 2,
-                  }}
-                >
-                  <TextField
-                    sx={{
-                      width: "100%",
-                      display: "flex",
-                      justifyContent: "center",
-                    }}
-                    id="filled-basic"
-                    variant="filled"
-                    label="Nombre"
-                    type="text"
-                    placeholder="Ingresar nombre"
-                    onChange={(e) => setNombre(e.target.value)}
-                    value={nombre}
-                    required
-                  />
-                </Box>
-              </Grid>
-
-              <Grid item sm={12} xs={12}>
-                <Box
-                  sx={{
-                    width: "100%",
-                    display: "flex",
-                    justifyContent: "center",
-                    pr: 2,
-                    pl: 2,
-                  }}
-                >
-                  <TextField
-                    sx={{
-                      width: "100%",
-                      display: "flex",
-                      justifyContent: "center",
-                    }}
-                    label="Correo"
-                    id="filled-basic"
-                    variant="filled"
-                    type="text"
-                    placeholder="Ingresar correo"
-                    onChange={(e) => setCorreo(e.target.value)}
-                    value={correo}
-                    required
-                  />
-                </Box>
-              </Grid>
-              <Grid item sm={12} xs={12}>
-                <Box
-                  sx={{
-                    width: "100%",
-                    display: "flex",
-                    justifyContent: "center",
-                    pr: 2,
-                    pl: 2,
-                  }}
-                >
-                  <TextField
-                    sx={{
-                      width: "100%",
-                      display: "flex",
-                      justifyContent: "center",
-                    }}
-                    label="Telefono"
-                    id="filled-basic"
-                    variant="filled"
-                    type="text"
-                    placeholder="Ingresar teléfono"
-                    onChange={(e) => setTelefono(e.target.value)}
-                    value={telefono}
-                    required
-                  />
-                </Box>
-              </Grid>
-
-              <Grid item sm={12} xs={12}>
-                <Box
-                  sx={{
-                    width: "100%",
-                    display: "flex",
-                    justifyContent: "center",
-                    pr: 2,
-                    pl: 2,
-                  }}
-                >
-                  <LocalizationProvider
-                    dateAdapter={AdapterDayjs}
-                    sx={{ width: "100%" }}
-                  >
-                    <DemoContainer
-                      components={["DatePicker"]}
-                      sx={{ width: "100%" }}
+                  <Grid item sm={12} xs={12}>
+                    <Box
+                      sx={{
+                        width: "100%",
+                        display: "flex",
+                        justifyContent: "center",
+                      }}
                     >
-                      <DatePicker
-                        sx={{ width: "100%" }}
-                        label="Fecha de Ingreso"
-                        value={fecha}
-                        minDate={dayjs(fechaact, "MM-DD-YYYY")}
-                        onChange={(date) => setStartDate(date)}
+                      <Typography
+                        sx={{ fontWeight: "bold", mt: 1, ml: 2, width: "20%" }}
+                      >
+                        Rol:
+                      </Typography>
+                      <FormControlLabel
+                        sx={{ width: "40%" }}
+                        control={
+                          <Checkbox
+                            checked={checked1}
+                            onChange={handleCheckbox1Change}
+                          />
+                        }
+                        label="Asesor"
                       />
-                    </DemoContainer>
-                  </LocalizationProvider>
-                </Box>
-              </Grid>
-              <Grid item sm={12} xs={12}>
-                <Box
-                  sx={{
-                    width: "100%",
-                    display: "flex",
-                    justifyContent: "center",
-                    pr: 2,
-                    pl: 2,
-                    zIndex: 0,
-                  }}
-                >
-                  <Button
-                    type="submit"
-                    onClick={() => {
-                      setChecked1(false);
-                      setChecked2(false);
-                    }}
-                    sx={{
-                      width: "100%",
-                      display: "flex",
-                      justifyContent: "center",
-                      backgroundColor: "black",
-                      color: "white",
-                      "&:hover": {
-                        backgroundColor: "darkgrey",
-                      },
-                    }}
-                  >
-                    Agregar
-                  </Button>
-                </Box>
+                      <FormControlLabel
+                        sx={{ width: "40%" }}
+                        control={
+                          <Checkbox
+                            checked={checked2}
+                            onChange={handleCheckbox2Change}
+                          />
+                        }
+                        label="Publicista"
+                      />
+                    </Box>
+                  </Grid>
+
+                  <Grid item sm={12} xs={12}>
+                    <Box
+                      sx={{
+                        width: "100%",
+                        display: "flex",
+                        justifyContent: "center",
+                        pr: 2,
+                        pl: 2,
+                      }}
+                    >
+                      <TextField
+                        sx={{
+                          width: "100%",
+                          display: "flex",
+                          justifyContent: "center",
+                        }}
+                        type="number"
+                        id="filled-basic"
+                        variant="filled"
+                        placeholder="Ingresar cédula"
+                        onChange={(e) => setCedula(e.target.value)}
+                        value={cedula}
+                        required
+                        label="Cedula"
+                      />
+                    </Box>
+                  </Grid>
+                  <Grid item sm={12} xs={12}>
+                    <Box
+                      sx={{
+                        width: "100%",
+                        display: "flex",
+                        justifyContent: "center",
+                        pr: 2,
+                        pl: 2,
+                      }}
+                    >
+                      <TextField
+                        sx={{
+                          width: "100%",
+                          display: "flex",
+                          justifyContent: "center",
+                        }}
+                        id="filled-basic"
+                        variant="filled"
+                        label="Nombre"
+                        type="text"
+                        placeholder="Ingresar nombre"
+                        onChange={(e) => setNombre(e.target.value)}
+                        value={nombre}
+                        required
+                      />
+                    </Box>
+                  </Grid>
+
+                  <Grid item sm={12} xs={12}>
+                    <Box
+                      sx={{
+                        width: "100%",
+                        display: "flex",
+                        justifyContent: "center",
+                        pr: 2,
+                        pl: 2,
+                      }}
+                    >
+                      <TextField
+                        sx={{
+                          width: "100%",
+                          display: "flex",
+                          justifyContent: "center",
+                        }}
+                        label="Correo"
+                        id="filled-basic"
+                        variant="filled"
+                        type="email"
+                        placeholder="Ingresar correo"
+                        onChange={(e) => setCorreo(e.target.value)}
+                        value={correo}
+                        required
+                      />
+                    </Box>
+                  </Grid>
+                  <Grid item sm={12} xs={12}>
+                    <Box
+                      sx={{
+                        width: "100%",
+                        display: "flex",
+                        justifyContent: "center",
+                        pr: 2,
+                        pl: 2,
+                      }}
+                    >
+                      <TextField
+                        sx={{
+                          width: "100%",
+                          display: "flex",
+                          justifyContent: "center",
+                        }}
+                        label="Telefono"
+                        id="filled-basic"
+                        variant="filled"
+                        type="number"
+                        placeholder="Ingresar teléfono"
+                        onChange={(e) => setTelefono(e.target.value)}
+                        value={telefono}
+                        required
+                      />
+                    </Box>
+                  </Grid>
+
+                  <Grid item sm={12} xs={12}>
+                    <Box
+                      sx={{
+                        width: "100%",
+                        display: "flex",
+                        justifyContent: "center",
+                        pr: 2,
+                        pl: 2,
+                      }}
+                    >
+                      <LocalizationProvider
+                        dateAdapter={AdapterDayjs}
+                        sx={{ width: "100%" }}
+                      >
+                        <DemoContainer
+                          components={["DatePicker"]}
+                          sx={{ width: "100%" }}
+                        >
+                          <DatePicker
+                            sx={{ width: "100%" }}
+                            label="Fecha de Ingreso"
+                            disabled
+                            value={fecha}
+                            minDate={dayjs(fechaact, "DD-MM-YYYY")}
+                            onChange={(date) => setFecha(date)}
+                          />
+                        </DemoContainer>
+                      </LocalizationProvider>
+                    </Box>
+                  </Grid>
+                  <Grid item sm={12} xs={12}>
+                    <Box
+                      sx={{
+                        width: "100%",
+                        display: "flex",
+                        justifyContent: "center",
+                        pr: 2,
+                        pl: 2,
+                        zIndex: 0,
+                      }}
+                    >
+                      <Button
+                        type="submit"
+                        sx={{
+                          width: "100%",
+                          display: "flex",
+                          justifyContent: "center",
+                          backgroundColor: "black",
+                          color: "white",
+                          "&:hover": {
+                            backgroundColor: "darkgrey",
+                          },
+                        }}
+                      >
+                        Agregar Asesor
+                      </Button>
+                    </Box>
+                  </Grid>
+                </Grid>
               </Grid>
             </Grid>
           </form>

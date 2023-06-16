@@ -1,9 +1,8 @@
 import * as React from "react";
 import { Drawer, Box, Toolbar, AppBar } from "@mui/material";
 import { ListasEstatica } from "./ListasEstatica";
-
+import imag from "../../../../public/Images/LUCKY5.png";
 export default function DrawerEstaticoVista({ tamaño, admin }) {
-
   return (
     <Drawer
       className="fondo"
@@ -27,7 +26,7 @@ export default function DrawerEstaticoVista({ tamaño, admin }) {
             sx={{ mt: 4, mb: 4 }}
             className="fondo"
           >
-            <img id="img4" src="../../../public/Images/LUCKY5.png" />
+            <img id="img4" src={imag} />
           </Box>
         </Toolbar>
       </Box>

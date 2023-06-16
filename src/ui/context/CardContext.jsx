@@ -4,9 +4,7 @@ import { publicistas as data } from "../data/publicistas";
 
 export const CardContext = createContext();
 
-
 export function CardContextProvider(props) {
-  
   const [cards, setCards] = useState([]);
   const [publicistas, setPublicistas] = useState([]);
 
@@ -20,7 +18,8 @@ export function CardContextProvider(props) {
           nombre: card.nombre,
           correo: card.correo,
           telefono: card.telefono,
-          fecha: card.fecha,
+          fechaVincu: card.fechaVincu,
+          img: card.img,
         },
       ]);
     } else if (card.rol == "ASESOR") {
@@ -32,7 +31,8 @@ export function CardContextProvider(props) {
           nombre: card.nombre,
           correo: card.correo,
           telefono: card.telefono,
-          fecha: card.fecha,
+          fechaVincu: card.fechaVincu,
+          img: card.img,
         },
       ]);
     } else {

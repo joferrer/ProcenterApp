@@ -7,6 +7,7 @@ import ToolarSesion from "./Sesion/ToolbarSesion";
 import { useDispatch, useSelector } from "react-redux";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { startLogout } from "../../store/auth";
+import ima from "../../../public/Images/LUCKY5.png";
 
 export default function MiniDrawer({ children, Admin }) {
   const isSmallScreen = useMediaQuery("(min-width:800px)");
@@ -49,7 +50,7 @@ export default function MiniDrawer({ children, Admin }) {
         sx={{ mt: 4, mb: 3 }}
         className="fondo"
       >
-        <img id="img4" src="../../../public/Images/LUCKY5.png" />
+        <img id="img4" src={ima} />
       </Box>
       <ListasdeDrawer admin={Admin} />
     </Box>
@@ -63,7 +64,7 @@ export default function MiniDrawer({ children, Admin }) {
             height: 10,
             position: "fixed",
             maxwidth: "100%",
-            zIndex:1,
+            zIndex: 1,
           }}
           className="fondo "
         >
